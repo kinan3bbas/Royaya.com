@@ -338,10 +338,11 @@ namespace Royaya.com.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            ApplicationUser tempUser = db.Users.Where(a => a.UserName.Equals(model.Username)).FirstOrDefault();
+            ApplicationUser tempUser = db.Users.Where(a => a.UserName.Equals(model.Username)||a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
             if (tempUser != null)
                 return BadRequest("Username is already taken");
             
+
             model.Email =model.Username+"@Test.com";
             IdentityResult result=null;
 
