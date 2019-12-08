@@ -35,6 +35,7 @@ namespace Royaya.com.Controllers
         private ApplicationUserManager _userManager;
 
         private ApplicationDbContext db = new ApplicationDbContext();
+        private CoreController core = new CoreController();
 
         public AccountController()
         {
@@ -340,8 +341,9 @@ namespace Royaya.com.Controllers
 
             ApplicationUser tempUser = db.Users.Where(a => a.UserName.Equals(model.Username)||a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
             if (tempUser != null)
-                return BadRequest("Username is already taken");
-            
+                await core.throwExcetpion("Username or phone number is already taken!");
+
+
 
             model.Email =model.Username+"@Test.com";
             IdentityResult result=null;
@@ -594,16 +596,56 @@ namespace Royaya.com.Controllers
         public async Task<IHttpActionResult> Test()
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
-            scheduler.Start();
+            await scheduler.Start();
 
             IJobDetail job = JobBuilder.Create<NotificationJob>().Build();
             ITrigger trigger = TriggerBuilder.Create()
             .WithIdentity("trigger3", "group1")
             .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+            await scheduler.ScheduleJob(job, trigger);
             return Ok();
         }
+
+        // POST api/Account/updateUserInfo
+        [Route("updateUserInfo")]
+        public async Task<IHttpActionResult> updateUserInfo([FromUri]string id,[FromBody]updateUserInfoBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+                await core.throwExcetpion("No matching user!");
+            if (model.Age != null)
+                user.Age = model.Age;
+            if (model.Country != null)
+                user.Country = model.Country;
+            if (model.JobDescription != null)
+                user.JobDescription = model.JobDescription;
+            if (model.MartialStatus != null)
+                user.MartialStatus = model.MartialStatus;
+            if (model.Name != null)
+                user.Name = model.Name;
+            if (model.numbOfDreamsInOneDay != null)
+                user.numbOfDreamsInOneDay = model.numbOfDreamsInOneDay;
+            if (model.PhoneNumber != null)
+                user.PhoneNumber = model.PhoneNumber;
+            if (model.PictureId != null)
+                user.PictureId = model.PictureId;
+            if (model.Sex != null)
+                user.Sex = model.Sex;
+            if (model.Status != null)
+                user.Status = model.Status;
+
+            user.LastModificationDate = DateTime.Now;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok(user);
+        }
+
         #region Helpers
 
 
