@@ -1,0 +1,189 @@
+﻿
+@model PagedList.IPagedList<RoyayaControlPanel.com.ViewModels.DreamViewModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+
+<h2>Dreams List</h2>
+<br />
+<div style="float:right;" class="col-md-12">
+        <button style="float:right;" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Dreams")'">
+            Add New Dream
+        </button>
+</div>
+
+<div class="container">
+@*@using (Html.BeginForm())
+{
+    <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-0">
+        <div class="row align-items-center">
+            <div class="col-xl-8 order-2 order-xl-1">
+                <div class="form-group m-form__group row align-items-center">
+                    
+                    <div class="col-md-6">
+                        <div class="m-input-icon m-input-icon--left">
+                            <input name="search_key" type="text" class="form-control m-input m-input--air" placeholder="name or mobile .. " id="generalSearch">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="SearchBtn btn btn-outline-brand m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--custom m-btn--outline-1x m-btn--pill m-btn--air">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <input id="Search" class="SearchBtn btn btn-outline-brand m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--custom m-btn--outline-1x m-btn--pill m-btn--air" type="submit"  />
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+}*@
+    @using (Html.BeginForm())
+    {
+        <p>
+            <table align="center">
+
+                <tr>
+                    <td style="padding-right:20px;padding-bottom:20px;">
+                        <b>Enter words</b>
+                    </td>
+                    <td style="padding-right:20px;padding-bottom:20px;" >
+                        @*@Html.TextBox("SearchString")*@
+                        <div class="m-input-icon m-input-icon--left">
+                            <input name="SearchString" type="text" class="form-control m-input m-input--air" placeholder="Description .. " id="generalSearch">
+                        </div>
+                    </td>
+                    <td   style="padding-left:50px;padding-right:20px;padding-bottom:20px;">
+                        <b>Status</b>
+                    </td>
+                    <td   style="padding-right:20px;padding-bottom:20px;">
+                        @Html.DropDownList("Status", new List<SelectListItem>
+                               { new SelectListItem { Text="Active", Value="Active"},
+                                new SelectListItem{Text="Done", Value="Done"}
+                          }, new { @class = "form-control m-input m-input--air" })
+
+                    </td>
+                    <td style="padding-bottom:20px">
+                        <button type="submit"  class="SearchBtn btn btn-outline-brand m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--custom m-btn--outline-1x m-btn--pill m-btn--air">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            </table>
+
+            <br />
+
+            @*<input id="Search" class="btn btn-primary btn-default"  type="submit" value="Search" style="float: right; position: relative; left: -50%; /* or right 50% */ text-align: left; background-color:#6610f2;color:white" />
+            <button type="submit" style="float:right;" class="SearchBtn btn btn-outline-brand m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--custom m-btn--outline-1x m-btn--pill m-btn--air">
+                <i class="fa fa-search"></i>
+            </button>*@
+        </p>
+    }
+</div>
+<br />
+<br />
+<div class="table-responsive ">
+    <table class="table table-striped table-bordered table-hover " id="myTable">
+        <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
+            <tr>
+                <th>
+                    Interpreter
+                </th>
+                <th>
+                    Plan
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Explanation
+                </th>
+                <th>
+                    Explanation Date
+                </th>
+                <th>
+                    User Rating
+                </th>
+                <th>
+                    Rating Date
+                </th>
+                <th>
+                    Creation Date
+                </th>
+
+                <th>
+                    Creator
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.interpretatorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pathCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Explanation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExplanationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserRating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RatingDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatorName)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }) )
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#Search").click();
+        });
+    </script>
+    
+    }

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Royaya.com", "Royaya.com\Royaya.com.csproj", "{10F9801F-0184-4555-9F93-666DE16AD905}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoyayaControlPanel.com", "RoyayaControlPanel.com\RoyayaControlPanel.com.csproj", "{A95E0BC6-2A82-4F66-81D2-D5993271035B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{10F9801F-0184-4555-9F93-666DE16AD905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10F9801F-0184-4555-9F93-666DE16AD905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10F9801F-0184-4555-9F93-666DE16AD905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95E0BC6-2A82-4F66-81D2-D5993271035B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95E0BC6-2A82-4F66-81D2-D5993271035B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95E0BC6-2A82-4F66-81D2-D5993271035B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95E0BC6-2A82-4F66-81D2-D5993271035B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

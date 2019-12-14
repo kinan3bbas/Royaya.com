@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Statistics</h1>
+    <p class="lead">
+        <div class="row" style="font-size:large">
+            <div class="col-md-6 col-sm-6 "><span> All Users: </span> <span id="AllUsers"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> Admins: </span> <span id="Admins"> value</span></div>
+        </div>
+        <div class="row " style="font-size:large">
+            <div class="col-md-6 col-sm-6 "><span> Clients: </span> <span id="Clients"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> Interpreters: </span> <span id="Interpreters"> value</span></div>
+        </div>
+        <div class="row" style="font-size:large">
+            <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> Active Dreams: </span> <span id="ActiveDreams"> value</span></div>
+        </div>
+        <div class="row" style="font-size:large">
+            <div class="col-md-6 col-sm-6 "><span> Done Dreams: </span> <span id="DoneDreams"> value</span></div>
+        </div>
+    </p>
+    <p></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Dreams List</h2>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Dreams")">Dreams &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","Dreams")">Add Dream &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Interpretation Paths</h2>
+        <p><a class="btn btn-default" href="@Url.Action("Index","InterprationPaths")">Current Paths &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","InterprationPaths")">Add Path &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Interpreters</h2>
+        <p><a class="btn btn-default" href="@Url.Action("Interpreters","Account")">Interpreters &raquo;</a></p>
+    </div>
+</div>
+
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        WorkExperienceLoadData();
+
+    });
+    function WorkExperienceLoadData() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("getAllStatistics", "Account")',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+            var items = '';
+            $('#AllDreams').text(data.AllDreams);
+            $('#ActiveDreams').text(data.allActiveDreams);
+            $('#DoneDreams').text(data.allDoneDreams);
+            $('#Interpreters').text(data.allInterpreters);
+            $('#Clients').text(data.allClients);
+            $('#Admins').text(data.allAdmins);
+            $('#AllUsers').text(data.allUsers);
+
+
+            //$.each(data, function (i, item) {
+            //var from_date = item.From;
+            //var to_date = item.To;
+            //var from =  new Date(parseInt(from_date.substr(6)));
+            //var to = new Date(parseInt(to_date.substr(6)))
+
+            //$('#AllDreams').
+
+            //});
+            },
+            error: function (ex) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+            alert("StackTrace: " + r.StackTrace);
+            alert("ExceptionType: " + r.ExceptionType);
+            }
+            });
+            return false;
+       }
+    </script>
+    }

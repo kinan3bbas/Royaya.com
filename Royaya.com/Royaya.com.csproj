@@ -370,6 +370,22 @@
     <Compile Include="Migrations\201912061749020_userUpdate.Designer.cs">
       <DependentUpon>201912061749020_userUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912131814273_creator.cs" />
+    <Compile Include="Migrations\201912131814273_creator.Designer.cs">
+      <DependentUpon>201912131814273_creator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912131819218_creator1.cs" />
+    <Compile Include="Migrations\201912131819218_creator1.Designer.cs">
+      <DependentUpon>201912131819218_creator1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912131823042_creator2.cs" />
+    <Compile Include="Migrations\201912131823042_creator2.Designer.cs">
+      <DependentUpon>201912131823042_creator2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912141845128_contactUs-Status.cs" />
+    <Compile Include="Migrations\201912141845128_contactUs-Status.Designer.cs">
+      <DependentUpon>201912141845128_contactUs-Status.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -542,6 +558,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912061749020_userUpdate.resx">
       <DependentUpon>201912061749020_userUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912131814273_creator.resx">
+      <DependentUpon>201912131814273_creator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912131819218_creator1.resx">
+      <DependentUpon>201912131819218_creator1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912131823042_creator2.resx">
+      <DependentUpon>201912131823042_creator2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912141845128_contactUs-Status.resx">
+      <DependentUpon>201912141845128_contactUs-Status.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

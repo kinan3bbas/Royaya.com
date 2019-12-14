@@ -1,0 +1,21 @@
+﻿.row-margin{
+    margin: 5px;
+}
+.row-top-margin{
+    margin-top: 5px;
+}
+
+.row-bottom-margin{
+    margin-bottom: 5px;
+}
+
+.logo-size{
+    height: 75px;
+    width: 105px;
+}
+
+.logo-container{
+    width:100%;
+    height: 110px;
+    padding-top: 70px;
+}

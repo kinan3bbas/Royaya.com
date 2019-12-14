@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<div>
+    <h2 style="color: #8b224e">Roles Management</h2>
+
+    <br />
+    <p style="float:right;text-decoration-color:white;">
+
+        <button class="btn btn-primary btn-default" onclick="location.href='@Url.Action("Create", "Roles")'">
+            <i class="fa fa-plus-square pull-right" style="font-size:x-large"></i> Create New Roles
+        </button> 
+
+    </p>
+    <table id="myTable" class="table table table-striped table-hover col-sm-10 col-md-10">
+        <thead>
+            <tr>
+                <th>
+                    Role Name
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "UsersByRole", "Account", new { @RoleId = item.Id }, null)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Roles", new { id = item.Id })">
+                            <i class="fa fa-pencil" style="font-size:x-large" data-toggle="tooltip" title="Edit Role"></i>
+                        </a>
+                        &nbsp; &nbsp;
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        <a href="@Url.Action("Delete", "Roles", new { id = item.Id })" data-toggle="tooltip" title="Delete Role">
+                            <i class="fa fa-remove" style="font-size:x-large"></i>
+                        </a>
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+    <br />
+
+
+</div>

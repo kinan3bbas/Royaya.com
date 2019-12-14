@@ -1,0 +1,51 @@
+﻿@model List<RoyayaControlPanel.com.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+<div>
+    <h2 style="color: #8b224e">Interpreters Users</h2>
+    <br />
+
+     <table id="myTable" class="table table-striped table-bordered table-hover">
+        <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
+            <tr>
+                <th>User Name</th>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>Joining Date</th>
+                <th>Job Description</th>
+                <th>Martial Status</th>
+                <th>Number of Dreams in one day</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@user.UserName, "PersonalPage", new { id = @user.Id }, null)</td>
+                    @*<td>
+                        @Html.ActionLink("Personal Page",
+                            "PersonalPage", "Employee",
+                            new { @Employeeid = user.EmployeeId }, null)
+                    </td>*@
+                    <td>@user.Name</td>
+                    <td>@user.Sex</td>
+                    <td>@user.Age</td>
+                    <td>@user.Country</td>
+                    <td>@user.JoiningDate</td>
+                    <td>@user.JobDescription</td>
+                    <td>@user.MartialStatus</td>
+                    <td>@user.numbOfDreamsInOneDay</td>
+                    <td>@Html.ActionLink("Edit", "EditInterpreter", new { id = user.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+
+
+</div>

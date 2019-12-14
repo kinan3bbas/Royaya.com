@@ -89,6 +89,7 @@ namespace Royaya.com.Controllers
                 return BadRequest(ModelState);
             }
 
+            contactUs.Status = "Active";
             contactUs.CreationDate = DateTime.Now;
             contactUs.LastModificationDate = DateTime.Now;
             contactUs.Creator = core.getCurrentUser().Id;

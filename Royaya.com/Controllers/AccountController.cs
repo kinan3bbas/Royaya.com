@@ -368,7 +368,7 @@ namespace Royaya.com.Controllers
             {
                 var user = new ApplicationUser()
                 {
-                    UserName = model.Email,
+                    UserName = model.Username,
                     Email = model.Email,
                     Age=model.Age,
                     Country = model.Country,
@@ -393,7 +393,7 @@ namespace Royaya.com.Controllers
             {
                 var user = new ApplicationUser()
                 {
-                    UserName = model.Email,
+                    UserName = model.Username,
                     Email = model.Email,
                     Age = model.Age,
                     JobDescription = model.JobDescription,
@@ -610,6 +610,45 @@ namespace Royaya.com.Controllers
         // POST api/Account/updateUserInfo
         [Route("updateUserInfo")]
         public async Task<IHttpActionResult> updateUserInfo([FromUri]string id,[FromBody]updateUserInfoBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+                await core.throwExcetpion("No matching user!");
+            if (model.Age != null)
+                user.Age = model.Age;
+            if (model.Country != null)
+                user.Country = model.Country;
+            if (model.JobDescription != null)
+                user.JobDescription = model.JobDescription;
+            if (model.MartialStatus != null)
+                user.MartialStatus = model.MartialStatus;
+            if (model.Name != null)
+                user.Name = model.Name;
+            if (model.numbOfDreamsInOneDay != null)
+                user.numbOfDreamsInOneDay = model.numbOfDreamsInOneDay;
+            if (model.PhoneNumber != null)
+                user.PhoneNumber = model.PhoneNumber;
+            if (model.PictureId != null)
+                user.PictureId = model.PictureId;
+            if (model.Sex != null)
+                user.Sex = model.Sex;
+            if (model.Status != null)
+                user.Status = model.Status;
+
+            user.LastModificationDate = DateTime.Now;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok(user);
+        }
+
+        // POST api/Account/verifyAccount
+        [Route("verifyAccount")]
+        public async Task<IHttpActionResult> verifyAccount([FromUri]string id, [FromBody]updateUserInfoBindingModel model)
         {
             if (!ModelState.IsValid)
             {

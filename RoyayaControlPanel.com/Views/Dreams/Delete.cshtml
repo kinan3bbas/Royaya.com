@@ -1,0 +1,137 @@
+﻿@model Royaya.com.Models.Dream
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Dream</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.interpretator.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interpretator.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.path.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.path.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Explanation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Explanation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExplanationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExplanationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterpretationStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterpretationStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModificationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModificationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttachmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttachmentId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

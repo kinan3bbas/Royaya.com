@@ -22,7 +22,7 @@ namespace Royaya.com.Extras
         public DateTime LastModificationDate { get; set; }
 
         public string Creator { get; set; }
-
+        
         public string Modifier { get; set; }
 
         public int AttachmentId { get; set; }

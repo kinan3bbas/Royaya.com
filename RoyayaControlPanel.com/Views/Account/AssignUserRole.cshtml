@@ -1,0 +1,29 @@
+﻿@model RoyayaControlPanel.Models.RoleViewModel
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+    ViewBag.Title = "AssignUserRole";
+}
+
+@using (@Html.BeginForm("AssignUserRole", "Account", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.UserId)
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ValidationMessage("", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedRole, new { @class = "col-md-2 control-label" })
+        <div class="col-md-6">
+            @Html.DropDownList("SelectedRole", (SelectList)ViewBag.SelectedRole, "-- Select Role --", new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(m => m.SelectedRole)
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" class="btn btn-primary" value="Add Role" />
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,120 @@
+﻿
+@model IEnumerable<Royaya.com.Models.Dream>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+    var Id = ViewBag.userId;
+    var userType = ViewBag.Type;
+}
+
+<h2>Dreams List</h2>
+<br />
+<div class="container">
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav flex-column nav-fill">
+
+            <li id="PersonalInfo" class="nav-item nav-link active " style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                @Html.ActionLink("Personal Information", "PersonalPage", new { id = Id })
+            </li>
+            <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
+                @Html.ActionLink("Dreams", "InterpreterDreams", new { id = Id })
+            </li>
+            <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
+                @Html.ActionLink("Payments", "EmployeeDocs", "Support", new { id = Id }, null)
+            </li>
+            @if (userType == "Interpreter")
+            {
+            <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Id }, null)
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-9">
+    <div class="table-responsive ">
+        <table class="table table-striped table-bordered table-hover " id="myTable">
+            <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
+                <tr>
+                    <th>
+                        Plan
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Explanation
+                    </th>
+                    <th>
+                        Explanation Date
+                    </th>
+                    <th>
+                        User Rating
+                    </th>
+                    <th>
+                        Rating Date
+                    </th>
+                    <th>
+                        Creation Date
+                    </th>
+
+                    <th>
+                        Creator
+                    </th>
+
+
+                    @*<th></th>*@
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.path.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Explanation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExplanationDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserRating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RatingDate)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreationDate)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Creator)
+                        </td>
+
+                        @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+        </div>
+    </div>
+    </div>

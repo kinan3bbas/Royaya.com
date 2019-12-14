@@ -1,0 +1,220 @@
+﻿@model RoyayaControlPanel.com.Models.ApplicationUser
+@{
+    ViewBag.Title = "Personal Info Page";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+    var Id = Request.QueryString["userId"];
+}
+
+</style>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>*@
+
+<h2 class="text-center" style="color: #071689 !important;">Personal Information for @Model.Name</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav flex-column nav-fill">
+
+                <li id="PersonalInfo" class="nav-item nav-link active " style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                    @Html.ActionLink("Personal Information", "PersonalPage", new { Employeeid = Id })
+                </li>
+                <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
+                    @Html.ActionLink("Dreams", "InterpreterDreams", new { id = Model.Id })
+                </li>
+                <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
+                    @Html.ActionLink("Payments", "EmployeeDocs", "Support", new { Employeeid = Id }, null)
+                </li>
+            @if (Model.Type == "Interpreter")
+            {
+                <li id="EmployeeRating"  class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                    @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Model.Id }, null)
+                </li>
+            }
+            </ul>
+        </div>
+        @*<div class="col-md-2">
+            @if (Model.EmployeeImage != null)
+            {
+                var path = Path.Combine("/Images/", Model.EmployeeImage);
+                <img src="@path" alt="@Model.Name" title="@Model.Name" class="img-thumbnail" height="200" />
+            }
+        </div>*@
+        <div class="col-md-9" id="PersonalInfoDV">
+
+          
+
+            <table class="table table-responsive" style="margin-top:3%">
+                <tr>
+                    <th>
+
+                        @Html.DisplayNameFor(model => model.Name) :
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+
+                    <th>
+                        Age
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Age)
+                    </td>
+                </tr>
+
+                <tr>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country) :
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Country)
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName) :
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.UserName)
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status) :
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Status)
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sex):
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Sex)
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber):
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.PhoneNumber)
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.MartialStatus):
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.MartialStatus)
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type):
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Type)
+                    </td>
+                </tr>
+            </table>
+            
+
+            <hr />
+
+            @if (Model.Type=="Interpreter") {
+            <div >
+                <h2 style="color: #071689 !important;">Statistics</h2>
+                <p class="lead">
+                    <div class="row" style="font-size:large">
+                        <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> </span></div>
+                        <div class="col-md-6 col-sm-6"><span> Done Dreams: </span> <span id="Done"> </span></div>
+                    </div>
+                    <div class="row " style="font-size:large">
+                        <div class="col-md-6 col-sm-6 "><span> Active Dreams: </span> <span id="Active"> </span></div>
+                        <div class="col-md-6 col-sm-6"><span> Number of Dreams in one day: </span> <span id="Day"> value</span></div>
+                    </div>
+                    <div class="row" style="font-size:large">
+                        <div class="col-md-6 col-sm-6 "><span> Speed </span> <span id="Speed"> </span></div>
+                        <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Money"> </span></div>
+                    </div>
+                    <div class="row" style="font-size:large">
+                        <div class="col-md-6 col-sm-6 "><span> Avg Rating </span> <span id="Rating"> </span></div>
+                    </div>
+
+                </p>
+                <p></p>
+            </div>
+            }
+                <div class="row">
+                    <div class="col-md-5">
+                        <input type="button"
+                               class="btn btn-primary" value="Edit Info"
+                               onclick="location.href='@Url.Action("EditInterpreter", "Account", new { id = Model.Id })'" />
+                       
+                    </div>
+                </div>
+           
+        </div>
+       
+    </div>
+    <!-- /.row -->
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        WorkExperienceLoadData();
+
+    });
+        function WorkExperienceLoadData() {
+        
+        $.ajax({
+            type: 'GET',
+            @*url: '@Url.Action("getInterpreterInfo", "Account")',*@
+            url: "/Account/getInterpreterInfo?phoneNumber="+String(@Model.PhoneNumber),
+            dataType: 'json',
+            data: { },
+            success: function (data) {
+            var items = '';
+            $('#AllDreams').text(data.numberOfAllDreams);
+            $('#Done').text(data.numberOfDoneDreams);
+            $('#Active').text(data.numberOfActiveDreams);
+            $('#Day').text(data.numberOfDreamsByDay);
+            $('#Speed').text(data.speed);
+            $('#Rating').text(data.Rating);
+
+
+
+
+            },
+            error: function (ex) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+            alert("StackTrace: " + r.StackTrace);
+            alert("ExceptionType: " + r.ExceptionType);
+            }
+            });
+            return false;
+       }
+    </script>
+}

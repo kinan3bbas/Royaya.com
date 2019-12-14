@@ -1,0 +1,654 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Control Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="najjar, oilfield, cranes" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/DropDownAdminPage.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/Admin/css/style.css" rel='stylesheet' type='text/css' />
+
+    <!-- font-awesome icons CSS -->
+    <link href="~/Content/Admin/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons CSS-->
+    <!-- side nav css file -->
+    <link href='~/Content/Admin/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- //side nav css file -->
+    <!-- js-->
+    <script src="~/Content/Admin/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Content/Admin/js/modernizr.custom.js"></script>
+
+    <!--webfonts-->
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+    <!--//webfonts-->
+    <!-- chart -->
+    <script src="~/Content/Admin/js/Chart.js"></script>
+    <!-- //chart -->
+    <!-- Metis Menu -->
+    <script src="~/Content/Admin/js/metisMenu.min.js"></script>
+    <script src="~/Content/Admin/js/custom.js"></script>
+    <link href="~/Content/Admin/css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 295px;
+        }
+
+        #homeLink {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 5px 0;
+        }
+    </style>
+    <!--pie-chart --><!-- index page sales reviews visitors pie chart -->
+    <script src="~/Content/Admin/js/pie-chart.js" type="text/javascript"></script>
+
+    <!-- //pie-chart --><!-- index page sales reviews visitors pie chart -->
+    <!-- requried-jsfiles-for owl -->
+    <link href="~/Content/Admin/css/owl.carousel.css" rel="stylesheet">
+    <script src="~/Content/Admin/js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                items: 3,
+                lazyLoad: true,
+                autoPlay: true,
+                pagination: true,
+                nav: true,
+            });
+        });
+    </script>
+    <!-- //requried-jsfiles-for owl -->
+</head>
+<body class="cbp-spmenu-push">
+    <div class="main-content">
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                    <!--left-fixed -navigation-->
+                    <aside class="sidebar-left">
+                        <nav class="navbar navbar-inverse">
+                            <div class="navbar-header" style="background-color:white; border:hidden">
+                                <button id="navPress" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapse" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="sidebar-menu">
+                                    <li class="header">MAIN NAVIGATION</li>
+                                   
+                                        <li class="treeview">
+                                            <a href="@Url.Action("AdminPage", "Roles")">
+                                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                    
+                                    
+                                        <li class="treeview">
+
+
+                                            <a href="#">
+                                                <i class="fa fa-laptop"></i>
+                                                <span>System Mgmt</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                                            <ul class="treeview-menu">
+                                                <!--Roles Menu -->
+                                                <li class="treeview">
+                                                    <a href="#">
+                                                        <i class="fa fa-laptop"></i>
+                                                        <span>Roles</span>
+                                                        <i class="fa fa-angle-left pull-right"></i>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        <li><a href="@Url.Action("Index", "Roles")"><i class="fa fa-angle-right"></i> Roles List</a></li>
+                                                        <li><a href="@Url.Action("Create", "Roles")"><i class="fa fa-angle-right"></i> Add new Role</a></li>
+                                                    </ul>
+
+                                                </li>
+                                                <!--User Management -->
+                                                <li class="treeview">
+                                                    <a href="#">
+                                                        <i class="fa fa-user"></i>
+                                                        <span>Users Management</span>
+                                                        <i class="fa fa-angle-left pull-right"></i>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        @*<li><a href="@Url.Action("Index", "Roles")"><i class="fa fa-angle-right"></i> Users List</a></li>*@
+                                                        <li><a href="@Url.Action("Register", "Account")"><i class="fa fa-angle-right"></i> Register New User</a></li>
+                                                        <li><a href="@Url.Action("UsersList", "Account")"><i class="fa fa-angle-right"></i> Users List</a></li>
+                                                        <li>@Html.ActionLink("Change Password", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                                                    </ul>
+                                                </li>
+
+                                                
+                                                
+
+
+
+
+
+
+
+                                                <!--Contact us Messages-->
+                                                <li class="treeview">
+                                                    <a href="#">
+                                                        <i class="fa fa-pie-chart"></i>
+                                                        <span>Contact Us Messages</span>
+                                                        <span class="fa fa-angle-left pull-right"></span>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        <li><a href="@Url.Action("Index", "ContactUs")"><i class="fa fa-angle-right"></i> Received Messages</a></li>
+                                                        <li><a href="@Url.Action("Create", "ContactUs")"><i class="fa fa-angle-right"></i> Add new Message</a></li>
+                                                    </ul>
+                                                </li>
+                                                <!--Document Mgmt-->
+                                                <li class="treeview">
+                                                    <a href="#">
+                                                        <i class="fa fa-file"></i>
+                                                        <span>Documents Management</span>
+                                                        <span class="fa fa-angle-left pull-right"></span>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        <li><a href="@Url.Action("Index", "Attachments")"><i class="fa fa-angle-right"></i> All Attachments</a></li>
+                                                    </ul>
+                                                </li>
+                                                
+                                            </ul>
+                                        </li>
+                                            
+                                    
+                                    
+                                 
+                                   
+                                        <li class="treeview">
+                                            <a href="#">
+                                                <i class="fa fa-group"></i>
+                                                <span>Dreams Managment</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                                            <ul class="treeview-menu">
+                                                <li><a href="@Url.Action("Index", "Dreams")"><i class="fa fa-angle-right"></i> Dreams List</a></li>
+                                                <li><a href="@Url.Action("Create", "Dreams")"><i class="fa fa-angle-right"></i> Add new Dream</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                    
+
+                                 
+
+                                    
+
+                                    
+                                  
+
+                                   
+                                    
+                                    
+
+                                   
+                                </ul>
+                               
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </nav>
+                    </aside>
+                </div>
+            </div>
+            <div class="col-md-11 col-sm-11 col-xs-11" id="maidDiv">
+                <div class="container body-content" style="padding-top:140px;">
+                    @RenderBody()
+                    <hr />
+                </div>
+            </div>
+        </div>
+
+        <!--left-fixed -navigation-->
+        <!-- header-starts -->
+        <!-- //header-ends -->
+        <!-- main content start-->
+
+
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+                <!--toggle button start-->
+                <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+                <!--toggle button end-->
+                <div class="profile_details_left">
+                    <!--notifications of menu start -->
+                    <ul class="nofitications-dropdown">
+                        <li class="dropdown head-dpdn">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="notification_header">
+                                        <h3>You have 3 new messages</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/2.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Kinan Abbas</p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li class="odd">
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/4.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Obadah Hatem </p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/3.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Ali Ali </p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/2.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Kinan Abbas </p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="notification_bottom">
+                                        <a href="#">See all messages</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown head-dpdn">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">4</span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="notification_header">
+                                        <h3>You have 3 new notification</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/4.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Hi from najjar</p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li class="odd">
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/1.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Hi from najjar </p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/3.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Hi from najjar</p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="user_img"><img src="~/Content/Admin/images/2.jpg" alt=""></div>
+                                        <div class="notification_desc">
+                                            <p>Hi from najjar </p>
+                                            <p><span>1 hour ago</span></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="notification_bottom">
+                                        <a href="#">See all notifications</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown head-dpdn">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">8</span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="notification_header">
+                                        <h3>You have 8 pending task</h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <span class="task-desc">Database update</span><span class="percentage">40%</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="progress progress-striped active">
+                                            <div class="bar yellow" style="width:40%;"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="progress progress-striped active">
+                                            <div class="bar green" style="width:90%;"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="progress progress-striped active">
+                                            <div class="bar red" style="width: 33%;"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="progress progress-striped active">
+                                            <div class="bar  blue" style="width: 80%;"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="notification_bottom">
+                                        <a href="#">See all pending tasks</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="clearfix"> </div>
+                </div>
+                <!--notification menu end -->
+                <div class="clearfix"> </div>
+            </div>
+            <div class="header-right">
+
+                <!--search-box-->
+                <div class="search-box">
+                    <form class="input">
+                        <input class="sb-search-input input__field--madoka"
+                               placeholder="Search..." type="search" id="input-31" />
+                        <label class="input__label" for="input-31">
+                            <svg class="graphic" width="100%"
+                                 height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                            </svg>
+                        </label>
+                    </form>
+                </div><!--//end-search-box-->
+
+                <div class="profile_details">
+                    <ul>
+                        <li class="dropdown profile_details_drop">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <div class="profile_img">
+                                    
+                                    @*@{
+                                        var path = Path.Combine("/Images/", @ViewBag.CurrentEmployee.EmployeeImage);
+                                        <span class="prfil-img" ><img src="@path" alt="" style="width:50px; height: 50px;"> </span>
+                                    
+                                    }*@
+                                    @*<div class="user-name">
+                                        <p>@User.Identity.Name</p>
+                                        <span>@ViewBag.CurrentUser.UserType</span>
+                                    </div>*@
+                                    <div class="user-name">
+                                        <p>Test User</p>
+                                        <span>Administrator</span>
+                                    </div>
+                                    <i class="fa fa-angle-down lnr"></i>
+                                    <i class="fa fa-angle-up lnr"></i>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown2-menu drp-mnu">
+                                <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+                                <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
+                                <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
+                                @*@Html.Partial("_LoginPartialv2")*@
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!--footer-->
+        <div class="footer">
+            <p>&copy; 2019 All Rights Reserved </p>
+        </div>
+        <!--//footer-->
+    </div>
+
+    <!-- new added graphs chart js-->
+
+    <script src="~/Content/Admin/js/Chart.bundle.js"></script>
+    <script src="~/Content/Admin/js/utils.js"></script>
+
+    <script>
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
+
+        };
+
+        //window.onload = function () {
+        //    var ctx = document.getElementById("canvas").getContext("2d");
+        //    window.myBar = new Chart(ctx, {
+        //        type: 'bar',
+        //        data: barChartData,
+        //        options: {
+        //            responsive: true,
+        //            legend: {
+        //                position: 'top',
+        //            },
+        //            title: {
+        //                display: true,
+        //                text: 'Chart.js Bar Chart'
+        //            }
+        //        }
+        //    });
+
+        //};
+
+        //document.getElementById('randomizeData').addEventListener('click', function () {
+        //    var zero = Math.random() < 0.2 ? true : false;
+        //    barChartData.datasets.forEach(function (dataset) {
+        //        dataset.data = dataset.data.map(function () {
+        //            return zero ? 0.0 : randomScalingFactor();
+        //        });
+
+        //    });
+        //    window.myBar.update();
+        //});
+
+        //var colorNames = Object.keys(window.chartColors);
+        //document.getElementById('addDataset').addEventListener('click', function () {
+        //    var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+        //    var dsColor = window.chartColors[colorName];
+        //    var newDataset = {
+        //        label: 'Dataset ' + barChartData.datasets.length,
+        //        backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+        //        borderColor: dsColor,
+        //        borderWidth: 1,
+        //        data: []
+        //    };
+
+        //    for (var index = 0; index < barChartData.labels.length; ++index) {
+        //        newDataset.data.push(randomScalingFactor());
+        //    }
+
+        //    barChartData.datasets.push(newDataset);
+        //    window.myBar.update();
+        //});
+
+        //document.getElementById('addData').addEventListener('click', function () {
+        //    if (barChartData.datasets.length > 0) {
+        //        var month = MONTHS[barChartData.labels.length % MONTHS.length];
+        //        barChartData.labels.push(month);
+
+        //        for (var index = 0; index < barChartData.datasets.length; ++index) {
+        //            //window.myBar.addData(randomScalingFactor(), index);
+        //            barChartData.datasets[index].data.push(randomScalingFactor());
+        //        }
+
+        //        window.myBar.update();
+        //    }
+        //});
+
+        //document.getElementById('removeDataset').addEventListener('click', function () {
+        //    barChartData.datasets.splice(0, 1);
+        //    window.myBar.update();
+        //});
+
+        //document.getElementById('removeData').addEventListener('click', function () {
+        //    barChartData.labels.splice(-1, 1); // remove the label first
+
+        //    barChartData.datasets.forEach(function (dataset, datasetIndex) {
+        //        dataset.data.pop();
+        //    });
+
+        //    window.myBar.update();
+        //});
+    </script>
+    <!-- new added graphs chart js-->
+    <!-- Classie --><!-- for toggle left push menu script -->
+    <script src="~/Content/Admin/js/classie.js"></script>
+    <script>
+        var menuLeft = document.getElementById('cbp-spmenu-s1'),
+            showLeftPush = document.getElementById('showLeftPush'),
+            body = document.body;
+
+        showLeftPush.onclick = function () {
+            classie.toggle(this, 'active');
+            classie.toggle(body, 'cbp-spmenu-push-toright');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            disableOther('showLeftPush');
+        };
+
+
+        function disableOther(button) {
+            if (button !== 'showLeftPush') {
+                classie.toggle(showLeftPush, 'disabled');
+            }
+        }
+    </script>
+    <!-- //Classie --><!-- //for toggle left push menu script -->
+    <!--scrolling js-->
+    <script src="~/Content/Admin/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/Admin/js/scripts.js"></script>
+    <!--//scrolling js-->
+    <!-- side nav js -->
+    <script src='~/Content/Admin/js/SidebarNav.min.js' type='text/javascript'></script>
+    <script>
+        $('.sidebar-menu').SidebarNav()
+    </script>
+    <!-- //side nav js -->
+    <!-- //for index page weekly sales java script -->
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="~/Content/Admin/js/bootstrap.js"></script>
+    <!-- //Bootstrap Core JavaScript -->
+    <!-- Classie --><!-- for toggle left push menu script -->
+    <script src="~/Content/Admin/js/classie.js"></script>
+    <script>
+        var menuLeft = document.getElementById('cbp-spmenu-s1'),
+            showLeftPush = document.getElementById('showLeftPush'),
+            body = document.body;
+
+        showLeftPush.onclick = function () {
+            classie.toggle(this, 'active');
+            classie.toggle(body, 'cbp-spmenu-push-toright');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            disableOther('showLeftPush');
+        };
+
+        function disableOther(button) {
+            if (button !== 'showLeftPush') {
+                classie.toggle(showLeftPush, 'disabled');
+            }
+        }
+    </script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>*@
+    @*<script src="@Url.Content("~/js/bootstrap.js")"></script>*@
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

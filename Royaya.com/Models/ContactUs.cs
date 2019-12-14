@@ -31,5 +31,8 @@ namespace Royaya.com.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
+
+        [Display(Name = "Status")]
+        public string Status { get; set; }
     }
 }
