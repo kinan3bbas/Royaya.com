@@ -14,7 +14,7 @@ using RoyayaControlPanel.com.ViewModels;
 
 namespace RoyayaControlPanel.com.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DreamsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -22,7 +22,7 @@ namespace RoyayaControlPanel.com.Controllers
         // GET: Dreams
         public async Task<ActionResult> Index(int? page, string searchString, string status)
         {
-            List<ApplicationUser> users = db.Users.ToList();
+            var users = db.Users;
             var dreams = db.Dreams.Include(d => d.interpretator).Include(d => d.path).OrderByDescending(r => r.CreationDate);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -30,14 +30,15 @@ namespace RoyayaControlPanel.com.Controllers
                 dreams = dreams.Where(a => a.Description.Contains(searchString)).OrderByDescending(r => r.CreationDate);
             if(status!=null&&!status.Equals(""))
                 dreams = dreams.Where(a => a.Status.Equals(status)).OrderByDescending(r => r.CreationDate);
-
+            //dreams = dreams.Skip((pageNumber-1)*pageSize).Take(pageSize).ToList();
             List<DreamViewModel> dreamsView = new List<DreamViewModel>();
             foreach (var item in dreams)
             {
                 DreamViewModel temp = new DreamViewModel();
                 temp.id = item.id;
                 temp.CreatorId = item.Creator;
-                temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null? users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
+
+                //temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null?users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
                 temp.Description = item.Description;
                 temp.Explanation = item.Explanation;
                 temp.ExplanationDate = item.ExplanationDate;

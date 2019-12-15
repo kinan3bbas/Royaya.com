@@ -12,7 +12,7 @@ using RoyayaControlPanel.com.Models;
 
 namespace RoyayaControlPanel.com.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class InterprationPathsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

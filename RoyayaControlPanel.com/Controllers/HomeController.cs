@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RoyayaControlPanel.com.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         public ActionResult Index()

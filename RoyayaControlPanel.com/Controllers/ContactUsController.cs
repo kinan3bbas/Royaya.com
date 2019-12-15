@@ -13,6 +13,7 @@ using RoyayaControlPanel.com.ViewModels;
 
 namespace RoyayaControlPanel.com.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ContactUsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

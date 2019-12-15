@@ -362,6 +362,7 @@ namespace Royaya.com.Controllers
                     LastModificationDate = DateTime.Now
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "Admin");
             }
             
             if (model.Type.Equals("Client"))
