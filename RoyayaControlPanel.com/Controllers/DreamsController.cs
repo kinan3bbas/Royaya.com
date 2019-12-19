@@ -28,35 +28,101 @@ namespace RoyayaControlPanel.com.Controllers
             int pageNumber = (page ?? 1);
             if (searchString != null && !searchString.Equals(""))
                 dreams = dreams.Where(a => a.Description.Contains(searchString)).OrderByDescending(r => r.CreationDate);
-            if(status!=null&&!status.Equals(""))
+            if (status != null && !status.Equals(""))
                 dreams = dreams.Where(a => a.Status.Equals(status)).OrderByDescending(r => r.CreationDate);
             //dreams = dreams.Skip((pageNumber-1)*pageSize).Take(pageSize).ToList();
             List<DreamViewModel> dreamsView = new List<DreamViewModel>();
             foreach (var item in dreams)
             {
-                DreamViewModel temp = new DreamViewModel();
-                temp.id = item.id;
-                temp.CreatorId = item.Creator;
+                DreamViewModel temp = new DreamViewModel
+                {
+                    id = item.id,
+                    CreatorId = item.Creator,
 
-                //temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null?users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
-                temp.Description = item.Description;
-                temp.Explanation = item.Explanation;
-                temp.ExplanationDate = item.ExplanationDate;
-                temp.InterpretationStartDate = item.InterpretationStartDate;
-                temp.interpretatorId = item.interpretatorId;
-                temp.interpretatorName = item.interpretator.Name;
-                temp.pathCost = item.path.Cost;
-                temp.pathId = item.pathId;
-                temp.RatingDate = item.RatingDate;
-                temp.Status = item.Status;
-                temp.UserRating = item.UserRating;
-                temp.CreationDate = item.CreationDate;
+                    //temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null?users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
+                    Description = item.Description,
+                    Explanation = item.Explanation,
+                    ExplanationDate = item.ExplanationDate,
+                    InterpretationStartDate = item.InterpretationStartDate,
+                    interpretatorId = item.interpretatorId != null ? item.interpretatorId : "",
+                    interpretatorName = item.interpretator != null ? item.interpretator.Name : "",
+                    pathCost = item.path != null ? item.path.Cost : -1,
+                    pathId = item.pathId != null ? item.pathId : 0,
+                    RatingDate = item.RatingDate,
+                    Status = item.Status,
+                    UserRating = item.UserRating,
+                    CreationDate = item.CreationDate
+                };
                 dreamsView.Add(temp);
             }
             return View(dreamsView.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Dreams/Details/5
+        [AllowAnonymous]
+        public JsonResult GetDreams(int? page, string searchString, string status)
+        {
+            var users = db.Users;
+            var dreams = db.Dreams.Include(d => d.interpretator).Include(d => d.path).OrderByDescending(r => r.CreationDate);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            if (searchString != null && !searchString.Equals(""))
+                dreams = dreams.Where(a => a.Description.Contains(searchString)).OrderByDescending(r => r.CreationDate);
+            if (status != null && !status.Equals(""))
+                dreams = dreams.Where(a => a.Status.Equals(status)).OrderByDescending(r => r.CreationDate);
+            //dreams = dreams.Skip((pageNumber-1)*pageSize).Take(pageSize).ToList();
+            List<DreamViewModel> dreamsView = new List<DreamViewModel>();
+            foreach (var item in dreams)
+            {
+                DreamViewModel temp = new DreamViewModel
+                {
+                    id = item.id,
+                    CreatorId = item.Creator,
+
+                    //temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null?users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
+                    Description = item.Description,
+                    Explanation = item.Explanation,
+                    ExplanationDate = item.ExplanationDate,
+                    InterpretationStartDate = item.InterpretationStartDate,
+                    interpretatorId = item.interpretatorId!=null?item.interpretatorId:"",
+                    interpretatorName = item.interpretator!=null?item.interpretator.Name:"",
+                    pathCost = item.path!=null?item.path.Cost:-1,
+                    pathId = item.pathId!=null?item.pathId:0,
+                    RatingDate = item.RatingDate,
+                    Status = item.Status,
+                    UserRating = item.UserRating,
+                    CreationDate = item.CreationDate
+                };
+                dreamsView.Add(temp);
+            }
+            return Json(dreamsView.ToPagedList(pageNumber, pageSize),JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult GetSingleDream(int? id)
+        {
+            
+            Dream item = db.Dreams.Find(id);
+
+            DreamViewModel temp = new DreamViewModel();
+            temp.CreatorId = item.Creator;
+
+            //temp.CreatorName = users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault()!=null?users.Where(a => a.Id.Equals(item.Creator)).FirstOrDefault().Name:"";
+            temp.Description = item.Description;
+            temp.Explanation = item.Explanation;
+            temp.ExplanationDate = item.ExplanationDate;
+            temp.InterpretationStartDate = item.InterpretationStartDate;
+            temp.interpretatorId = item.interpretatorId != null ? item.interpretatorId : "";
+            temp.interpretatorName = item.interpretator != null ? item.interpretator.Name : "";
+            temp.pathCost = item.path != null ? item.path.Cost : -1;
+            temp.pathId = item.pathId != null ? item.pathId : 0;
+            temp.RatingDate = item.RatingDate;
+            temp.Status = item.Status;
+            temp.UserRating = item.UserRating;
+            temp.CreationDate = item.CreationDate;
+            return Json(temp, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,10 +137,40 @@ namespace RoyayaControlPanel.com.Controllers
             return View(dream);
         }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> DreamPage(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Dream dream = await db.Dreams.FindAsync(id);
+            if (dream == null)
+            {
+                return HttpNotFound();
+            }
+
+            dream.numberOfViews++;
+            db.Entry(dream).State = EntityState.Modified;
+            db.SaveChanges();
+
+            ApplicationUser creator = db.Users.Where(a => a.Id.Equals(dream.Creator)).FirstOrDefault();
+            ApplicationUser Interpreter = db.Users.Where(a => a.Id.Equals(dream.interpretatorId)).FirstOrDefault();
+            InterprationPath path = db.InterprationPaths.Where(a => a.id.Equals(dream.pathId)).FirstOrDefault();
+            if (path.Cost == 0)
+                ViewBag.Type = "رؤية مجانية";
+            else
+                ViewBag.Type = "رؤية مدفوعة";
+
+            ViewBag.InterpreterName = Interpreter != null ? Interpreter.Name : "";
+            ViewBag.CreatorName = creator != null ? creator.Name : "";
+            return View(dream);
+        }
+
         // GET: Dreams/Create
         public ActionResult Create()
         {
-            ViewBag.interpretatorId = new SelectList(db.Users.Where(a=>a.Type.Equals("Interpreter")), "Id", "Name");
+            ViewBag.interpretatorId = new SelectList(db.Users.Where(a => a.Type.Equals("Interpreter")), "Id", "Name");
             ViewBag.pathId = new SelectList(db.InterprationPaths, "id", "Cost");
             return View();
         }
@@ -127,7 +223,7 @@ namespace RoyayaControlPanel.com.Controllers
             Dream dream = db.Dreams.Find(tempdream.id);
             if (ModelState.IsValid)
             {
-                
+
                 dream.Status = tempdream.Status;
                 dream.Description = tempdream.Description;
                 dream.interpretatorId = tempdream.interpretatorId;

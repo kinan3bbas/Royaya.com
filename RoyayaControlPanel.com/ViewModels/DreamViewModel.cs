@@ -48,5 +48,7 @@ namespace RoyayaControlPanel.com.ViewModels
 
         public int id { get; set; }
 
+        public DreamViewModel() { }
+
     }
 }

@@ -68,12 +68,23 @@ namespace Royaya.com.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+            ApplicationUser user = core.getCurrentUser();
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                Age = user.Age,
+                Country=user.Country,
+                JobDescription=user.JobDescription,
+                JoiningDate=user.JoiningDate,
+                Name=user.Name,
+                MartialStatus=user.MartialStatus,
+                numbOfDreamsInOneDay=user.numbOfDreamsInOneDay,
+                PictureId=user.PictureId,
+                Sex=user.Sex,
+                Status=user.Status,
+                Type=user.Type,
+                phoneNumber=user.PhoneNumber
+                
             };
         }
 
@@ -399,7 +410,7 @@ namespace Royaya.com.Controllers
                     Age = model.Age,
                     JobDescription = model.JobDescription,
 
-                    JoiningDate = model.JoiningDate,
+                    JoiningDate = DateTime.Now,
                     Name = model.Name,
                     PhoneNumber = model.PhoneNumber
                                                     ,
@@ -489,6 +500,13 @@ namespace Royaya.com.Controllers
                 temp.numberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count;
                 temp.numberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count;
                 temp.speed =temp.numberOfActiveDreams>0?temp.numberOfDoneDreams / temp.numberOfActiveDreams:0;
+                temp.PhoneNumber = user.PhoneNumber;
+                temp.Status = user.Status;
+                temp.JobDescription = user.JobDescription;
+                temp.sex = user.Sex;
+                temp.Age = user.Age;
+                temp.MartialStatus = user.MartialStatus;
+                temp.country = user.Country;
                 finalResult.Add(temp);
 
                 
@@ -506,9 +524,9 @@ namespace Royaya.com.Controllers
             result.AllDreams = dreams.Count();
             result.allActiveDreams = dreams.Where(a => a.Status.Equals("Active")).Count();
             result.allDoneDreams= dreams.Where(a => a.Status.Equals("Done")).Count();
-            result.allClients = users.Where(a => a.Type.Equals("Client")) != null ? users.Where(a => a.Type.Equals("Client")).Count() : 0;
-            result.allInterpreters = users.Where(a => a.Type.Equals("Interpreter")).Count();
-            result.allAdmins= users.Where(a => a.Type.Equals("Admin")).Count();
+            result.allClients = db.Users.Where(a => a.Type.Equals("Client")) != null ? db.Users.Where(a => a.Type.Equals("Client")).Count() : 0;
+            result.allInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter")).Count();
+            result.allAdmins= db.Users.Where(a => a.Type.Equals("Admin")).Count();
             result.allUsers = users.Count();
 
             return Ok(result);
@@ -591,6 +609,51 @@ namespace Royaya.com.Controllers
             
             return Ok(db.Users.Where(a=>a.Status.Equals("Active")).ToList());
         }
+
+        [Route("GetInterpreters")]
+        public async Task<IHttpActionResult> GetInterpreters()
+        {
+
+            return Ok(db.Users.Where(a => a.Status.Equals("Active")&&a.Type.Equals("Interpreter")).ToList());
+        }
+
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("GetSingleUserInfo")]
+        public UserInfoViewModel GetSingleUserInfo([FromUri]string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            return new UserInfoViewModel
+            {
+                Email = User.Identity.GetUserName(),
+                Age = user.Age,
+                Country = user.Country,
+                JobDescription = user.JobDescription,
+                JoiningDate = user.JoiningDate,
+                Name = user.Name,
+                MartialStatus = user.MartialStatus,
+                numbOfDreamsInOneDay = user.numbOfDreamsInOneDay,
+                PictureId = user.PictureId,
+                Sex = user.Sex,
+                Status = user.Status,
+                Type = user.Type,
+                phoneNumber = user.PhoneNumber
+                
+
+            };
+        }
+
+
+        // POST api/Account/getWaitingTimeForSingleDream
+        [Route("Like")]
+        public async Task<IHttpActionResult> LikeDream([FromUri] int id)
+        {
+            Dream dream = db.Dreams.Find(id);
+            dream.numberOfLikes++;
+            db.Entry(dream).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok(dream);
+        }
+
 
         // POST api/Account/getWaitingTimeForSingleDream
         [Route("test")]

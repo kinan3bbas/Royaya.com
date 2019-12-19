@@ -386,6 +386,14 @@
     <Compile Include="Migrations\201912141845128_contactUs-Status.Designer.cs">
       <DependentUpon>201912141845128_contactUs-Status.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912181657020_numberOfViewsz.cs" />
+    <Compile Include="Migrations\201912181657020_numberOfViewsz.Designer.cs">
+      <DependentUpon>201912181657020_numberOfViewsz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912191147239_test2.cs" />
+    <Compile Include="Migrations\201912191147239_test2.Designer.cs">
+      <DependentUpon>201912191147239_test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -570,6 +578,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912141845128_contactUs-Status.resx">
       <DependentUpon>201912141845128_contactUs-Status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912181657020_numberOfViewsz.resx">
+      <DependentUpon>201912181657020_numberOfViewsz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912191147239_test2.resx">
+      <DependentUpon>201912191147239_test2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -52,9 +52,16 @@ namespace Royaya.com.Controllers
 
         // GET: odata/Dreams(5)
         [EnableQuery]
-        public SingleResult<Dream> GetDream([FromODataUri] int key)
+        public IHttpActionResult GetDream([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Dreams.Where(dream => dream.id == key));
+            Dream dream = db.Dreams.Where(a => a.id == key).FirstOrDefault();
+            if (!core.getCurrentUser().Id.Equals(dream.Creator)) {
+                dream.numberOfViews++;
+                db.Entry(dream).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Ok(dream);
         }
 
         // PUT: odata/Dreams(5)

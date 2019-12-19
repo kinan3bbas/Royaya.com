@@ -55,5 +55,9 @@ namespace Royaya.com.Models
         [Display(Name = "Interpretation Start Date")]
         public DateTime? InterpretationStartDate { get; set; }
 
+        public long numberOfViews { get; set; }
+
+        public long numberOfLikes { get; set; }
+
     }
 }

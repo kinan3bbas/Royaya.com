@@ -1,0 +1,209 @@
+﻿@model Royaya.com.Models.Dream
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PLayout_Public.cshtml";
+}
+<meta charset="utf-8" />
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="align-content:center;text-align:center">
+        <div style="background-color:dodgerblue;padding-left:25%;padding-right:25%;color:white;font-size:x-large;font-weight:bolder"> بيانات الطلب</div>
+        <div > </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<br />
+<br />
+
+<div>
+
+    <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card" style="direction:rtl;text-align:right;font-size:large;font-weight:bolder">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-body" style="text-align:center">
+                            <h5 class="card-title">@ViewBag.Type</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align:center">@if (Model.Status == "Done") {
+                                <p>تم الرد<i class="glyphicon-alert"></i>  </p>
+                            } else {
+                                <p>لم يتم الرد بعد</p>
+                            }</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body" style="text-align:center">
+                            <h5 class="card-title">التقييم @Model.UserRating</h5>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+</div>
+
+<br />
+<br />
+
+<div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card"  style="direction:rtl;text-align:right;font-size:large;font-weight:bolder">
+                <h5 class="card-header">@ViewBag.CreatorName</h5>
+                <div class="card-body">
+                    <h5 class="card-title">الرؤية رقم @Model.id</h5>
+                    <p class="card-text">@Model.Description</p>
+                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card"  style="direction:rtl;text-align:right">
+                <h5 class="card-header">@ViewBag.InterpreterName &nbsp;&nbsp;&nbsp;&nbsp; @Model.ExplanationDate</h5>
+                <div class="card-body" style="direction:rtl;text-align:right">
+                    <h5 class="card-title">تفسير الرؤية</h5>
+                    <p class="card-text">@Model.Explanation</p>
+                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interpretator.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.path.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.path.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Explanation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Explanation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExplanationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExplanationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterpretationStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterpretationStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModificationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModificationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttachmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttachmentId)
+        </dd>
+
+    </dl>*@
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

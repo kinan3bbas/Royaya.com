@@ -700,6 +700,8 @@
     <Content Include="Views\Account\PersonalPage.cshtml" />
     <Content Include="Views\Account\InterpreterDreams.cshtml" />
     <Content Include="Views\Account\InterpreterRatings.cshtml" />
+    <Content Include="Views\Dreams\DreamPage.cshtml" />
+    <Content Include="Views\Shared\_PLayout_Public.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,6 +16,20 @@ namespace Royaya.com.ViewModels
 
         public string Name { get; set; }
 
+        public string PhoneNumber { get; set; }
+
+        public String Status { get; set; }
+
+        public String JobDescription { get; set; }
+
+
+        public String sex { get; set; }
+
+        public int Age { get; set; }
+
+        public String country { get; set; }
+        public string MartialStatus { get; set; }
+
         public double Rating { get; set; }
 
         public int numberOfActiveDreams { get; set; }
