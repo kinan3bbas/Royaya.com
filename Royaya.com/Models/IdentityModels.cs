@@ -24,7 +24,7 @@ namespace Royaya.com.Models
         [Display(Name = "Last Modification Date")]
         public DateTime? LastModificationDate { get; set; }
 
-        
+
 
         [Display(Name = "Sex")]
         public string Sex { get; set; }
@@ -59,6 +59,12 @@ namespace Royaya.com.Models
         public ICollection<Dream> Dreams { get; set; }
 
         public int Age { get; set; }
+
+        public string FireBaseId { get; set; }
+
+        public string PersonalDescription { get; set; }
+
+       public bool verifiedInterpreter { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

@@ -16,5 +16,7 @@ namespace Royaya.com.Models
 
         public ApplicationUser User { get; set; }
 
+        public bool seen { get;set; }
+
     }
 }

@@ -62,5 +62,8 @@ namespace Royaya.com.Models
         
         public long numberOfLikes { get; set; }
 
+        public string CreatorFireBaseId { get; set; }
+        public string InterpreterFireBaseId { get; set; }
+
     }
 }

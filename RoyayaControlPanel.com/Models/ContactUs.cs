@@ -34,5 +34,8 @@ namespace Royaya.com.Models
         [Display(Name = "Status")]
         public string Status { get; set; }
 
+        [Display(Name = "Response")]
+        public string Response { get; set; }
+
     }
 }

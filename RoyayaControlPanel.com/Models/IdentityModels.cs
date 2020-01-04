@@ -55,7 +55,18 @@ namespace RoyayaControlPanel.com.Models
 
         public ICollection<Dream> Dreams { get; set; }
 
+        [Display(Name = "Age")]
         public int Age { get; set; }
+
+        [Display(Name = "Fire Base id ")]
+        public string FireBaseId { get; set; }
+
+        [Display(Name = "Personal Description")]
+        public string PersonalDescription { get; set; }
+
+        [Display(Name = "Verified Interpreter")]
+        public bool verifiedInterpreter { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

@@ -463,9 +463,24 @@ namespace RoyayaControlPanel.com.Controllers
             temp.JoiningDate = user.JoiningDate;
             temp.MartialStatus = user.MartialStatus;
             temp.Age = user.Age;
+            temp.PersonalDescription = user.PersonalDescription;
+            temp.FireBaseId = user.FireBaseId;
+            temp.VerifiedInterpreter = user.verifiedInterpreter;
+            temp.Type = user.Type;
 
             temp.numbOfDreamsInOneDay = user.numbOfDreamsInOneDay;
             return View(temp);
+        }
+
+        [HttpGet]
+        public JsonResult VerifyInterpreter(String id)
+        {
+            ApplicationUser user = db.Users.Where(a => a.Id.Equals(id)).FirstOrDefault();
+            user.verifiedInterpreter = true;
+            user.LastModificationDate = DateTime.Now;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(user, JsonRequestBehavior.AllowGet);
         }
 
         // POST: EditInterpreter/Edit/5
@@ -488,12 +503,42 @@ namespace RoyayaControlPanel.com.Controllers
                 user.numbOfDreamsInOneDay = tempUser.numbOfDreamsInOneDay;
                 user.Age = tempUser.Age;
                 user.Type = tempUser.Type;
+                
+                user.FireBaseId = tempUser.FireBaseId;
+                user.PersonalDescription = tempUser.PersonalDescription;
                 user.CreationDate = DateTime.Now;
                 user.LastModificationDate = DateTime.Now;
+                if (user.verifiedInterpreter != tempUser.VerifiedInterpreter) {
+                    if (user.verifiedInterpreter == false)
+                    {
+                        NotificationLog log = new NotificationLog();
+                        log.User = user;
+                        log.UserId = user.Id;
+                        log.message = "Congratulation your account has been promoted to be a verified interpreter!";
+                        log.CreationDate = DateTime.Now;
+                        log.LastModificationDate = DateTime.Now;
+                        db.NotificationLogs.Add(log);
+                        db.SaveChanges();
+
+                    }
+                    else
+                    {
+                        NotificationLog log = new NotificationLog();
+                        log.User = user;
+                        log.UserId = user.Id;
+                        log.message = "You aren't interpreter anymore!";
+                        log.CreationDate = DateTime.Now;
+                        log.LastModificationDate = DateTime.Now;
+                        db.NotificationLogs.Add(log);
+                        db.SaveChanges();
+                    }
+                    user.verifiedInterpreter = tempUser.VerifiedInterpreter;
+                }
                 db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Interpreters");
             }
+
             return View(tempUser);
         }
 

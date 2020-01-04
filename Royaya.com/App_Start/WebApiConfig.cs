@@ -28,7 +28,7 @@ namespace Royaya.com
             builder.EntitySet<ContactUs>("ContactUs");
             builder.EntitySet<DreamComment>("DreamComments");
             builder.EntitySet<UsersDeviceTokens>("UsersDeviceTokens");
-            
+            builder.EntitySet<NotificationLog>("NotificationLogs");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
             // Web API routes

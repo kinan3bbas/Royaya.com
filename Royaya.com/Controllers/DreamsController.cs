@@ -117,6 +117,7 @@ namespace Royaya.com.Controllers
             dream.Modifier = core.getCurrentUser().Id;
             dream.path = db.InterprationPaths.Where(a => a.Cost == 0).FirstOrDefault();
             dream.InterpretationStartDate = DateTime.Now;
+            dream.CreatorFireBaseId = core.getCurrentUser().FireBaseId;
             db.Dreams.Add(dream);
             await db.SaveChangesAsync();
 
@@ -195,6 +196,7 @@ namespace Royaya.com.Controllers
                         return BadRequest("Not matching interpretator!");
                     }
                     dream.interpretator = interpatator;
+                    dream.InterpreterFireBaseId = interpatator.FireBaseId;
                 }
                 if (dreamExplained)
                 {
@@ -229,7 +231,7 @@ namespace Royaya.com.Controllers
                 }
             }
 
-            return Updated(dream);
+            return Ok(dream);
         }
 
         // DELETE: odata/Dreams(5)

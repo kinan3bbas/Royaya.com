@@ -72,7 +72,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MartialStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MartialStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("MartialStatus", new List<SelectListItem>
+                                      { new SelectListItem { Text="Married", Value="Married"},
+                                         new SelectListItem{Text="Single", Value="Single"},
+                                         new SelectListItem{Text="Other", Value="Other"}
+                                        }, "Select Status")
                 @Html.ValidationMessageFor(model => model.MartialStatus, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,6 +92,19 @@
             </div>
         </div>
         
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonalDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PersonalDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PersonalDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VerifiedInterpreter, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.VerifiedInterpreter, new { htmlAttributes = new { @style = "size:small" } })
+            @Html.ValidationMessageFor(model => model.VerifiedInterpreter, "", new { @class = "text-danger" })
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

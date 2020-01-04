@@ -86,6 +86,10 @@ namespace Royaya.com.Models
         public string Username { get; set; }
 
         public int numbOfDreamsInOneDay { get; set; }
+
+        public string PersonalDescription { get; set; }
+
+        public string FireBaseId { get; set; }
     }
 
     public class RegisterExternalBindingModel

@@ -40,6 +40,12 @@ namespace Royaya.com.ViewModels
 
         public double speed { get; set; }
 
+        public string personalDescription { get; set; }
+
+        public string fireBaseId { get; set; }
+
+        public bool HasRegistered { get; set; }
+
         
 
     }

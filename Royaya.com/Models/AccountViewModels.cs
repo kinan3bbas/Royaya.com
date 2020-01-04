@@ -29,6 +29,7 @@ namespace Royaya.com.Models
     {
         public string Email { get; set; }
 
+        public string PersonalDescription { get; set; }
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
@@ -56,6 +57,15 @@ namespace Royaya.com.Models
         public int Age { get; set; }
 
         public string phoneNumber { get; set; }
+
+        public string FireBaseId { get; set; }
+
+        public string Id { get; set; }
+
+        public int NumberOfActiveDreams { get; set; }
+
+        public int NumberOfDoneDreams { get; set; }
+
     }
 
     public class UserLoginInfoViewModel

@@ -33,6 +33,9 @@ namespace Royaya.com.ViewModels
 
         public string Type { get; set; }
 
+        public string PersonalDescription { get; set; }
+        public string FireBaseId { get; set; }
+        public bool VerifiedInterpreter { get; set; }
 
         public int Age { get; set; }
         public int numbOfDreamsInOneDay { get; set; }

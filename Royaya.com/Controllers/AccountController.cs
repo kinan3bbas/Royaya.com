@@ -69,6 +69,27 @@ namespace Royaya.com.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             ApplicationUser user = core.getCurrentUser();
+            UsersDeviceTokens token = db.UsersDeviceTokens.Where(a => a.UserId.Equals(user.Id)).FirstOrDefault();
+            if (user.Type == "Client") {
+                return new UserInfoViewModel
+                {
+                    Email = User.Identity.GetUserName(),
+                    Age = user.Age,
+                    Country = user.Country,
+                    JobDescription = user.JobDescription,
+                    JoiningDate = user.JoiningDate,
+                    Name = user.Name,
+                    MartialStatus = user.MartialStatus,
+                    Sex = user.Sex,
+                    Status = user.Status,
+                    Type = user.Type,
+                    phoneNumber = user.PhoneNumber,
+                    PersonalDescription = user.PersonalDescription,
+                    FireBaseId=user.FireBaseId,
+                    Id=user.Id
+
+                };
+            }
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
@@ -83,8 +104,13 @@ namespace Royaya.com.Controllers
                 Sex=user.Sex,
                 Status=user.Status,
                 Type=user.Type,
-                phoneNumber=user.PhoneNumber
-                
+                phoneNumber=user.PhoneNumber,
+                PersonalDescription=user.PersonalDescription,
+                FireBaseId = user.FireBaseId,
+                Id=user.Id,
+                HasRegistered=user.verifiedInterpreter
+
+
             };
         }
 
@@ -368,7 +394,9 @@ namespace Royaya.com.Controllers
                     Name = model.Name,
                     Status = model.Status,
                     Type = model.Type,
-                    CreationDate = DateTime.Now
+                    CreationDate = DateTime.Now,
+                    FireBaseId=model.FireBaseId
+
                                                     ,
                     LastModificationDate = DateTime.Now
                 };
@@ -396,7 +424,9 @@ namespace Royaya.com.Controllers
                                                     ,
                     JobDescription = model.JobDescription,
 
-                    LastModificationDate = DateTime.Now
+                    LastModificationDate = DateTime.Now,
+                    PersonalDescription=model.PersonalDescription,
+                    FireBaseId=model.FireBaseId
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
             }
@@ -409,7 +439,7 @@ namespace Royaya.com.Controllers
                     Email = model.Email,
                     Age = model.Age,
                     JobDescription = model.JobDescription,
-
+                    Country=model.Country,
                     JoiningDate = DateTime.Now,
                     Name = model.Name,
                     PhoneNumber = model.PhoneNumber
@@ -421,7 +451,9 @@ namespace Royaya.com.Controllers
                     CreationDate = DateTime.Now
                                                     ,
                     LastModificationDate = DateTime.Now,
-                    numbOfDreamsInOneDay = model.numbOfDreamsInOneDay
+                    numbOfDreamsInOneDay = model.numbOfDreamsInOneDay,
+                    PersonalDescription=model.PersonalDescription,
+                    FireBaseId=model.FireBaseId
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
             }
@@ -507,6 +539,10 @@ namespace Royaya.com.Controllers
                 temp.Age = user.Age;
                 temp.MartialStatus = user.MartialStatus;
                 temp.country = user.Country;
+                temp.personalDescription = user.PersonalDescription;
+                temp.fireBaseId = user.FireBaseId;
+                temp.HasRegistered = user.verifiedInterpreter;
+                
                 finalResult.Add(temp);
 
                 
@@ -514,6 +550,7 @@ namespace Royaya.com.Controllers
                 return Ok(finalResult.OrderByDescending(a=>a.speed).OrderByDescending(b=>b.Rating).ToList());
         }
 
+        [AllowAnonymous]
         // GET api/Account/getAllStatistics
         [Route("getAllStatistics")]
         public async Task<IHttpActionResult> getAllStatistics()
@@ -584,23 +621,27 @@ namespace Royaya.com.Controllers
 
         public  string getWaitingTimeMessage(double x,double y)
         {
-            double duration = (y / x) * 24 * 60 * 60;
+            if (x != null && x != 0)
+            {
+                double duration = (y / x) * 24 * 60 * 60;
 
-            LocalDateTime d1 = new LocalDateTime();
-            LocalDateTime d2 = d1.PlusSeconds((long)duration);
-            Period period = Period.Between(d1, d2);
-            int years = period.Years;
-            int months = period.Months;
-            int days = period.Days;
-            long hours = period.Hours;
-            long minutes = period.Minutes;
-            long seconds = period.Seconds;
-            string result = "Your average waiting time is " + (years > 0 ? years + " years " : "") +
-                            (months > 0 ? months + " months " : "") +
-                            (days > 0 ? days + " days " : "") +
-                            (hours > 0 ? hours + " hours " : "") +
-                             (minutes > 0 ? minutes + " minutes " : "");
-            return result;
+                LocalDateTime d1 = new LocalDateTime();
+                LocalDateTime d2 = d1.PlusSeconds((long)duration);
+                Period period = Period.Between(d1, d2);
+                int years = period.Years;
+                int months = period.Months;
+                int days = period.Days;
+                long hours = period.Hours;
+                long minutes = period.Minutes;
+                long seconds = period.Seconds;
+                string result = "Your average waiting time is " + (years > 0 ? years + " years " : "") +
+                                (months > 0 ? months + " months " : "") +
+                                (days > 0 ? days + " days " : "") +
+                                (hours > 0 ? hours + " hours " : "") +
+                                 (minutes > 0 ? minutes + " minutes " : "");
+                return result;
+            }
+            return "";
         }
 
         [Route("GetUsersList")]
@@ -610,18 +651,51 @@ namespace Royaya.com.Controllers
             return Ok(db.Users.Where(a=>a.Status.Equals("Active")).ToList());
         }
 
+        [AllowAnonymous]
         [Route("GetInterpreters")]
         public async Task<IHttpActionResult> GetInterpreters()
         {
+            List<ApplicationUser> users = db.Users.Where(a => a.Status.Equals("Active") && a.Type.Equals("Interpreter")).Include("Dreams").ToList();
 
-            return Ok(db.Users.Where(a => a.Status.Equals("Active")&&a.Type.Equals("Interpreter")).ToList());
+            List<UserInfoViewModel> result = new List<UserInfoViewModel>();
+            foreach (var user in users)
+            {
+                result.Add(new UserInfoViewModel
+                {
+                    Email = User.Identity.GetUserName(),
+                    Age = user.Age,
+                    Country = user.Country,
+                    JobDescription = user.JobDescription,
+                    JoiningDate = user.JoiningDate,
+                    Name = user.Name,
+                    MartialStatus = user.MartialStatus,
+                    numbOfDreamsInOneDay = user.numbOfDreamsInOneDay,
+                    PictureId = user.PictureId,
+                    Sex = user.Sex,
+                    Status = user.Status,
+                    Type = user.Type,
+                    phoneNumber = user.PhoneNumber,
+                    PersonalDescription = user.PersonalDescription,
+                    FireBaseId = user.FireBaseId,
+                    Id = user.Id,
+                    HasRegistered=user.verifiedInterpreter,
+                    NumberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count(),
+                    NumberOfDoneDreams= user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count()
+
+
+                });
+            }
+
+            return Ok(result);
         }
 
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [AllowAnonymous]
         [Route("GetSingleUserInfo")]
         public UserInfoViewModel GetSingleUserInfo([FromUri]string id)
         {
+
             ApplicationUser user = db.Users.Find(id);
+            UsersDeviceTokens token = db.UsersDeviceTokens.Where(a => a.UserId.Equals(user.Id)).FirstOrDefault();
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
@@ -636,7 +710,11 @@ namespace Royaya.com.Controllers
                 Sex = user.Sex,
                 Status = user.Status,
                 Type = user.Type,
-                phoneNumber = user.PhoneNumber
+                phoneNumber = user.PhoneNumber,
+                PersonalDescription=user.PersonalDescription,
+                FireBaseId = user.FireBaseId,
+                Id = user.Id,
+                HasRegistered=user.verifiedInterpreter
                 
 
             };
@@ -654,7 +732,38 @@ namespace Royaya.com.Controllers
             return Ok(dream);
         }
 
+        [Route("GetRemainingTimeForaPlan")]
+        public async Task<IHttpActionResult> getRemainingTimeForAPlan(String id,int pathId)
+        {
+            ApplicationUser interpreter = db.Users.Where(a=>a.Id.Equals(id)).FirstOrDefault();
+            InterprationPath path = db.InterprationPaths.Find(pathId);
+            long numberOfDreamsinOneDay =(long) interpreter.numbOfDreamsInOneDay;
+            long totalOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")
+            && a.interpretatorId.Equals(id)).ToList().Count();
+            
 
+            return Ok(getWaitingTimeMessage(Double.Parse(numberOfDreamsinOneDay.ToString()),
+                Double.Parse(totalOfActiveDreams.ToString())).Replace("Your average waiting time is ",""));
+        }
+
+        [AllowAnonymous]
+        [Route("GetNotifications")]
+        public async Task<IHttpActionResult> GetNotifications(String id)
+        {
+
+            return Ok(db.NotificationLogs.Where(a => a.UserId.Equals(id) && a.seen == false).ToList());
+        }
+
+        [AllowAnonymous]
+        [Route("SeeNotification")]
+        public async Task<IHttpActionResult> SeeNotification(int id)
+        {
+            NotificationLog log = db.NotificationLogs.Find(id);
+            log.seen = true;
+            db.Entry(log).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
+        }
         // POST api/Account/getWaitingTimeForSingleDream
         [Route("test")]
         public async Task<IHttpActionResult> Test()

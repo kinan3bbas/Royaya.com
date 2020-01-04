@@ -11,6 +11,7 @@
         integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
         crossorigin="anonymous"></script>*@
 
+
 <h2 class="text-center" style="color: #071689 !important;">Personal Information for @Model.Name</h2>
 <br />
 <div class="container">
@@ -35,13 +36,7 @@
             }
             </ul>
         </div>
-        @*<div class="col-md-2">
-            @if (Model.EmployeeImage != null)
-            {
-                var path = Path.Combine("/Images/", Model.EmployeeImage);
-                <img src="@path" alt="@Model.Name" title="@Model.Name" class="img-thumbnail" height="200" />
-            }
-        </div>*@
+        
         <div class="col-md-9" id="PersonalInfoDV">
 
           
@@ -135,49 +130,83 @@
                         @Html.DisplayFor(model => model.Type)
                     </td>
                 </tr>
+@if (Model.Type == "Interpreter")
+{
+                <tr>
+                    <th>
+                        Verified Interpreter
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.verifiedInterpreter)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                       Personal Description
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.PersonalDescription)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        FireBase ID 
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.FireBaseId)
+                    </td>
+                </tr>
+
+}
             </table>
             
-
-            <hr />
-
-            @if (Model.Type=="Interpreter") {
-            <div >
-                <h2 style="color: #071689 !important;">Statistics</h2>
-                <p class="lead">
-                    <div class="row" style="font-size:large">
-                        <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> </span></div>
-                        <div class="col-md-6 col-sm-6"><span> Done Dreams: </span> <span id="Done"> </span></div>
-                    </div>
-                    <div class="row " style="font-size:large">
-                        <div class="col-md-6 col-sm-6 "><span> Active Dreams: </span> <span id="Active"> </span></div>
-                        <div class="col-md-6 col-sm-6"><span> Number of Dreams in one day: </span> <span id="Day"> value</span></div>
-                    </div>
-                    <div class="row" style="font-size:large">
-                        <div class="col-md-6 col-sm-6 "><span> Speed </span> <span id="Speed"> </span></div>
-                        <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Money"> </span></div>
-                    </div>
-                    <div class="row" style="font-size:large">
-                        <div class="col-md-6 col-sm-6 "><span> Avg Rating </span> <span id="Rating"> </span></div>
-                    </div>
-
-                </p>
-                <p></p>
             </div>
-            }
+        
+        </div>
+    <div class="row ">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <hr />
+
+                @if (Model.Type == "Interpreter")
+                {
+                    <div>
+                        <h2 style="color: #071689 !important;">Statistics</h2>
+                        <p class="lead">
+                            <div class="row" style="font-size:large">
+                                <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> Done Dreams: </span> <span id="Done"> </span></div>
+                            </div>
+                            <div class="row " style="font-size:large">
+                                <div class="col-md-6 col-sm-6 "><span> Active Dreams: </span> <span id="Active"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> Number of Dreams in one day: </span> <span id="Day"> value</span></div>
+                            </div>
+                            <div class="row" style="font-size:large">
+                                <div class="col-md-6 col-sm-6 "><span> Speed </span> <span id="Speed"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Money"> </span></div>
+                            </div>
+                            <div class="row" style="font-size:large">
+                                <div class="col-md-6 col-sm-6 "><span> Avg Rating </span> <span id="Rating"> </span></div>
+                            </div>
+
+                        </p>
+                        <p></p>
+                    </div>
+                }
                 <div class="row">
                     <div class="col-md-5">
                         <input type="button"
                                class="btn btn-primary" value="Edit Info"
                                onclick="location.href='@Url.Action("EditInterpreter", "Account", new { id = Model.Id })'" />
-                       
+
                     </div>
                 </div>
-           
+
+            </div>
         </div>
        
+       
     </div>
-    <!-- /.row -->
-</div>
 
 @section Scripts
 {
@@ -187,7 +216,7 @@
 
     });
         function WorkExperienceLoadData() {
-        
+
         $.ajax({
             type: 'GET',
             @*url: '@Url.Action("getInterpreterInfo", "Account")',*@
@@ -215,6 +244,27 @@
             }
             });
             return false;
-       }
+        }
+        //Verify interpreter
+        $(function () {
+        $("#Skill_btnSave").click(function () {
+            var urlString='@Url.Action("VerifyInterpreter", "Account", new {id=Model.Id })';
+                $.ajax({
+                    type: "GET",
+                    url: urlString,
+                    data: {},
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        
+                        alert(1);
+                    },
+                    error: function () {
+                        alert("Error while inserting data");
+                    }
+                });
+                return false;
+            });
+        });
     </script>
 }

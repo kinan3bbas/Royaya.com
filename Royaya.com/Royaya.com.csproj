@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,15 +36,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -394,6 +397,34 @@
     <Compile Include="Migrations\201912191147239_test2.Designer.cs">
       <DependentUpon>201912191147239_test2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912240518212_personalDescription.cs" />
+    <Compile Include="Migrations\201912240518212_personalDescription.Designer.cs">
+      <DependentUpon>201912240518212_personalDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912281649350_firebaseId.cs" />
+    <Compile Include="Migrations\201912281649350_firebaseId.Designer.cs">
+      <DependentUpon>201912281649350_firebaseId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912281823141_firebaseId1.cs" />
+    <Compile Include="Migrations\201912281823141_firebaseId1.Designer.cs">
+      <DependentUpon>201912281823141_firebaseId1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912310506069_test2020.cs" />
+    <Compile Include="Migrations\201912310506069_test2020.Designer.cs">
+      <DependentUpon>201912310506069_test2020.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001021129248_verifyInterpreter.cs" />
+    <Compile Include="Migrations\202001021129248_verifyInterpreter.Designer.cs">
+      <DependentUpon>202001021129248_verifyInterpreter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001021158502_Notification.cs" />
+    <Compile Include="Migrations\202001021158502_Notification.Designer.cs">
+      <DependentUpon>202001021158502_Notification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001021204472_Notification1.cs" />
+    <Compile Include="Migrations\202001021204472_Notification1.Designer.cs">
+      <DependentUpon>202001021204472_Notification1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -446,6 +477,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FinalPublish.pubxml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -584,6 +617,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912191147239_test2.resx">
       <DependentUpon>201912191147239_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912240518212_personalDescription.resx">
+      <DependentUpon>201912240518212_personalDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912281649350_firebaseId.resx">
+      <DependentUpon>201912281649350_firebaseId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912281823141_firebaseId1.resx">
+      <DependentUpon>201912281823141_firebaseId1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912310506069_test2020.resx">
+      <DependentUpon>201912310506069_test2020.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001021129248_verifyInterpreter.resx">
+      <DependentUpon>202001021129248_verifyInterpreter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001021158502_Notification.resx">
+      <DependentUpon>202001021158502_Notification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001021204472_Notification1.resx">
+      <DependentUpon>202001021204472_Notification1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

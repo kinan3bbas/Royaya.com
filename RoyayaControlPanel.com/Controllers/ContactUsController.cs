@@ -121,7 +121,15 @@ namespace RoyayaControlPanel.com.Controllers
             }
             return View(contactUs);
         }
-
+        [HttpPost]
+        public JsonResult addResponse(int id, string message) {
+            ContactUs item = db.ContactUss.Find(id);
+            item.Message = message;
+            item.LastModificationDate = DateTime.Now;
+            db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(item, JsonRequestBehavior.AllowGet);
+        }
         // GET: ContactUs/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
