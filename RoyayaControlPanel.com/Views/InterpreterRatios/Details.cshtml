@@ -1,0 +1,83 @@
+﻿@model Royaya.com.Models.InterpreterRatio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InterpreterRatio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.interpretator.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interpretator.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.path.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.path.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ratio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ratio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModificationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModificationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttachmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttachmentId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

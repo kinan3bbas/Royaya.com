@@ -26,6 +26,8 @@ namespace Royaya.com.ViewModels
 
         public double speed { get; set; }
 
+        public double balance { get; set; }
+
         
 
     }

@@ -115,6 +115,8 @@ namespace Royaya.com.Models
 
         public DbSet<NotificationLog> NotificationLogs { get; set; }
         public DbSet<UsersDeviceTokens> UsersDeviceTokens { get; set; }
+
+        public DbSet<InterpreterRatio> InterpreterRatios { get; set; }
         //public System.Data.Entity.DbSet<Royaya.com.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

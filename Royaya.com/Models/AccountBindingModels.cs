@@ -146,7 +146,7 @@ namespace Royaya.com.Models
 
         [Display(Name = "Job Description")]
         public string JobDescription { get; set; }
-
+        public string PersonalDescription { get; set; }
 
 
         [Display(Name = "Picture Id")]
@@ -157,5 +157,7 @@ namespace Royaya.com.Models
 
 
         public int numbOfDreamsInOneDay { get; set; }
+
+        public string FireBaseId { get; set; }
     }
 }

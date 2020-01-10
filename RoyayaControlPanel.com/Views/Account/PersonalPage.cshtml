@@ -33,6 +33,9 @@
                 <li id="EmployeeRating"  class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
                     @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Model.Id }, null)
                 </li>
+                <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                    @Html.ActionLink("Balance Ratio", "InterpreterRatio", new { id = Model.Id }, null)
+                </li>
             }
             </ul>
         </div>
@@ -183,7 +186,7 @@
                             </div>
                             <div class="row" style="font-size:large">
                                 <div class="col-md-6 col-sm-6 "><span> Speed </span> <span id="Speed"> </span></div>
-                                <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Money"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Balance"> </span></div>
                             </div>
                             <div class="row" style="font-size:large">
                                 <div class="col-md-6 col-sm-6 "><span> Avg Rating </span> <span id="Rating"> </span></div>
@@ -231,7 +234,7 @@
             $('#Day').text(data.numberOfDreamsByDay);
             $('#Speed').text(data.speed);
             $('#Rating').text(data.Rating);
-
+            $('#Balance').text(data.balance);
 
 
 

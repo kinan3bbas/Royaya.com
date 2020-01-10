@@ -812,6 +812,10 @@ namespace Royaya.com.Controllers
                 user.Sex = model.Sex;
             if (model.Status != null)
                 user.Status = model.Status;
+            if (model.PersonalDescription != null)
+                user.PersonalDescription = model.PersonalDescription;
+            if (model.FireBaseId != null)
+                user.FireBaseId = model.FireBaseId;
 
             user.LastModificationDate = DateTime.Now;
             db.Entry(user).State = EntityState.Modified;

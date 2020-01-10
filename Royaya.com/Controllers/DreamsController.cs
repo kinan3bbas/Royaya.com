@@ -37,7 +37,7 @@ namespace Royaya.com.Controllers
         [EnableQuery]
         public IQueryable<Dream> GetDreams()
         {
-            return db.Dreams;
+            return db.Dreams.OrderByDescending(a=>a.CreationDate);
         }
 
         // GET: odata/Dreams

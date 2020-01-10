@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-	<includesetaclproviderondestination>False</includesetaclproviderondestination>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,17 +36,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-	<includesetaclproviderondestination>False</includesetaclproviderondestination>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-	<includesetaclproviderondestination>False</includesetaclproviderondestination>
+    <includesetaclproviderondestination>False</includesetaclproviderondestination>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -228,6 +228,7 @@
     <Compile Include="Controllers\DreamsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterprationPathsController.cs" />
+    <Compile Include="Controllers\InterpreterRatiosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Extras\BasicModel.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Models\DreamComment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterprationPath.cs" />
+    <Compile Include="Models\InterpreterRatio.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NotificationLog.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ContactUsViewModel.cs" />
+    <Compile Include="ViewModels\InterpreterRatioViewModel.cs" />
     <Compile Include="ViewModels\DreamViewModel.cs" />
     <Compile Include="ViewModels\InterpreterViewModel.cs" />
     <Compile Include="ViewModels\InterpreterUserModel.cs" />
@@ -706,6 +709,13 @@
     <Content Include="Views\Account\InterpreterRatings.cshtml" />
     <Content Include="Views\Dreams\DreamPage.cshtml" />
     <Content Include="Views\Shared\_PLayout_Public.cshtml" />
+    <Content Include="Views\InterpreterRatios\Create.cshtml" />
+    <Content Include="Views\InterpreterRatios\Delete.cshtml" />
+    <Content Include="Views\InterpreterRatios\Details.cshtml" />
+    <Content Include="Views\InterpreterRatios\Edit.cshtml" />
+    <Content Include="Views\InterpreterRatios\Index.cshtml" />
+    <Content Include="Views\Account\InterpreterRatio.cshtml" />
+    <Content Include="Views\Account\InterpreterRatioCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

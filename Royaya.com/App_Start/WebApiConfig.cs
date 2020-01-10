@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
 using Royaya.com.Models;
+using Royaya.com.Extras;
 
 namespace Royaya.com
 {
@@ -33,6 +34,10 @@ namespace Royaya.com
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //Enable SSL
+            config.Filters.Add(new RequireHttpsAttribute());
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

@@ -16,6 +16,7 @@ using System.Data.Entity;
 using Royaya.com.Models;
 using System.Net;
 using System.Net.Http;
+using RoyayaControlPanel.com.ViewModels;
 
 namespace RoyayaControlPanel.com.Controllers
 {
@@ -699,7 +700,7 @@ namespace RoyayaControlPanel.com.Controllers
             ApplicationUser user = db.Users.Find(id);
             List<Dream> dreams = new List<Dream>();
             if (user.Type.Equals("Interpreter"))
-                dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)).OrderByDescending(r => r.CreationDate).ToList();
+                dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)).Include(d => d.path).OrderByDescending(r => r.CreationDate).ToList();
             if (user.Type.Equals("Client"))
                 dreams = db.Dreams.Where(a => a.Creator.Equals(id)).OrderByDescending(r => r.CreationDate).ToList();
             ViewBag.userId = id;
@@ -715,6 +716,65 @@ namespace RoyayaControlPanel.com.Controllers
             return View(dreams.ToList());
         }
 
+        public async Task<ActionResult> InterpreterRatio(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            var ratios = db.InterpreterRatios.Where(a => a.interpretatorId.Equals(id)).OrderByDescending(r => r.CreationDate);
+            ViewBag.userId = id;
+            ViewBag.Type = user.Type;
+            List<InterprationPath> paths = db.InterprationPaths.ToList();
+            List<InterpreterRatioViewModel> rows = new List<InterpreterRatioViewModel>();
+            foreach (var item in ratios)
+            {
+                InterpreterRatioViewModel temp = new InterpreterRatioViewModel();
+                temp.CreationDate = item.CreationDate;
+                temp.id = item.id;
+                temp.interpretatorId = item.interpretatorId;
+                temp.pathId = item.pathId;
+                temp.CreatorName = user.Name;
+                temp.CreatorId = item.Creator;
+                temp.interpretatorName = item.interpretator != null ? item.interpretator.Name : "";
+                temp.pathCost = paths.Where(a=>a.id.Equals(temp.pathId)) != null ? paths.Where(a => a.id.Equals(temp.pathId)).FirstOrDefault().Cost : -1;
+                temp.Ratio = item.ratio;
+                rows.Add(temp);
+            }
+            return View(rows);
+        }
+
+        // GET: InterpreterRatios/Create
+        public ActionResult InterpreterRatioCreate(String id)
+        {
+            InterpreterRatio ratio = new InterpreterRatio();
+            ratio.interpretatorId = id;
+
+            ViewBag.pathId = new SelectList(db.InterprationPaths, "id", "Cost");
+            return View(ratio);
+        }
+
+        // POST: InterpreterRatios/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> InterpreterRatioCreate( InterpreterRatio interpreterRatio)
+        {
+           
+                interpreterRatio.CreationDate = DateTime.Now;
+                interpreterRatio.LastModificationDate = DateTime.Now;
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = userManager.FindById(User.Identity.GetUserId());
+            //interpreterRatio.path = db.InterprationPaths.Where(a => a.id.Equals(interpreterRatio.pathId)).FirstOrDefault() ;
+                interpreterRatio.interpretator = db.Users.Find(interpreterRatio.interpretatorId);
+                interpreterRatio.Creator = user.Id;
+                db.InterpreterRatios.Add(interpreterRatio);
+                await db.SaveChangesAsync();
+                return RedirectToAction("InterpreterRatio",new {id=interpreterRatio.interpretatorId });
+        
+
+            //ViewBag.interpretatorId = new SelectList(db.Users, "Id", "Sex", interpreterRatio.interpretatorId);
+            //ViewBag.pathId = new SelectList(db.InterprationPaths, "id", "Status", interpreterRatio.pathId);
+            //return View(interpreterRatio);
+        }
         public JsonResult getInterpreterInfo(string phoneNumber)
         {
             ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(phoneNumber)).FirstOrDefault();
@@ -730,7 +790,8 @@ namespace RoyayaControlPanel.com.Controllers
             List<InterpreterViewModel> finalResult = new List<InterpreterViewModel>();
             string userId = user.Id;
             List<Dream> dreams = db.Dreams.Where(a=>a.interpretatorId.Equals(userId)).ToList();
-            
+            List<InterpreterRatio> ratios = db.InterpreterRatios.Where(a => a.interpretatorId.Equals(userId)).ToList();
+            List<InterprationPath> paths = db.InterprationPaths.ToList();
             InterpreterViewModel temp = new InterpreterViewModel();
             temp.id = user.Id;
             temp.Email = user.Email;
@@ -742,6 +803,15 @@ namespace RoyayaControlPanel.com.Controllers
             temp.numberOfActiveDreams = dreams.Where(a => a.Status.Equals("Active")).Count()>0? dreams.Where(a => a.Status.Equals("Active")).ToList().Count():0;
             temp.numberOfDoneDreams = dreams.Where(a => a.Status.Equals("Done")).Count()>0? dreams.Where(a => a.Status.Equals("Done")).ToList().Count():0;
             temp.speed = temp.numberOfActiveDreams > 0 ? temp.numberOfDoneDreams / temp.numberOfActiveDreams : 0;
+            double balance = 0.0;
+            foreach (var item in ratios)
+            {
+                List<Dream> tempdream = dreams.Where(a => a.pathId.Equals(item.pathId)&&a.Status.Equals("Done")).ToList();
+                double cost = paths.Where(a => a.id.Equals(item.pathId)).FirstOrDefault().Cost;
+                if (tempdream != null)
+                    balance += tempdream.Count * cost * (item.ratio/100);
+            }
+            temp.balance =Math.Round(balance,2);
             finalResult.Add(temp);
 
 

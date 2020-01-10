@@ -266,6 +266,7 @@
     <Compile Include="Extras\Message.cs" />
     <Compile Include="Extras\Notification.cs" />
     <Compile Include="Extras\PushNotificationLogic.cs" />
+    <Compile Include="Extras\RequireHttpsAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -425,6 +426,14 @@
     <Compile Include="Migrations\202001021204472_Notification1.Designer.cs">
       <DependentUpon>202001021204472_Notification1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001071734043_interpreterratio.cs" />
+    <Compile Include="Migrations\202001071734043_interpreterratio.Designer.cs">
+      <DependentUpon>202001071734043_interpreterratio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001071734465_interpreterratio1.cs" />
+    <Compile Include="Migrations\202001071734465_interpreterratio1.Designer.cs">
+      <DependentUpon>202001071734465_interpreterratio1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -434,6 +443,7 @@
     <Compile Include="Models\DreamComment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterprationPath.cs" />
+    <Compile Include="Models\InterpreterRatio.cs" />
     <Compile Include="Models\NotificationLog.cs" />
     <Compile Include="Models\UsersDeviceTokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -638,6 +648,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001021204472_Notification1.resx">
       <DependentUpon>202001021204472_Notification1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001071734043_interpreterratio.resx">
+      <DependentUpon>202001071734043_interpreterratio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001071734465_interpreterratio1.resx">
+      <DependentUpon>202001071734465_interpreterratio1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
