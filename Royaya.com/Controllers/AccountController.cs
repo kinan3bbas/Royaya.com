@@ -118,6 +118,7 @@ namespace Royaya.com.Controllers
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
+            core.changeUserStatus(core.getCurrentUser(), "Not Active");
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
@@ -480,7 +481,7 @@ namespace Royaya.com.Controllers
                 {
                     UserName = model.Username,
                     Email = model.Email,
-                    Age=model.Age,
+                    Age = model.Age,
                     Country = model.Country,
                     MartialStatus = model.MartialStatus
                                                     ,
@@ -495,8 +496,8 @@ namespace Royaya.com.Controllers
                     JobDescription = model.JobDescription,
 
                     LastModificationDate = DateTime.Now,
-                    PersonalDescription=model.PersonalDescription,
-                    FireBaseId=model.FireBaseId,
+                    PersonalDescription = model.PersonalDescription,
+                    FireBaseId = model.FireBaseId,
                     SecurityQuestion = model.SecurityQuestion,
                     SecurityQuestionAnswer = model.SecurityQuestionAnswer
                 };
@@ -527,7 +528,8 @@ namespace Royaya.com.Controllers
                     PersonalDescription=model.PersonalDescription,
                     FireBaseId=model.FireBaseId,
                     SecurityQuestion = model.SecurityQuestion,
-                    SecurityQuestionAnswer = model.SecurityQuestionAnswer
+                    SecurityQuestionAnswer = model.SecurityQuestionAnswer,
+                    verifiedInterpreter = true
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
             }
@@ -590,7 +592,7 @@ namespace Royaya.com.Controllers
         [Route("getFastestInterpretor")]
         public async Task<IHttpActionResult> getFastestInterpretator()
         {
-            var users = db.Users.Where(a => a.Type.Equals("Interpreter")&&a.Status.Equals("Active")).Include("Dreams").ToList();
+            var users = db.Users.Where(a => a.Type.Equals("Interpreter")&&a.verifiedInterpreter).Include("Dreams").ToList();
             List<InterpreterViewModel> finalResult = new List<InterpreterViewModel>();
             foreach (var user in users)
             {
@@ -890,6 +892,7 @@ namespace Royaya.com.Controllers
                 user.PersonalDescription = model.PersonalDescription;
             if (model.FireBaseId != null)
                 user.FireBaseId = model.FireBaseId;
+           
 
             user.LastModificationDate = DateTime.Now;
             db.Entry(user).State = EntityState.Modified;

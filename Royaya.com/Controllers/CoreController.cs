@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Royaya.com.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -154,6 +155,12 @@ namespace Royaya.com.Controllers
                 ReasonPhrase = message
             };
             throw new HttpResponseException(resp);
+        }
+
+        public void changeUserStatus(ApplicationUser user, String status) {
+            user.Status = status;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }
