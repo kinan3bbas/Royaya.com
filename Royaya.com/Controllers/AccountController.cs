@@ -729,7 +729,7 @@ namespace Royaya.com.Controllers
         [Route("GetInterpreters")]
         public async Task<IHttpActionResult> GetInterpreters()
         {
-            List<ApplicationUser> users = db.Users.Where(a => a.Status.Equals("Active") && a.Type.Equals("Interpreter")).Include("Dreams").ToList();
+            List<ApplicationUser> users = db.Users.Where(a => a.verifiedInterpreter && a.Type.Equals("Interpreter")).Include("Dreams").ToList();
 
             List<UserInfoViewModel> result = new List<UserInfoViewModel>();
             foreach (var user in users)
