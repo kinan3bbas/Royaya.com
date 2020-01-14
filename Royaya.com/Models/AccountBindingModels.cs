@@ -90,6 +90,10 @@ namespace Royaya.com.Models
         public string PersonalDescription { get; set; }
 
         public string FireBaseId { get; set; }
+
+        public string SecurityQuestion { get; set; }
+
+        public string SecurityQuestionAnswer { get; set; }
     }
 
     public class RegisterExternalBindingModel

@@ -201,6 +201,74 @@ namespace Royaya.com.Controllers
             return Ok();
         }
 
+
+        [AllowAnonymous]
+        // POST api/Account/ForgetPassword
+        [Route("ForgetPassword")]
+        public async Task<IHttpActionResult> ForgetPassword(ForgetPassword model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
+            if (user == null)
+            {
+                return BadRequest("No matching user");
+            }
+
+            IdentityResult remove = await UserManager.RemovePasswordAsync(user.Id);
+            IdentityResult result = await UserManager.AddPasswordAsync(user.Id, model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        // POST api/Account/CheckSecurityQuestion
+        [Route("CheckSecurityQuestion")]
+        public async Task<IHttpActionResult> CheckSecurityQuestion(SecurityQuestionBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
+            if (user == null)
+            {
+                return BadRequest("No matching user");
+            }
+
+            if (user.SecurityQuestion.Equals(model.SecurityQuestion) &&
+                user.SecurityQuestionAnswer.Equals(model.SecurityQuestionAnswer))
+                return Ok("Verified");
+            else
+                return BadRequest("Not Verified");
+
+        }
+
+        [AllowAnonymous]
+        // GET api/Account/GetSecurityQuestion
+        [Route("GetSecurityQuestion")]
+        public async Task<IHttpActionResult> GetSecurityQuestion(String phoneNumber)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(phoneNumber)).FirstOrDefault();
+            if (user == null)
+            {
+                return BadRequest("No matching user");
+            }
+
+            return Ok(user.SecurityQuestion);
+
+        }
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
@@ -396,9 +464,11 @@ namespace Royaya.com.Controllers
                     Type = model.Type,
                     CreationDate = DateTime.Now,
                     FireBaseId=model.FireBaseId
-
+                    
                                                     ,
-                    LastModificationDate = DateTime.Now
+                    LastModificationDate = DateTime.Now,
+                    SecurityQuestion=model.SecurityQuestion,
+                    SecurityQuestionAnswer=model.SecurityQuestionAnswer
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
                 await UserManager.AddToRoleAsync(user.Id, "Admin");
@@ -426,7 +496,9 @@ namespace Royaya.com.Controllers
 
                     LastModificationDate = DateTime.Now,
                     PersonalDescription=model.PersonalDescription,
-                    FireBaseId=model.FireBaseId
+                    FireBaseId=model.FireBaseId,
+                    SecurityQuestion = model.SecurityQuestion,
+                    SecurityQuestionAnswer = model.SecurityQuestionAnswer
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
             }
@@ -453,7 +525,9 @@ namespace Royaya.com.Controllers
                     LastModificationDate = DateTime.Now,
                     numbOfDreamsInOneDay = model.numbOfDreamsInOneDay,
                     PersonalDescription=model.PersonalDescription,
-                    FireBaseId=model.FireBaseId
+                    FireBaseId=model.FireBaseId,
+                    SecurityQuestion = model.SecurityQuestion,
+                    SecurityQuestionAnswer = model.SecurityQuestionAnswer
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
             }

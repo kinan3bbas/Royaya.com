@@ -434,6 +434,10 @@
     <Compile Include="Migrations\202001071734465_interpreterratio1.Designer.cs">
       <DependentUpon>202001071734465_interpreterratio1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001141700331_securityQuestion.cs" />
+    <Compile Include="Migrations\202001141700331_securityQuestion.Designer.cs">
+      <DependentUpon>202001141700331_securityQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -452,6 +456,8 @@
     <Compile Include="ScheduledJobs\JobScheduler.cs" />
     <Compile Include="ScheduledJobs\NotificationJob.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SecurityQuestionBindingModel.cs" />
+    <Compile Include="ViewModels\ForgetPassword.cs" />
     <Compile Include="ViewModels\InterpreterViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
   </ItemGroup>
@@ -654,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001071734465_interpreterratio1.resx">
       <DependentUpon>202001071734465_interpreterratio1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001141700331_securityQuestion.resx">
+      <DependentUpon>202001141700331_securityQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

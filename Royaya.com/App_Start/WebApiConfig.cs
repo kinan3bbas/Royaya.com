@@ -36,7 +36,7 @@ namespace Royaya.com
             config.MapHttpAttributeRoutes();
 
             //Enable SSL
-            config.Filters.Add(new RequireHttpsAttribute());
+            //config.Filters.Add(new RequireHttpsAttribute());
 
 
             config.Routes.MapHttpRoute(
