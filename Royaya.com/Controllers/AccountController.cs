@@ -824,10 +824,12 @@ namespace Royaya.com.Controllers
 
         [AllowAnonymous]
         [Route("GetNotifications")]
-        public  IQueryable<NotificationLog> GetNotifications(String id)
+        public async Task<IHttpActionResult> GetNotifications(String id)
         {
-
-            return db.NotificationLogs.Where(a => a.UserId.Equals(id) && a.seen == false);
+            List<NotificationLog> result = db.NotificationLogs.Where(a => a.UserId.Equals(id) && a.seen == false).ToList();
+            if (result.Count() == 0)
+                return Ok();
+            return Ok(result);
         }
 
         [AllowAnonymous]
