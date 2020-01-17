@@ -37,9 +37,8 @@ namespace Royaya.com.Controllers
         [EnableQuery]
         public IQueryable<Dream> GetDreams()
         {
-            ApplicationUser user = core.getCurrentUser();
-            if(!user.Status.Equals("Active"))
-                core.changeUserStatus(core.getCurrentUser(), "Active");
+            
+            
             return db.Dreams.OrderByDescending(a=>a.CreationDate);
 
         }

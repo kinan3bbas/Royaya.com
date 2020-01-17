@@ -85,8 +85,8 @@ namespace Royaya.com.Controllers
                     Type = user.Type,
                     phoneNumber = user.PhoneNumber,
                     PersonalDescription = user.PersonalDescription,
-                    FireBaseId=user.FireBaseId,
-                    Id=user.Id
+                    FireBaseId = user.FireBaseId,
+                    Id = user.Id
 
                 };
             }
@@ -94,21 +94,21 @@ namespace Royaya.com.Controllers
             {
                 Email = User.Identity.GetUserName(),
                 Age = user.Age,
-                Country=user.Country,
-                JobDescription=user.JobDescription,
-                JoiningDate=user.JoiningDate,
-                Name=user.Name,
-                MartialStatus=user.MartialStatus,
-                numbOfDreamsInOneDay=user.numbOfDreamsInOneDay,
-                PictureId=user.PictureId,
-                Sex=user.Sex,
-                Status=user.Status,
-                Type=user.Type,
-                phoneNumber=user.PhoneNumber,
-                PersonalDescription=user.PersonalDescription,
+                Country = user.Country,
+                JobDescription = user.JobDescription,
+                JoiningDate = user.JoiningDate,
+                Name = user.Name,
+                MartialStatus = user.MartialStatus,
+                numbOfDreamsInOneDay = user.numbOfDreamsInOneDay,
+                PictureId = user.PictureId,
+                Sex = user.Sex,
+                Status = user.Status,
+                Type = user.Type,
+                phoneNumber = user.PhoneNumber,
+                PersonalDescription = user.PersonalDescription,
                 FireBaseId = user.FireBaseId,
-                Id=user.Id,
-                HasRegistered=user.verifiedInterpreter
+                Id = user.Id,
+                HasRegistered = user.verifiedInterpreter
 
 
             };
@@ -174,7 +174,7 @@ namespace Royaya.com.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -375,9 +375,9 @@ namespace Royaya.com.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -445,14 +445,14 @@ namespace Royaya.com.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            ApplicationUser tempUser = db.Users.Where(a => a.UserName.Equals(model.Username)||a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
+            ApplicationUser tempUser = db.Users.Where(a => a.UserName.Equals(model.Username) || a.PhoneNumber.Equals(model.PhoneNumber)).FirstOrDefault();
             if (tempUser != null)
                 await core.throwExcetpion("Username or phone number is already taken!");
 
 
 
-            model.Email =model.Username+"@Test.com";
-            IdentityResult result=null;
+            model.Email = model.Username + "@Test.com";
+            IdentityResult result = null;
 
             if (model.Type.Equals("Admin"))
             {
@@ -464,17 +464,17 @@ namespace Royaya.com.Controllers
                     Status = model.Status,
                     Type = model.Type,
                     CreationDate = DateTime.Now,
-                    FireBaseId=model.FireBaseId
-                    
+                    FireBaseId = model.FireBaseId
+
                                                     ,
                     LastModificationDate = DateTime.Now,
-                    SecurityQuestion=model.SecurityQuestion,
-                    SecurityQuestionAnswer=model.SecurityQuestionAnswer
+                    SecurityQuestion = model.SecurityQuestion,
+                    SecurityQuestionAnswer = model.SecurityQuestionAnswer
                 };
                 result = await UserManager.CreateAsync(user, model.Password);
                 await UserManager.AddToRoleAsync(user.Id, "Admin");
             }
-            
+
             if (model.Type.Equals("Client"))
             {
                 var user = new ApplicationUser()
@@ -512,7 +512,7 @@ namespace Royaya.com.Controllers
                     Email = model.Email,
                     Age = model.Age,
                     JobDescription = model.JobDescription,
-                    Country=model.Country,
+                    Country = model.Country,
                     JoiningDate = DateTime.Now,
                     Name = model.Name,
                     PhoneNumber = model.PhoneNumber
@@ -525,8 +525,8 @@ namespace Royaya.com.Controllers
                                                     ,
                     LastModificationDate = DateTime.Now,
                     numbOfDreamsInOneDay = model.numbOfDreamsInOneDay,
-                    PersonalDescription=model.PersonalDescription,
-                    FireBaseId=model.FireBaseId,
+                    PersonalDescription = model.PersonalDescription,
+                    FireBaseId = model.FireBaseId,
                     SecurityQuestion = model.SecurityQuestion,
                     SecurityQuestionAnswer = model.SecurityQuestionAnswer,
                     verifiedInterpreter = true
@@ -571,7 +571,7 @@ namespace Royaya.com.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }
@@ -592,22 +592,22 @@ namespace Royaya.com.Controllers
         [Route("getFastestInterpretor")]
         public async Task<IHttpActionResult> getFastestInterpretator()
         {
-            var users = db.Users.Where(a => a.Type.Equals("Interpreter")&&a.verifiedInterpreter).Include("Dreams").ToList();
+            var users = db.Users.Where(a => a.Type.Equals("Interpreter") && a.verifiedInterpreter).Include("Dreams").ToList();
             List<InterpreterViewModel> finalResult = new List<InterpreterViewModel>();
             foreach (var user in users)
             {
-                
+
                 InterpreterViewModel temp = new InterpreterViewModel();
                 temp.id = user.Id;
                 temp.Email = user.Email;
                 temp.pictureId = user.PictureId;
                 temp.Name = user.Name;
                 temp.numberOfAllDreams = user.Dreams.Count;
-                temp.Rating= temp.numberOfAllDreams > 0 ? user.Dreams.Where(b => b.Status.Equals("Done")).Average(a => a.UserRating) : 0;
+                temp.Rating = temp.numberOfAllDreams > 0 ? user.Dreams.Where(b => b.Status.Equals("Done")).Average(a => a.UserRating) : 0;
                 temp.numberOfDreamsByDay = user.numbOfDreamsInOneDay;
                 temp.numberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count;
                 temp.numberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count;
-                temp.speed =temp.numberOfActiveDreams>0?temp.numberOfDoneDreams / temp.numberOfActiveDreams:0;
+                temp.speed = temp.numberOfActiveDreams > 0 ? temp.numberOfDoneDreams / temp.numberOfActiveDreams : 0;
                 temp.PhoneNumber = user.PhoneNumber;
                 temp.Status = user.Status;
                 temp.JobDescription = user.JobDescription;
@@ -618,12 +618,12 @@ namespace Royaya.com.Controllers
                 temp.personalDescription = user.PersonalDescription;
                 temp.fireBaseId = user.FireBaseId;
                 temp.HasRegistered = user.verifiedInterpreter;
-                
+
                 finalResult.Add(temp);
 
-                
+
             }
-                return Ok(finalResult.OrderByDescending(a=>a.speed).OrderByDescending(b=>b.Rating).ToList());
+            return Ok(finalResult.OrderByDescending(a => a.speed).OrderByDescending(b => b.Rating).ToList());
         }
 
         [AllowAnonymous]
@@ -636,10 +636,10 @@ namespace Royaya.com.Controllers
             StatisticsViewModel result = new StatisticsViewModel();
             result.AllDreams = dreams.Count();
             result.allActiveDreams = dreams.Where(a => a.Status.Equals("Active")).Count();
-            result.allDoneDreams= dreams.Where(a => a.Status.Equals("Done")).Count();
+            result.allDoneDreams = dreams.Where(a => a.Status.Equals("Done")).Count();
             result.allClients = db.Users.Where(a => a.Type.Equals("Client")) != null ? db.Users.Where(a => a.Type.Equals("Client")).Count() : 0;
             result.allInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter")).Count();
-            result.allAdmins= db.Users.Where(a => a.Type.Equals("Admin")).Count();
+            result.allAdmins = db.Users.Where(a => a.Type.Equals("Admin")).Count();
             result.allUsers = users.Count();
 
             return Ok(result);
@@ -656,8 +656,8 @@ namespace Royaya.com.Controllers
             if (dream == null)
                 return BadRequest("No matching dream!");
 
-           
-            
+
+
             return Ok(getExpectedDate(dream));
         }
 
@@ -682,20 +682,20 @@ namespace Royaya.com.Controllers
                     throw new HttpResponseException(resp);
                 }
             }
-           
+
             ApplicationUser interpreter = db.Users.Find(dream.interpretatorId);
             InterprationPath path = db.InterprationPaths.Find(dream.pathId);
             long totalOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")
-            &&a.interpretatorId.Equals(interpreter.Id)).ToList().Count();
+            && a.interpretatorId.Equals(interpreter.Id)).ToList().Count();
             long numberOfDreamsinOneDay = interpreter.numbOfDreamsInOneDay;
 
             return getWaitingTimeMessage(Double.Parse(numberOfDreamsinOneDay.ToString()),
                 Double.Parse(totalOfActiveDreams.ToString()));
-            
+
         }
 
 
-        public  string getWaitingTimeMessage(double x,double y)
+        public string getWaitingTimeMessage(double x, double y)
         {
             if (x != null && x != 0)
             {
@@ -723,8 +723,8 @@ namespace Royaya.com.Controllers
         [Route("GetUsersList")]
         public async Task<IHttpActionResult> GetUsersList()
         {
-            
-            return Ok(db.Users.Where(a=>a.Status.Equals("Active")).ToList());
+
+            return Ok(db.Users.Where(a => a.Status.Equals("Active")).ToList());
         }
 
         [AllowAnonymous]
@@ -754,9 +754,9 @@ namespace Royaya.com.Controllers
                     PersonalDescription = user.PersonalDescription,
                     FireBaseId = user.FireBaseId,
                     Id = user.Id,
-                    HasRegistered=user.verifiedInterpreter,
+                    HasRegistered = user.verifiedInterpreter,
                     NumberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count(),
-                    NumberOfDoneDreams= user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count()
+                    NumberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count()
 
 
                 });
@@ -787,11 +787,11 @@ namespace Royaya.com.Controllers
                 Status = user.Status,
                 Type = user.Type,
                 phoneNumber = user.PhoneNumber,
-                PersonalDescription=user.PersonalDescription,
+                PersonalDescription = user.PersonalDescription,
                 FireBaseId = user.FireBaseId,
                 Id = user.Id,
-                HasRegistered=user.verifiedInterpreter
-                
+                HasRegistered = user.verifiedInterpreter
+
 
             };
         }
@@ -809,17 +809,17 @@ namespace Royaya.com.Controllers
         }
 
         [Route("GetRemainingTimeForaPlan")]
-        public async Task<IHttpActionResult> getRemainingTimeForAPlan(String id,int pathId)
+        public async Task<IHttpActionResult> getRemainingTimeForAPlan(String id, int pathId)
         {
-            ApplicationUser interpreter = db.Users.Where(a=>a.Id.Equals(id)).FirstOrDefault();
+            ApplicationUser interpreter = db.Users.Where(a => a.Id.Equals(id)).FirstOrDefault();
             InterprationPath path = db.InterprationPaths.Find(pathId);
-            long numberOfDreamsinOneDay =(long) interpreter.numbOfDreamsInOneDay;
+            long numberOfDreamsinOneDay = (long)interpreter.numbOfDreamsInOneDay;
             long totalOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")
             && a.interpretatorId.Equals(id)).ToList().Count();
-            
+
 
             return Ok(getWaitingTimeMessage(Double.Parse(numberOfDreamsinOneDay.ToString()),
-                Double.Parse(totalOfActiveDreams.ToString())).Replace("Your average waiting time is ",""));
+                Double.Parse(totalOfActiveDreams.ToString())).Replace("Your average waiting time is ", ""));
         }
 
         [AllowAnonymous]
@@ -858,7 +858,7 @@ namespace Royaya.com.Controllers
 
         // POST api/Account/updateUserInfo
         [Route("updateUserInfo")]
-        public async Task<IHttpActionResult> updateUserInfo([FromUri]string id,[FromBody]updateUserInfoBindingModel model)
+        public async Task<IHttpActionResult> updateUserInfo([FromUri]string id, [FromBody]updateUserInfoBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -892,13 +892,23 @@ namespace Royaya.com.Controllers
                 user.PersonalDescription = model.PersonalDescription;
             if (model.FireBaseId != null)
                 user.FireBaseId = model.FireBaseId;
-           
+
 
             user.LastModificationDate = DateTime.Now;
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return Ok(user);
         }
+
+        [Route("AddLogs")]
+        public async Task<IHttpActionResult> AddLogs()
+
+        {
+            ApplicationUser user = core.getCurrentUser();
+            if (!user.Status.Equals("Active"))
+                core.changeUserStatus(core.getCurrentUser(), "Active");
+            return Ok();
+}
 
         // POST api/Account/verifyAccount
         [Route("verifyAccount")]
