@@ -501,11 +501,10 @@ namespace RoyayaControlPanel.com.Controllers
                 user.MartialStatus = tempUser.MartialStatus;
                 user.JobDescription = tempUser.JobDescription;
                 user.JoiningDate = tempUser.JoiningDate;
-                user.numbOfDreamsInOneDay = tempUser.numbOfDreamsInOneDay;
+                //user.numbOfDreamsInOneDay = tempUser.numbOfDreamsInOneDay;
                 user.Age = tempUser.Age;
                 user.Type = tempUser.Type;
                 
-                user.FireBaseId = tempUser.FireBaseId;
                 user.PersonalDescription = tempUser.PersonalDescription;
                 user.CreationDate = DateTime.Now;
                 user.LastModificationDate = DateTime.Now;
