@@ -824,10 +824,10 @@ namespace Royaya.com.Controllers
 
         [AllowAnonymous]
         [Route("GetNotifications")]
-        public async Task<IHttpActionResult> GetNotifications(String id)
+        public  IQueryable<NotificationLog> GetNotifications(String id)
         {
 
-            return Ok(db.NotificationLogs.Where(a => a.UserId.Equals(id) && a.seen == false).ToList());
+            return db.NotificationLogs.Where(a => a.UserId.Equals(id) && a.seen == false);
         }
 
         [AllowAnonymous]
@@ -901,12 +901,12 @@ namespace Royaya.com.Controllers
         }
 
         [Route("AddLogs")]
-        public async Task<IHttpActionResult> AddLogs()
+        public  IHttpActionResult AddLogs(String id)
 
         {
-            ApplicationUser user = core.getCurrentUser();
+            ApplicationUser user = db.Users.Find(id);
             if (!user.Status.Equals("Active"))
-                core.changeUserStatus(core.getCurrentUser(), "Active");
+                core.changeUserStatus(user, "Active");
             return Ok();
 }
 
