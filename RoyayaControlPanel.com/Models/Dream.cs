@@ -15,20 +15,22 @@ namespace Royaya.com.Models
     public class Dream:BasicModel
     {
         [JsonProperty]
-        [Display(Name = "Status")]
+        [Display(Name = "Status",ResourceType = typeof(Resources.Dream))]
         public String Status { get; set; } //Active, Done
 
         [JsonProperty]
-        [Display(Name = "Description")]
+        [Display(Name = "Description", ResourceType = typeof(Resources.Dream))]
         public string Description { get; set; }
 
         [JsonProperty]
+        [Display(Name = "Interpretator Id", ResourceType = typeof(Resources.Dream))]
         public string interpretatorId { get; set; }
 
         [JsonProperty]
         public ApplicationUser interpretator { get; set; }
 
         [JsonProperty]
+        [Display(Name = "Cost", ResourceType = typeof(Resources.Dream))]
         public int pathId { get; set; }
 
         [JsonProperty]
@@ -37,22 +39,22 @@ namespace Royaya.com.Models
 
 
         [JsonProperty]
-        [Display(Name = "Explanation")]
+        [Display(Name = "Explanation", ResourceType = typeof(Resources.Dream))]
         public string Explanation { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Explanation Date")]
+        [Display(Name = "Explanation Date", ResourceType = typeof(Resources.Dream))]
         public DateTime? ExplanationDate { get; set; }
 
-        [Display(Name ="User's Rating")]
+        [Display(Name ="User's Rating", ResourceType = typeof(Resources.Dream))]
         public int UserRating { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Rating Date")]
+        [Display(Name = "Rating Date", ResourceType = typeof(Resources.Dream))]
         public DateTime? RatingDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Interpretation Start Date")]
+        [Display(Name = "Interpretation Start Date", ResourceType = typeof(Resources.Dream))]
         public DateTime? InterpretationStartDate { get; set; }
 
         public long numberOfViews { get; set; }
