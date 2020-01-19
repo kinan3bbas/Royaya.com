@@ -630,7 +630,6 @@
     <Content Include="img\app-store.png" />
     <Content Include="img\asset-5.png" />
     <Content Include="img\callus.svg" />
-    <Content Include="img\details.svg" />
     <Content Include="img\google-play.png" />
     <Content Include="img\Group 1668.svg" />
     <Content Include="img\Group 1694.svg" />
@@ -741,8 +740,6 @@
     <Content Include="assets\vendors\base\fonts\summernote\summernote.eot" />
     <Content Include="assets\vendors\base\fonts\summernote\summernote.ttf" />
     <Content Include="assets\vendors\base\fonts\summernote\summernote.woff" />
-    <Content Include="img\debug.log" />
-    <Content Include="MainPageStyle\img\debug.log" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <EmbeddedResource Include="Resources\Dream.ar.resx">
