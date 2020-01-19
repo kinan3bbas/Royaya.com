@@ -4,22 +4,22 @@
 }
 
 <div class="jumbotron">
-    <h1>Statistics</h1>
+    <h1>@Resources.Global.Statistics</h1>
     <p class="lead">
         <div class="row" style="font-size:large">
-            <div class="col-md-6 col-sm-6 "><span> All Users: </span> <span id="AllUsers"> value</span></div>
-            <div class="col-md-6 col-sm-6"><span> Admins: </span> <span id="Admins"> value</span></div>
+            <div class="col-md-6 col-sm-6 "><span> @Resources.Global.All_Users: </span> <span id="AllUsers"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> @Resources.Global.Admins: </span> <span id="Admins"> value</span></div>
         </div>
         <div class="row " style="font-size:large">
-            <div class="col-md-6 col-sm-6 "><span> Clients: </span> <span id="Clients"> value</span></div>
-            <div class="col-md-6 col-sm-6"><span> Interpreters: </span> <span id="Interpreters"> value</span></div>
+            <div class="col-md-6 col-sm-6 "><span> @Resources.Global.Clients: </span> <span id="Clients"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> @Resources.Global.Interpreters: </span> <span id="Interpreters"> value</span></div>
         </div>
         <div class="row" style="font-size:large">
-            <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> value</span></div>
-            <div class="col-md-6 col-sm-6"><span> Active Dreams: </span> <span id="ActiveDreams"> value</span></div>
+            <div class="col-md-6 col-sm-6 "><span> @Resources.Global.All_Dreams: </span> <span id="AllDreams"> value</span></div>
+            <div class="col-md-6 col-sm-6"><span> @Resources.Global.Active_dreams: </span> <span id="ActiveDreams"> value</span></div>
         </div>
         <div class="row" style="font-size:large">
-            <div class="col-md-6 col-sm-6 "><span> Done Dreams: </span> <span id="DoneDreams"> value</span></div>
+            <div class="col-md-6 col-sm-6 "><span> @Resources.Global.Done_dreams: </span> <span id="DoneDreams"> value</span></div>
         </div>
     </p>
     <p></p>
@@ -28,17 +28,17 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Dreams List</h2>
-        <p><a class="btn btn-default" href="@Url.Action("Index","Dreams")">Dreams &raquo;</a></p>
-        <p><a class="btn btn-default" href="@Url.Action("Create","Dreams")">Add Dream &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Dreams")">@Resources.Global.Dreams &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","Dreams")">@Resources.Global.Add_dream &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Interpretation Paths</h2>
-        <p><a class="btn btn-default" href="@Url.Action("Index","InterprationPaths")">Current Paths &raquo;</a></p>
-        <p><a class="btn btn-default" href="@Url.Action("Create","InterprationPaths")">Add Path &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","InterprationPaths")">@Resources.Global.Interpretation_Paths &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","InterprationPaths")">@Resources.Global.Add_path &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Interpreters</h2>
-        <p><a class="btn btn-default" href="@Url.Action("Interpreters","Account")">Interpreters &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Interpreters","Account")">@Resources.Global.Interpreters &raquo;</a></p>
     </div>
 </div>
 

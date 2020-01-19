@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Active_dreams" xml:space="preserve">
+    <value>Active Dreams</value>
+  </data>
+  <data name="Add_dream" xml:space="preserve">
+    <value>Add Dream</value>
+  </data>
+  <data name="Add_path" xml:space="preserve">
+    <value>Add Path</value>
+  </data>
+  <data name="Admins" xml:space="preserve">
+    <value>Admins</value>
+  </data>
+  <data name="All_Dreams" xml:space="preserve">
+    <value>All Dreams</value>
+  </data>
+  <data name="All_Users" xml:space="preserve">
+    <value>All Users</value>
+  </data>
   <data name="BASIC_FUNCTIONS" xml:space="preserve">
     <value>BASIC FUNCTIONS</value>
   </data>
+  <data name="Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
   <data name="Contact_us" xml:space="preserve">
     <value>Contact us Messages</value>
+  </data>
+  <data name="Done_dreams" xml:space="preserve">
+    <value>Done Dreams</value>
   </data>
   <data name="Dreams" xml:space="preserve">
     <value>Dreams</value>
@@ -131,6 +155,9 @@
   </data>
   <data name="Interpretation_Paths" xml:space="preserve">
     <value>Interpretation Paths</value>
+  </data>
+  <data name="Interpreters" xml:space="preserve">
+    <value>Interpreters</value>
   </data>
   <data name="Interpreters_List" xml:space="preserve">
     <value>Interpreters List</value>
@@ -143,6 +170,9 @@
   </data>
   <data name="Reports" xml:space="preserve">
     <value>Reports</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
   </data>
   <data name="System" xml:space="preserve">
     <value>System</value>

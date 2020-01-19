@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/_empty.cshtml";
+    ViewBag.Title = "Home Page";
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/MainPageStyle/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MainPageStyle/css/fontawesome.css">
+    <link rel="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .bg-light {
+            background-color: unset !important;
+        }
+    </style>
+</head>
+<body>
+    <img class="img img-fluid" src="~/MainPageStyle/img/others.svg" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: fit-content;margin-top: -151px;">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html"><img src="~/MainPageStyle/img/home.svg"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contactus.html"><img src="~/MainPageStyle/img/callus.svg"></a>
+            </li>
+        </ul>
+    </nav>
+    <div id="Dream_Body">
+
+    </div>
+    <div class="row text-center" style="margin-right: 424px; margin-top: 100px;">
+        <a href="#"><img class="rounded affix" src="~/MainPageStyle/img/Group 1697.svg" style="width:258px ;height:60px" /></a>
+        <a href="#"><img class="rounded affix" src="~/MainPageStyle/img/Group 1668.svg" style="width:258px ;height:60px" /></a>
+    </div>
+    
+</body>
+
+
+
+@section Scripts
+{
+<script src="~/MainPageStyle/js/fontawesome.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+                roaashow();
+                
+        });
+            function roaashow() {
+                $.ajax({
+                    type: "GET",
+                    url:'@Url.Action("GetDreams", "Dreams")',
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var row = "<div class='col'>" +
+                                "<div class='card rounded-card  ' style='width: 20rem;'>" +
+                                "<div class='title text-right '>" +
+                                " <p class='pr-4 pt-2'>رؤية مجانية</p>" +
+                                "<hr>" +
+                                "</div>" +
+                                "<div class='card-body'>" +
+                                "<p class='card-text text-right'>نص افتراضينص افتراضينص افتراضينص افتراضينص افتراضينص افتراضينص افتراضي</p>" +
+                                "</div>" +
+                                "<hr>" +
+                                "<div class='d-flex bd-highlight justify-content-between'>" +
+                                "<div class='p-2 bd-highlight'>15 اكتوبر 2019</div>" +
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'><i class='fas fa-eye text-primary'></i>15</span>" +
+                                "<span><i class='fas fa-heart text-danger'></i>15</span>" +
+                                "</div>" +
+                                "</div>" +
+
+                                "</div>" +
+
+                                "</div>" +
+
+                                "</div>";
+                            $('#Dream_Body').append(row);
+                        });
+                        
+                    }
+                });
+
+            }
+
+    </script>
+}

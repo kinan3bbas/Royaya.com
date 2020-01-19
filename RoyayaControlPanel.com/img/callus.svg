@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="101.279" height="31.752" viewBox="0 0 101.279 31.752">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-1 {
+        font-size: 15px;
+        font-family: DroidArabicKufi, Droid Arabic Kufi;
+      }
+    </style>
+  </defs>
+  <g id="callus" transform="translate(-1542 -30.102)">
+    <text id="اتصل_بنا" data-name="اتصل بنا" class="cls-1" transform="translate(1542 52.854)"><tspan x="0" y="0">اتصل بنا</tspan></text>
+    <path id="ic_email_24px" class="cls-2" d="M33.238,4H5.471A3.466,3.466,0,0,0,2.017,7.471L2,28.3a3.481,3.481,0,0,0,3.471,3.471H33.238A3.481,3.481,0,0,0,36.709,28.3V7.471A3.481,3.481,0,0,0,33.238,4Zm0,6.942L19.354,19.619,5.471,10.942V7.471l13.883,8.677L33.238,7.471Z" transform="translate(1606.571 26.102)"/>
+  </g>
+</svg>

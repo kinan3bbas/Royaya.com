@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="345" height="124" viewBox="0 0 345 124">
+  <defs>
+    <filter id="Rectangle_1584" x="0" y="0" width="345" height="124" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1698" data-name="Group 1698" transform="translate(-788 -217)">
+    <g transform="matrix(1, 0, 0, 1, 788, 217)" filter="url(#Rectangle_1584)">
+      <rect id="Rectangle_1584-2" data-name="Rectangle 1584" width="327" height="106" rx="14" transform="translate(9 4)" fill="#fff"/>
+    </g>
+    <text id="تواصلك_يهمنا" data-name="تواصلك يهمنا" transform="translate(817 291)" fill="#3c4bff" font-size="48" font-family="DroidArabicKufi, Droid Arabic Kufi"><tspan x="0" y="0">تواصلك يهمنا</tspan></text>
+  </g>
+</svg>

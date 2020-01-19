@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Active_dreams" xml:space="preserve">
+    <value>الاحلام قيد التفسير</value>
+  </data>
+  <data name="Add_dream" xml:space="preserve">
+    <value>إضافة حلم</value>
+  </data>
+  <data name="Add_path" xml:space="preserve">
+    <value>إضافة مسار تفسير</value>
+  </data>
+  <data name="Admins" xml:space="preserve">
+    <value>المدراء</value>
+  </data>
+  <data name="All_Dreams" xml:space="preserve">
+    <value>كل الأحلام</value>
+  </data>
+  <data name="All_Users" xml:space="preserve">
+    <value>جميع المستخدمين</value>
+  </data>
   <data name="BASIC_FUNCTIONS" xml:space="preserve">
     <value>العمليات الأساسية</value>
   </data>
+  <data name="Clients" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
   <data name="Contact_us" xml:space="preserve">
     <value>رسائل المستخدمين</value>
+  </data>
+  <data name="Done_dreams" xml:space="preserve">
+    <value>الأحلام المفسرة</value>
   </data>
   <data name="Dreams" xml:space="preserve">
     <value>الأحلام</value>
@@ -131,6 +155,9 @@
   </data>
   <data name="Interpretation_Paths" xml:space="preserve">
     <value>خطط التفسير</value>
+  </data>
+  <data name="Interpreters" xml:space="preserve">
+    <value>المفسرين</value>
   </data>
   <data name="Interpreters_List" xml:space="preserve">
     <value>قائمة المفسرين</value>
@@ -143,6 +170,9 @@
   </data>
   <data name="Reports" xml:space="preserve">
     <value>التقارير</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>الإحصائيات</value>
   </data>
   <data name="System" xml:space="preserve">
     <value>النظام</value>

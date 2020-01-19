@@ -14,6 +14,18 @@ namespace RoyayaControlPanel.com.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Home()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Main()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

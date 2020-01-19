@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="682.306" height="105.798" viewBox="0 0 682.306 105.798">
+  <defs>
+    <filter id="Rectangle_1447" x="379" y="0" width="303.306" height="105.798" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.239"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_1447-2" x="0" y="0" width="302.918" height="105.798" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-2"/>
+      <feFlood flood-opacity="0.239"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1696" data-name="Group 1696" transform="translate(-618.55 -209.646)">
+    <g transform="matrix(1, 0, 0, 1, 618.55, 209.65)" filter="url(#Rectangle_1447)">
+      <rect id="Rectangle_1447-3" data-name="Rectangle 1447" width="258.306" height="60.798" rx="30" transform="translate(401.5 19.5)" fill="#fff"/>
+    </g>
+    <text id="الأحدث" transform="translate(1194 268)" fill="#3c4bff" font-size="24" font-family="DroidArabicKufi, Droid Arabic Kufi"><tspan x="-69.352" y="0">الأحدث</tspan></text>
+    <path id="Path_3580" data-name="Path 3580" d="M8,0Z" fill="#fff" stroke="#707070" stroke-width="1"/>
+    <g id="z" transform="translate(1160.666 239.531) rotate(90)">
+      <path id="Path_194" data-name="Path 194" d="M342.077,533.2,343.34,532l-5.907-5.56h15.711v-1.689H337.433l5.907-5.56L342.077,518,334,525.6Z" transform="translate(-323 -476)" fill="#3c4bff"/>
+    </g>
+    <g id="Group_1668" data-name="Group 1668" transform="translate(557.05 131.146)">
+      <g transform="matrix(1, 0, 0, 1, 61.5, 78.5)" filter="url(#Rectangle_1447-2)">
+        <rect id="Rectangle_1447-4" data-name="Rectangle 1447" width="257.918" height="60.798" rx="30" transform="translate(22.5 19.5)" fill="#fff"/>
+      </g>
+      <text id="الأقدم" transform="translate(256.951 136.854)" fill="#3c4bff" font-size="24" font-family="DroidArabicKufi, Droid Arabic Kufi"><tspan x="-66.375" y="0">الأقدم</tspan></text>
+      <path id="Path_3580-2" data-name="Path 3580" d="M8,0Z" fill="#fff" stroke="#707070" stroke-width="1"/>
+      <g id="z-2" data-name="z" transform="translate(127.419 153.529) rotate(-90)">
+        <path id="Path_194-2" data-name="Path 194" d="M342.077,533.2,343.34,532l-5.907-5.56h19.457v-1.689H337.433l5.907-5.56L342.077,518,334,525.6Z" transform="translate(-323 -476)" fill="#3c4bff"/>
+      </g>
+    </g>
+  </g>
+</svg>
