@@ -1,6 +1,6 @@
 *{
     direction: rtl;
-    font-family: Droid Arabic Kufi;
+    font-family: Droid Arabic Kufi !important;
 }
 body{
   background-color: #F5F5F5 !important;
@@ -172,5 +172,14 @@ li:first-child
   {
     margin-bottom: 1vh;
   }
+}
+
+.col-sm-6{
+  margin-top: 37px !important;
+  padding-right: unset !important;
+}
+.container{
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 

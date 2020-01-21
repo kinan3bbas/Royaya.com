@@ -690,6 +690,7 @@
     <Content Include="MainPageStyle\js\brands.min.js" />
     <Content Include="MainPageStyle\js\conflict-detection.js" />
     <Content Include="MainPageStyle\js\conflict-detection.min.js" />
+    <Content Include="MainPageStyle\js\date.format.js" />
     <Content Include="MainPageStyle\js\fontawesome.js" />
     <Content Include="MainPageStyle\js\fontawesome.min.js" />
     <Content Include="MainPageStyle\js\regular.js" />
@@ -852,6 +853,8 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Shared\_empty.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

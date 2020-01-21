@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_empty.cshtml";
+    ViewBag.Title = "Contact Us";
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/MainPageStyle/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MainPageStyle/css/fontawesome.css">
+    <link rel="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .bg-light {
+            background-color: unset !important;
+        }
+    </style>
+</head>
+<body>
+    <img class="img img-fluid" src="~/MainPageStyle/img/others.svg" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: fit-content;margin-top: -151px;">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Main", "Home")"><img src="~/MainPageStyle/img/home.svg"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ContactUs", "Home")"><img src="~/MainPageStyle/img/callus.svg"></a>
+            </li>
+        </ul>
+    </nav>
+    <img class="rounded" src="~/MainPageStyle/img/Group 1698.svg" style="width:327px ;height:106px;margin-left: 506px;margin-top: 86px;" />
+    <div class="contact-info d-flex  flex-column bd-highlight m-4 p-4" style="margin-right: 117px !important;">
+        <div class="phone text-blue">
+            <span><img src="~/MainPageStyle/img/google-play.png"></span>
+            <span class="mr-4">Google Play</span>
+            <hr class="mr-4">
+        </div>
+        <div class="email text-blue">
+            <span><img src="~/MainPageStyle/img/app-store.png"></span>
+            <span class="mr-4">Apple Store</span>
+            <hr class="mr-4">
+        </div>
+
+    </div>
+
+</body>
+@section Scripts
+{
+    <script src="~/MainPageStyle/js/fontawesome.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+}
