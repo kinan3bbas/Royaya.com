@@ -12,7 +12,7 @@
         crossorigin="anonymous"></script>*@
 
 
-<h2 class="text-center" style="color: #071689 !important;">Personal Information for @Model.Name</h2>
+<h2 class="text-center" style="color: #071689 !important;">@Resources.Global.PersonalInformation @Model.Name</h2>
 <br />
 <div class="container">
     <div class="row">
@@ -20,21 +20,21 @@
             <ul class="nav flex-column nav-fill">
 
                 <li id="PersonalInfo" class="nav-item nav-link active " style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                    @Html.ActionLink("Personal Information", "PersonalPage", new { Employeeid = Id })
+                    @Html.ActionLink(Resources.Global.PersonalInformation, "PersonalPage", new { Employeeid = Id })
                 </li>
                 <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
-                    @Html.ActionLink("Dreams", "InterpreterDreams", new { id = Model.Id })
+                    @Html.ActionLink(Resources.Global.Dreams, "InterpreterDreams", new { id = Model.Id })
                 </li>
                 <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
-                    @Html.ActionLink("Payments", "EmployeeDocs", "Support", new { Employeeid = Id }, null)
+                    @Html.ActionLink(Resources.Global.Payments, "EmployeeDocs", "Support", new { Employeeid = Id }, null)
                 </li>
             @if (Model.Type == "Interpreter")
             {
                 <li id="EmployeeRating"  class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                    @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Model.Id }, null)
+                    @Html.ActionLink(Resources.Global.Ratings, "InterpreterRatings", new { id = Model.Id }, null)
                 </li>
                 <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                    @Html.ActionLink("Balance Ratio", "InterpreterRatio", new { id = Model.Id }, null)
+                    @Html.ActionLink(Resources.Global.BalanceRatio, "InterpreterRatio", new { id = Model.Id }, null)
                 </li>
             }
             </ul>
@@ -48,7 +48,7 @@
                 <tr>
                     <th>
 
-                        @Html.DisplayNameFor(model => model.Name) :
+                        @Resources.Register.Name:
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Name)
@@ -57,7 +57,7 @@
                 <tr>
 
                     <th>
-                        Age
+                        @Resources.Register.Age
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Age)
@@ -68,7 +68,7 @@
 
 
                     <th>
-                        @Html.DisplayNameFor(model => model.Country) :
+                        @Resources.Register.Country :
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Country)
@@ -78,7 +78,7 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.UserName) :
+                        @Resources.Register.UserName:
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.UserName)
@@ -88,7 +88,7 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.Status) :
+                        @Resources.Register.Status :
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Status)
@@ -98,7 +98,7 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.Sex):
+                        @Resources.Register.Sex :
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Sex)
@@ -108,7 +108,7 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber):
+                        @Resources.Register.PhoneNumber:
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.PhoneNumber)
@@ -118,7 +118,7 @@
                 <tr>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.MartialStatus):
+                        @Resources.Register.MartialStatus:
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.MartialStatus)
@@ -127,7 +127,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Type):
+                        @Resources.Register.Type:
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.Type)
@@ -137,7 +137,7 @@
 {
                 <tr>
                     <th>
-                        Verified Interpreter
+                        @Resources.Register.VerifiedInterpreter
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.verifiedInterpreter)
@@ -145,7 +145,7 @@
                 </tr>
                 <tr>
                     <th>
-                       Personal Description
+                       @Resources.Register.PersonalDescription
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.PersonalDescription)
@@ -153,7 +153,7 @@
                 </tr>
                 <tr>
                     <th>
-                        FireBase ID 
+                        @Resources.Register.FireBasieId
                     </th>
                     <td>
                         @Html.DisplayFor(model => model.FireBaseId)
@@ -174,22 +174,22 @@
                 @if (Model.Type == "Interpreter")
                 {
                     <div>
-                        <h2 style="color: #071689 !important;">Statistics</h2>
+                        <h2 style="color: #071689 !important;">@Resources.Global.Statistics</h2>
                         <p class="lead">
                             <div class="row" style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> All Dreams: </span> <span id="AllDreams"> </span></div>
-                                <div class="col-md-6 col-sm-6"><span> Done Dreams: </span> <span id="Done"> </span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Global.All_Dreams: </span> <span id="AllDreams"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> @Resources.Global.Done_dreams: </span> <span id="Done"> </span></div>
                             </div>
                             <div class="row " style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> Active Dreams: </span> <span id="Active"> </span></div>
-                                <div class="col-md-6 col-sm-6"><span> Number of Dreams in one day: </span> <span id="Day"> value</span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Global.Active_dreams: </span> <span id="Active"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> @Resources.Register.NumberOfDreamsInOneDay: </span> <span id="Day"> value</span></div>
                             </div>
                             <div class="row" style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> Speed </span> <span id="Speed"> </span></div>
-                                <div class="col-md-6 col-sm-6"><span> Total Money </span> <span id="Balance"> </span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.Speed </span> <span id="Speed"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> @Resources.Register.Money </span> <span id="Balance"> </span></div>
                             </div>
                             <div class="row" style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> Avg Rating </span> <span id="Rating"> </span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.AvgRating </span> <span id="Rating"> </span></div>
                             </div>
 
                         </p>
@@ -199,7 +199,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <input type="button"
-                               class="btn btn-primary" value="Edit Info"
+                               class="btn btn-primary" value="@Resources.Dream.Edit"
                                onclick="location.href='@Url.Action("EditInterpreter", "Account", new { id = Model.Id })'" />
 
                     </div>

@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_PLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Resources.Global.Messages</h2>
 
 <p style="float:right; text-decoration-color:white;">
 
     <button class="btn" style="background-color:#6610f2;color:white" onclick="location.href='@Url.Action("Create", "ContactUs")'">
-        Add New message
+        @Resources.Global.AddNewMessage
     </button>
 
 </p>
@@ -19,33 +19,33 @@
 
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Message)
+                @Resources.Global.Message
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Resources.Register.Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Resources.Register.Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobDescription)
+                @Resources.Register.JobDescription
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Resources.Register.PhoneNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
+                @Resources.Dream.CreationDate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-
-            <th>
-                Creator
+                @Resources.Dream.Status
             </th>
 
             <th>
-                Interpreter 
+                @Resources.Dream.Creator
+            </th>
+
+            <th>
+                @Resources.Dream.interpretator 
             </th>
 
             <th></th>

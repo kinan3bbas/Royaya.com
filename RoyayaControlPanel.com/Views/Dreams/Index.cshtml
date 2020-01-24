@@ -7,11 +7,11 @@
     Layout = "~/Views/Shared/_PLayout.cshtml";
 }
 
-<h2>Dreams List</h2>
+<h2>@Resources.Global.Dreams</h2>
 <br />
 <div style="float:right;" class="col-md-12">
         <button style="float:right;" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Dreams")'">
-            Add New Dream
+            @Resources.Dream.AddNewDream
         </button>
 </div>
 
@@ -48,7 +48,7 @@
 
                 <tr>
                     <td style="padding-right:20px;padding-bottom:20px;">
-                        <b>Enter words</b>
+                        <b>@Resources.Dream.EnterWords</b>
                     </td>
                     <td style="padding-right:20px;padding-bottom:20px;" >
                         @*@Html.TextBox("SearchString")*@
@@ -57,7 +57,7 @@
                         </div>
                     </td>
                     <td   style="padding-left:50px;padding-right:20px;padding-bottom:20px;">
-                        <b>Status</b>
+                        <b>@Resources.Dream.Status</b>
                     </td>
                     <td   style="padding-right:20px;padding-bottom:20px;">
                         @Html.DropDownList("Status", new List<SelectListItem>
@@ -91,35 +91,35 @@
         <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
             <tr>
                 <th>
-                    Interpreter
+                    @Resources.Dream.interpretator
                 </th>
                 <th>
-                    Plan
+                    @Resources.Dream.path
                 </th>
                 <th>
-                    Status
+                    @Resources.Dream.Status
                 </th>
                 <th>
-                    Description
+                    @Resources.Dream.Description
                 </th>
                 <th>
-                    Explanation
+                    @Resources.Dream.Explanation
                 </th>
                 <th>
-                    Explanation Date
+                    @Resources.Dream.ExplanationDate
                 </th>
                 <th>
-                    User Rating
+                    @Resources.Dream.UserRating
                 </th>
                 <th>
-                    Rating Date
+                    @Resources.Dream.RatingDate
                 </th>
                 <th>
-                    Creation Date
+                    @Resources.Dream.CreationDate
                 </th>
 
                 <th>
-                    Creator
+                    @Resources.Dream.Creator
                 </th>
 
 
@@ -165,9 +165,9 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        @Html.ActionLink(Resources.Dream.Edit, "Edit", new { id = item.id }) |
+                        @Html.ActionLink(Resources.Dream.Details, "Details", new { id = item.id }) |
+                        @Html.ActionLink(Resources.Dream.Delete, "Delete", new { id = item.id })
                     </td>
                 </tr>
             }

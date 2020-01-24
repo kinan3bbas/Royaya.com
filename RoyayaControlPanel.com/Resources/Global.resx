@@ -135,6 +135,9 @@
   <data name="All_Users" xml:space="preserve">
     <value>All Users</value>
   </data>
+  <data name="BalanceRatio" xml:space="preserve">
+    <value>Balance Ratio</value>
+  </data>
   <data name="BASIC_FUNCTIONS" xml:space="preserve">
     <value>BASIC FUNCTIONS</value>
   </data>
@@ -165,6 +168,15 @@
   <data name="Messages" xml:space="preserve">
     <value>Messages</value>
   </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Presonal Information</value>
+  </data>
+  <data name="Ratings" xml:space="preserve">
+    <value>Ratings</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -182,5 +194,23 @@
   </data>
   <data name="User_List_All" xml:space="preserve">
     <value>User List</value>
+  </data>
+  <data name="AddNewRatio" xml:space="preserve">
+    <value>Add New Ratio</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="RatioForEachPath" xml:space="preserve">
+    <value>Ratio For Each Path</value>
+  </data>
+  <data name="AddNewMessage" xml:space="preserve">
+    <value>Add New Message</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
   </data>
 </root>

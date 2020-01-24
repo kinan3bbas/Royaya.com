@@ -17,21 +17,23 @@
         <ul class="nav flex-column nav-fill">
 
             <li id="PersonalInfo" class="nav-item nav-link active " style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Personal Information", "PersonalPage", new { id = Id })
+                @Html.ActionLink(Resources.Global.PersonalInformation, "PersonalPage", new { id = Id })
             </li>
             <li id="SalaryInfo" class="nav-item nav-link" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
-                @Html.ActionLink("Dreams", "InterpreterDreams", new { id = Id })
+                @Html.ActionLink(Resources.Global.Dreams, "InterpreterDreams", new { id = Id })
             </li>
             <li id="EmployeeDocs" class="nav-item nav-link" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
-                @Html.ActionLink("Payments", "EmployeeDocs", "Support", new { id = Id }, null)
+                @Html.ActionLink(Resources.Global.Payments, "EmployeeDocs", "Support", new { id = Id }, null)
             </li>
+@if (userType == "Interpreter")
+{
             <li id="EmployeeRating" class="nav-item nav-link" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Id }, null)
+                @Html.ActionLink(Resources.Global.Ratings, "InterpreterRatings", new { id = Id }, null)
             </li>
             <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Balance Ratio", "InterpreterRatio", new { id = Id}, null)
+                @Html.ActionLink(Resources.Global.BalanceRatio, "InterpreterRatio", new { id = Id }, null)
             </li>
-
+}
         </ul>
     </div>
     <div class="col-md-9">
@@ -41,17 +43,17 @@
                 <tr>
 
                     <th>
-                        User Rating
+                        @Resources.Dream.UserRating
                     </th>
                     <th>
-                        Rating Date
+                        @Resources.Dream.RatingDate
                     </th>
                     <th>
-                        Creation Date
+                        @Resources.Dream.CreationDate
                     </th>
 
                     <th>
-                        Client
+                        @Resources.Dream.Creator
                     </th>
 
 

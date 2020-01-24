@@ -48,6 +48,12 @@ namespace RoyayaControlPanel.com.ViewModels
 
         public int id { get; set; }
 
+        public long numberOfViews { get; set; }
+
+        public long numberOfLikes { get; set; }
+
+        public long AllItems { get; set; }
+
         public DreamViewModel() { }
 
     }

@@ -4,23 +4,23 @@
     Layout = "~/Views/Shared/_PLayout.cshtml";
 }
 <div>
-    <h2 style="color: #8b224e">Interpreters Users</h2>
+    <h2 style="color: #8b224e">@Resources.Global.Interpreters_List</h2>
     <br />
 
      <table id="myTable" class="table table-striped table-bordered table-hover">
         <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
             <tr>
-                <th>User Name</th>
-                <th>Name</th>
-                <th>Id</th>
-                <th>Status</th>
-                <th>Sex</th>
-                <th>Age</th>
-                <th>Country</th>
-                <th>Joining Date</th>
-                <th>Job Description</th>
-                <th>Martial Status</th>
-                <th>Number of Dreams in one day</th>
+                <th>@Resources.Register.UserName</th>
+                <th>@Resources.Register.Name</th>
+                <th>@Resources.Register.Id</th>
+                <th>@Resources.Register.Status</th>
+                <th>@Resources.Register.Sex</th>
+                <th>@Resources.Register.Age</th>
+                <th>@Resources.Register.Country</th>
+                <th>@Resources.Register.JoiningDate</th>
+                <th>@Resources.Register.JobDescription</th>
+                <th>@Resources.Register.MartialStatus</th>
+                <th>@Resources.Register.NumberOfDreamsInOneDay</th>
                 <th></th>
             </tr>
         </thead>
@@ -44,7 +44,7 @@
                     <td>@user.JobDescription</td>
                     <td>@user.MartialStatus</td>
                     <td>@user.numbOfDreamsInOneDay</td>
-                    <td>@Html.ActionLink("Edit", "EditInterpreter", new { id = user.Id })</td>
+                    <td>@Html.ActionLink(@Resources.Dream.Edit, "EditInterpreter", new { id = user.Id })</td>
                 </tr>
             }
         </tbody>

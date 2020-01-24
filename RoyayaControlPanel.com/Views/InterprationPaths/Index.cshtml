@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_PLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Resources.Global.Interpretation_Paths</h2>
 
 
 
 <p style="float:right; text-decoration-color:white;">
 
     <button class="btn" style="background-color:#6610f2;color:white" onclick="location.href='@Url.Action("Create", "InterprationPaths")'">
-        Add New Path
+        @Resources.Global.Add_path
     </button>
 
 </p>
@@ -41,9 +41,9 @@
                     </td>
                    
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        @Html.ActionLink(Resources.Dream.Edit, "Edit", new { id = item.id }) |
+                        @Html.ActionLink(Resources.Dream.Details, "Details", new { id = item.id }) |
+                        @Html.ActionLink(Resources.Dream.Delete, "Delete", new { id = item.id })
                     </td>
                 </tr>
             }

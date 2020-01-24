@@ -23,7 +23,7 @@ namespace Royaya.com.Models
         public string Description { get; set; }
 
         [JsonProperty]
-        [Display(Name = "Interpretator Id", ResourceType = typeof(Resources.Dream))]
+        [Display(Name = "interpretatorId", ResourceType = typeof(Resources.Dream))]
         public string interpretatorId { get; set; }
 
         [JsonProperty]
@@ -43,18 +43,18 @@ namespace Royaya.com.Models
         public string Explanation { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Explanation Date", ResourceType = typeof(Resources.Dream))]
+        [Display(Name = "ExplanationDate", ResourceType = typeof(Resources.Dream))]
         public DateTime? ExplanationDate { get; set; }
 
-        [Display(Name ="User's Rating", ResourceType = typeof(Resources.Dream))]
+        [Display(Name = "UserRating", ResourceType = typeof(Resources.Dream))]
         public int UserRating { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Rating Date", ResourceType = typeof(Resources.Dream))]
+        [Display(Name = "RatingDate", ResourceType = typeof(Resources.Dream))]
         public DateTime? RatingDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [Display(Name = "Interpretation Start Date", ResourceType = typeof(Resources.Dream))]
+        [Display(Name = "InterpretationStartDate", ResourceType = typeof(Resources.Dream))]
         public DateTime? InterpretationStartDate { get; set; }
 
         public long numberOfViews { get; set; }

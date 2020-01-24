@@ -135,6 +135,9 @@
   <data name="All_Users" xml:space="preserve">
     <value>جميع المستخدمين</value>
   </data>
+  <data name="BalanceRatio" xml:space="preserve">
+    <value>نسبة المفسر لكل خطة</value>
+  </data>
   <data name="BASIC_FUNCTIONS" xml:space="preserve">
     <value>العمليات الأساسية</value>
   </data>
@@ -165,6 +168,15 @@
   <data name="Messages" xml:space="preserve">
     <value>الرسائل</value>
   </data>
+  <data name="Payments" xml:space="preserve">
+    <value>المدفوعات</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>المعلومات الشخصية</value>
+  </data>
+  <data name="Ratings" xml:space="preserve">
+    <value>التقييمات</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>تسجيل مستخدم جديد</value>
   </data>
@@ -182,5 +194,23 @@
   </data>
   <data name="User_List_All" xml:space="preserve">
     <value>جميع المستخدمين</value>
+  </data>
+  <data name="AddNewRatio" xml:space="preserve">
+    <value>إضافة نسبة جديدة</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>الكلفة</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>النسبة</value>
+  </data>
+  <data name="RatioForEachPath" xml:space="preserve">
+    <value>النسبة لكل خط تفسير</value>
+  </data>
+  <data name="AddNewMessage" xml:space="preserve">
+    <value>إضافة رسالة جديدة</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>الرسالة</value>
   </data>
 </root>

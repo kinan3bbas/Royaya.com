@@ -16,21 +16,21 @@
         <ul class="nav flex-column nav-fill">
 
             <li id="PersonalInfo" class="nav-item nav-link active " style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Personal Information", "PersonalPage", new { id = Id })
+                @Html.ActionLink(Resources.Global.PersonalInformation, "PersonalPage", new { id = Id })
             </li>
             <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
-                @Html.ActionLink("Dreams", "InterpreterDreams", new { id = Id })
+                @Html.ActionLink(Resources.Global.Dreams, "InterpreterDreams", new { id = Id })
             </li>
             <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
-                @Html.ActionLink("Payments", "EmployeeDocs", "Support", new { id = Id }, null)
+                @Html.ActionLink(Resources.Global.Payments, "EmployeeDocs", "Support", new { id = Id }, null)
             </li>
             @if (userType == "Interpreter")
             {
             <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Ratings", "InterpreterRatings", new { id = Id }, null)
+                @Html.ActionLink(Resources.Global.Ratings, "InterpreterRatings", new { id = Id }, null)
             </li>
             <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
-                @Html.ActionLink("Balance Ratio", "InterpreterRatio", new { id = Model.Id }, null)
+                @Html.ActionLink(Resources.Global.BalanceRatio, "InterpreterRatio", new { id = Id }, null)
             </li>
             }
         </ul>
@@ -41,32 +41,32 @@
             <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
                 <tr>
                     <th>
-                        Plan
+                        @Resources.Dream.path
                     </th>
                     <th>
-                        Status
+                        @Resources.Dream.Status
                     </th>
                     <th>
-                        Description
+                        @Resources.Dream.Description
                     </th>
                     <th>
-                        Explanation
+                        @Resources.Dream.Explanation
                     </th>
                     <th>
-                        Explanation Date
+                        @Resources.Dream.ExplanationDate
                     </th>
                     <th>
-                        User Rating
+                        @Resources.Dream.UserRating
                     </th>
                     <th>
-                        Rating Date
+                        @Resources.Dream.RatingDate
                     </th>
                     <th>
-                        Creation Date
+                        @Resources.Dream.CreationDate
                     </th>
 
                     <th>
-                        Creator
+                        @Resources.Dream.Creator
                     </th>
 
 

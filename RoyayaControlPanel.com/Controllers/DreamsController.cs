@@ -83,14 +83,18 @@ namespace RoyayaControlPanel.com.Controllers
                     Explanation = item.Explanation,
                     ExplanationDate = item.ExplanationDate,
                     InterpretationStartDate = item.InterpretationStartDate,
-                    interpretatorId = item.interpretatorId!=null?item.interpretatorId:"",
-                    interpretatorName = item.interpretator!=null?item.interpretator.Name:"",
-                    pathCost = item.path!=null?item.path.Cost:-1,
-                    pathId = item.pathId!=null?item.pathId:0,
+                    interpretatorId = item.interpretatorId != null ? item.interpretatorId : "",
+                    interpretatorName = item.interpretator != null ? item.interpretator.Name : "",
+                    pathCost = item.path != null ? item.path.Cost : -1,
+                    pathId = item.pathId != null ? item.pathId : 0,
                     RatingDate = item.RatingDate,
                     Status = item.Status,
                     UserRating = item.UserRating,
-                    CreationDate = item.CreationDate
+                    CreationDate = item.CreationDate,
+                    numberOfLikes=item.numberOfLikes,
+                    numberOfViews=item.numberOfViews,
+                    
+                    AllItems = dreams.Count()
                 };
                 dreamsView.Add(temp);
             }

@@ -156,4 +156,34 @@
   <data name="UserRating" xml:space="preserve">
     <value>تقييم المستخدم</value>
   </data>
+  <data name="AddNewDream" xml:space="preserve">
+    <value>أضف حلم جديد</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>العودة إلى القائمة السابقة</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>الكلفة</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>أنشأ</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>تاريخ الإنشاء</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>المستخدم المنشىء</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EnterWords" xml:space="preserve">
+    <value>أدخل كلمة البحث</value>
+  </data>
 </root>

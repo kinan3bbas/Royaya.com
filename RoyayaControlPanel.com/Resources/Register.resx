@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AvgRating" xml:space="preserve">
+    <value>Avg Rating</value>
+  </data>
   <data name="Confirm_Password" xml:space="preserve">
     <value>Confrim Password</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
   </data>
   <data name="Create_New_Account" xml:space="preserve">
     <value>Create_New_Account</value>
@@ -126,10 +135,58 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="FireBasieId" xml:space="preserve">
+    <value>FireBaseId</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="JobDescription" xml:space="preserve">
+    <value>Job Description</value>
+  </data>
+  <data name="JoiningDate" xml:space="preserve">
+    <value>Joining Date</value>
+  </data>
+  <data name="MartialStatus" xml:space="preserve">
+    <value>Martial Status</value>
+  </data>
+  <data name="Money" xml:space="preserve">
+    <value>Money</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NumberOfDreamsInOneDay" xml:space="preserve">
+    <value>Number Of Dreams in one Day</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PersonalDescription" xml:space="preserve">
+    <value>Personal Description</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
   <data name="Register_Account" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Sex</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="VerifiedInterpreter" xml:space="preserve">
+    <value>Verified Interpreter</value>
   </data>
 </root>

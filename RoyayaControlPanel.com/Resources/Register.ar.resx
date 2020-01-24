@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>العمر</value>
+  </data>
+  <data name="AvgRating" xml:space="preserve">
+    <value>متوسط التقييم</value>
+  </data>
   <data name="Confirm_Password" xml:space="preserve">
     <value>تأكيد كلمة السر</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>البلد</value>
   </data>
   <data name="Create_New_Account" xml:space="preserve">
     <value>تسجيل مستخدم جديد</value>
@@ -126,10 +135,58 @@
   <data name="Email" xml:space="preserve">
     <value>البريد الالكتروني</value>
   </data>
+  <data name="FireBasieId" xml:space="preserve">
+    <value>معرف الـ FireBase</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>المعرف</value>
+  </data>
+  <data name="JobDescription" xml:space="preserve">
+    <value>وصف العمل</value>
+  </data>
+  <data name="JoiningDate" xml:space="preserve">
+    <value>تاريخ الانضمام</value>
+  </data>
+  <data name="MartialStatus" xml:space="preserve">
+    <value>الحالة الاجتماعية</value>
+  </data>
+  <data name="Money" xml:space="preserve">
+    <value>المبلغ المستحق</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="NumberOfDreamsInOneDay" xml:space="preserve">
+    <value>عدد الأحلام في اليوم الواحد</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>كلمة السر</value>
   </data>
+  <data name="PersonalDescription" xml:space="preserve">
+    <value>الوصف الشخصي للمستخدم</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
   <data name="Register_Account" xml:space="preserve">
     <value>التسجيل</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>السرعة</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>نوع المستخدم</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="VerifiedInterpreter" xml:space="preserve">
+    <value>مفسر مفعل</value>
   </data>
 </root>
