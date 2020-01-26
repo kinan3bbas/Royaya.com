@@ -27,16 +27,38 @@
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("ContactUs", "Home")"><img src="~/MainPageStyle/img/callus.svg"></a>
             </li>
+            <li class="nav-item">
+                <div class="s128">
+                    <form>
+                        <div class="inner-form">
+                            <div class="row" style="margin-right: unset">
+                                <div class="input-field first" id="first">
+                                    <input class="input" id="inputFocus" type="text" placeholder="Keyword" oninput="search(document.getElementById('inputFocus').value)" />
+                                    <button class="clear" id="clear">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-top: -6px;">
+                                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
         </ul>
     </nav>
     <div class="row text-center" style="margin-right: 424px; margin-top: 100px;">
-        <a href="#"><img class="rounded affix" src="~/MainPageStyle/img/Group 1697.svg" style="width:258px ;height:60px" /></a>
-        <a href="#"><img class="rounded affix" src="~/MainPageStyle/img/Group 1668.svg" style="width:258px ;height:60px" /></a>
+        <a href="#" ><img  onclick="roaashow(false);" class="rounded affix" src="~/MainPageStyle/img/Group 1697.svg" style="width:258px ;height:60px" /></a>
+        <a href="#"><img onclick="roaashowDone(false);" class="rounded affix" src="~/MainPageStyle/img/Group 1668.svg" style="width:258px ;height:60px" /></a>
     </div>
     <div class="container row" style="margin-bottom: 25px;" id="Dream_Body">
-
+        <div id="Body">
+            
+        </div>
     </div>
-
+    <div class="row center" style="text-align: center;display: inline-block;margin-left: 48%;;">
+        <a href="#" style="display: inline-block"><img onclick="loadMore();" class="rounded affix" src="~/MainPageStyle/img/Group 2020.svg" style="width:258px ;height:60px" /></a>
+    </div>
 </body>
 
 @section Scripts
@@ -45,22 +67,73 @@
     <script src="~/MainPageStyle/js/fontawesome.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
     <script type="text/javascript">
+        var currentValue = "Done";
         $(document).ready(function () {
-                roaashow();
+            roaashow(false);
 
         });
-            function roaashow() {
-                $.ajax({
-                    type: "GET",
-                    url:'@Url.Action("GetDreams", "Dreams")',
+
+        function loadMore() {
+            if (currentValue == "Done")
+                roaashowDone(true);
+            else
+                roaashow(true);
+        };
+        function roaashow(loadmore) {
+            currentValue = "Active";
+            if (loadmore==false)
+                $('#Dream_Body div').remove();
+            $.ajax({
+                type: "GET",
+                url:'@Url.Action("GetDreams", "Dreams",new { status="Active"})',
                     dataType: "json",
                     data: {},
                     success: function (data) {
                         $.each(data, function (index, value) {
                             var dateString = value.CreationDate;
                             var date = new Date(parseInt(dateString.substr(6)));
-                            var row = "<div class='col-sm-6 col-lg-4'>"+
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
+                            "<a href='Details/"+value.id+"\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
+                            "<div class='title text-right '>"+
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p><i class='fas fa- cloud'></i>"+
+                                "<hr style='background-color:white'>" +
+                            "</div>"+
+                            "<div class='card-body'>"+
+                            "<a href='Details/"+value.id+ "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>"+value.Description+"</p>"+
+                            "</a></div>"+
+                            "<hr style='background-color:white'>"+
+                            "<div class='d-flex bd-highlight justify-content-between'>"+
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews+"<i class='fas fa-eye '></i></span>"+
+                                "<span>" + value.numberOfLikes+"</span><i class='fas fa-heart' style='color: red'></i></div>"+
+                            "</div>"+
+
+                            "</div></a></div>";
+                            $('#Dream_Body').append(row);
+                        });
+
+                    }
+                });
+
+        }
+
+
+        function roaashowDone(loadmore) {
+            currentValue = "Done";
+            if (loadmore==false)
+                $('#Dream_Body div').remove();
+                $.ajax({
+                    type: "GET",
+                    url:'@Url.Action("GetDreams", "Dreams",new { status="Done"})',
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var dateString = value.CreationDate;
+                            var date = new Date(parseInt(dateString.substr(6)));
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
                             "<a href='details.html'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
                             "<div class='title text-right '>"+
                             "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p>"+
@@ -83,7 +156,61 @@
                     }
                 });
 
- }
+        }
 
+
+        function search(loadmore) {
+            $.ajax({
+                type: "GET",
+                url: 'GetDreams?searchString=' + loadmore,
+                dataType: "json",
+                data: { },
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var dateString = value.CreationDate;
+                            var date = new Date(parseInt(dateString.substr(6)));
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
+                            "<a href='Details/"+value.id+"\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
+                            "<div class='title text-right '>"+
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p><i class='fas fa- cloud'></i>"+
+                                "<hr style='background-color:white'>" +
+                            "</div>"+
+                            "<div class='card-body'>"+
+                            "<a href='Details/"+value.id+ "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>"+value.Description+"</p>"+
+                            "</a></div>"+
+                            "<hr style='background-color:white'>"+
+                            "<div class='d-flex bd-highlight justify-content-between'>"+
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews+"<i class='fas fa-eye '></i></span>"+
+                                "<span>" + value.numberOfLikes+"</span><i class='fas fa-heart' style='color: red'></i></div>"+
+                            "</div>"+
+
+                            "</div></a></div>";
+                            $('#Dream_Body').append(row);
+                        });
+
+                    }
+                });
+
+        }
+
+
+        var btnDelete = document.getElementById('clear');
+        var inputFocus = document.getElementById('inputFocus');
+        btnDelete.addEventListener('click', function (e) {
+            e.preventDefault();
+            inputFocus.value = ''
+        })
+        document.addEventListener('click', function (e) {
+            if (document.getElementById('first').contains(e.target)) {
+                inputFocus.classList.add('isFocus');
+            }
+            else {
+                // Clicked outside the box
+                inputFocus.classList.remove('isFocus')
+            }
+        });
+
+        
     </script>
 }
