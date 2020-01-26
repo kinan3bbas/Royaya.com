@@ -97,7 +97,7 @@
                             var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
                             "<a href='Details/"+value.id+"\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
                             "<div class='title text-right '>"+
-                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p><i class='fas fa- cloud'></i>"+
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost))+"</p><i class='fas fa- cloud'></i>"+
                                 "<hr style='background-color:white'>" +
                             "</div>"+
                             "<div class='card-body'>"+
@@ -106,8 +106,8 @@
                             "<hr style='background-color:white'>"+
                             "<div class='d-flex bd-highlight justify-content-between'>"+
                                 "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
-                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews+"<i class='fas fa-eye '></i></span>"+
-                                "<span>" + value.numberOfLikes+"</span><i class='fas fa-heart' style='color: red'></i></div>"+
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews +"<span> مشاهدة </span>"+
+                                "<span>" + value.numberOfLikes +"</span><span> إعجاب </span></div>"+
                             "</div>"+
 
                             "</div></a></div>";
@@ -133,23 +133,23 @@
                         $.each(data, function (index, value) {
                             var dateString = value.CreationDate;
                             var date = new Date(parseInt(dateString.substr(6)));
-                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
-                            "<a href='details.html'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
-                            "<div class='title text-right '>"+
-                            "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p>"+
-                            "<hr style='background-color:white'>"+
-                            "</div>"+
-                            "<div class='card-body'>"+
-                            "<a href='Details/"+value.id+ "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>"+value.Description+"</p>"+
-                            "</a></div>"+
-                            "<hr style='background-color:white'>"+
-                            "<div class='d-flex bd-highlight justify-content-between'>"+
-                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
-                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews+"<i class='fas fa-eye '></i></span>"+
-                                "<span>" + value.numberOfLikes+"</span><i class='fas fa-heart' style='color: red'></i></div>"+
-                            "</div>"+
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>" +
+                                "<a href='Details/" + value.id + "\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>" +
+                                "<div class='title text-right '>" +
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost)) + "</p><i class='fas fa- cloud'></i>" +
+                                "<hr style='background-color:white'>" +
+                                "</div>" +
+                                "<div class='card-body'>" +
+                                "<a href='Details/" + value.id + "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>" + value.Description + "</p>" +
+                                "</a></div>" +
+                                "<hr style='background-color:white'>" +
+                                "<div class='d-flex bd-highlight justify-content-between'>" +
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy") + "</div>" +
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews + "<span> مشاهدة </span>" +
+                                "<span>" + value.numberOfLikes + "</span><span> إعجاب </span></div>" +
+                                "</div>" +
 
-                            "</div></a></div>";
+                                "</div></a></div>";
                             $('#Dream_Body').append(row);
                         });
 
@@ -160,6 +160,7 @@
 
 
         function search(loadmore) {
+            $('#Dream_Body div').remove();
             $.ajax({
                 type: "GET",
                 url: 'GetDreams?searchString=' + loadmore,
@@ -169,23 +170,23 @@
                         $.each(data, function (index, value) {
                             var dateString = value.CreationDate;
                             var date = new Date(parseInt(dateString.substr(6)));
-                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
-                            "<a href='Details/"+value.id+"\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
-                            "<div class='title text-right '>"+
-                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>رؤية مجانية</p><i class='fas fa- cloud'></i>"+
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>" +
+                                "<a href='Details/" + value.id + "\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>" +
+                                "<div class='title text-right '>" +
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost)) + "</p><i class='fas fa- cloud'></i>" +
                                 "<hr style='background-color:white'>" +
-                            "</div>"+
-                            "<div class='card-body'>"+
-                            "<a href='Details/"+value.id+ "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>"+value.Description+"</p>"+
-                            "</a></div>"+
-                            "<hr style='background-color:white'>"+
-                            "<div class='d-flex bd-highlight justify-content-between'>"+
-                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
-                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews+"<i class='fas fa-eye '></i></span>"+
-                                "<span>" + value.numberOfLikes+"</span><i class='fas fa-heart' style='color: red'></i></div>"+
-                            "</div>"+
+                                "</div>" +
+                                "<div class='card-body'>" +
+                                "<a href='Details/" + value.id + "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>" + value.Description + "</p>" +
+                                "</a></div>" +
+                                "<hr style='background-color:white'>" +
+                                "<div class='d-flex bd-highlight justify-content-between'>" +
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy") + "</div>" +
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews + "<span> مشاهدة </span>" +
+                                "<span>" + value.numberOfLikes + "</span><span> إعجاب </span></div>" +
+                                "</div>" +
 
-                            "</div></a></div>";
+                                "</div></a></div>";
                             $('#Dream_Body').append(row);
                         });
 
