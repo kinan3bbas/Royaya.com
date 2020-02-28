@@ -12,10 +12,6 @@
     <g transform="matrix(1, 0, 0, 1, 61.5, 78.5)" filter="url(#Rectangle_1447)">
       <rect id="Rectangle_1447-2" data-name="Rectangle 1447" width="257.918" height="60.798" rx="30" transform="translate(22.5 19.5)" fill="#fff"/>
     </g>
-    <text id="الأقدم" transform="translate(256.951 136.854)" fill="#3c4bff" font-size="24" font-family="DroidArabicKufi, Droid Arabic Kufi" text-align="center"><tspan x="-66.375" y="0" >الأحلام المفسرة</tspan></text>
-    <!--<path id="Path_3580" data-name="Path 3580" d="M8,0Z" fill="#fff" stroke="#707070" stroke-width="1"/>-->
-    <!--<g id="z" transform="translate(127.419 153.529) rotate(-90)">
-      <path id="Path_194" data-name="Path 194" d="M342.077,533.2,343.34,532l-5.907-5.56h19.457v-1.689H337.433l5.907-5.56L342.077,518,334,525.6Z" transform="translate(-323 -476)" fill="#3c4bff"/>
-    </g>-->
+    <text id="الأقدم" transform="translate(256.951 136.854)" fill="#3c4bff" font-size="24" font-family="DroidArabicKufi, Droid Arabic Kufi"><tspan x="-89.375" y="0">المفسرة</tspan></text>
   </g>
 </svg>

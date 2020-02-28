@@ -95,6 +95,7 @@ namespace Royaya.com.Controllers
 
 
         //GET /api/Core/Download?id=4
+        [AllowAnonymous]
         [Route("Download")]
         public HttpResponseMessage GetFile(int id)
         {
