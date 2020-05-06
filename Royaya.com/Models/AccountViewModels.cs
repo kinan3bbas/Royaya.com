@@ -66,6 +66,9 @@ namespace Royaya.com.Models
 
         public int NumberOfDoneDreams { get; set; }
 
+        public double balance { get; set; }
+
+        public double rating { get; set; }
     }
 
     public class UserLoginInfoViewModel

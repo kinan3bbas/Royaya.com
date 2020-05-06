@@ -1,0 +1,147 @@
+﻿@model RoyayaControlPanel.com.ViewModels.DreamViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
+}
+<meta charset="utf-8" />
+<head>
+    <link href="~/css/MainPageStyles2.css" rel="stylesheet" />
+    <style>
+        .bg-light {
+            background-color: unset !important;
+        }
+
+        a {
+            font-family: Droid Arabic Kufi !important;
+        }
+        .navbar {
+            position: absolute;
+            top: 5px;
+        }
+        .card-header {
+            background-color: #3c4bff;
+            color:white;
+        }
+        .card-footer {
+            background-color: #3c4bff;
+            color: white;
+        }
+        .card-title {
+            font-size: large;
+            font-weight:bold;
+        }
+        .card {
+            direction:rtl;
+            text-align:right;
+            border:solid;
+            
+        }
+        .icon-bar {
+            position: fixed;
+            top: 50%;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateX(-50%);
+            float: right;
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 20px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        .google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        .linkedin {
+            background: #007bb5;
+            color: white;
+        }
+
+        .youtube {
+            background: #bb0000;
+            color: white;
+        }
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+</nav>
+<body>
+   
+<br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <div style="margin-right:10px"> <span>الرؤية رقم @Model.id</span>
+                    <span style="float:left"> &nbsp; <i class="fa fa-money" style="font-size: x-large"> </i> رؤية مدفوعة</span>
+                    </div>
+                    <div style="margin-right:10px">@Model.CreationDate</div style="margin-right:10px">
+                </div>
+                <div class="panel-body">
+                    <div class="card-title"> 
+                         نص الرؤية
+                        <img src="~/Images/dream.png" style="height:30px;width:30px;margin-top:-10px" />
+                    </div>
+                    <div class="card-text"></div>
+                   <hr />
+                    <div class="card-title">
+                        <span> التفسير
+
+                            <img src="~/Images/book.png" style="height:30px;width:30px;margin-top:-10px" />
+                        </span>
+                        <span style="float:left">المفسر @Model.interpretatorName</span>
+                    </div>
+                    <div class="card-text">
+                        <div> @Model.Explanation</div>
+                        <div style="float:left">@Model.ExplanationDate</div>
+                    </div>
+                    
+                </div>
+                <div class="panel-footer" >
+                   <span style="float:left"> &nbsp; &nbsp; <i class="fa fa-eye">  </i>&nbsp; @Model.numberOfViews </span> 
+                   <span style="float:left"><i class="fa fa-heart"> </i>&nbsp;@Model.numberOfLikes</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    
+    </body>
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/bcdb06b809.js" crossorigin="anonymous"></script>
+}

@@ -2,9 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Royaya.com.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+
 
 namespace Royaya.com.Controllers
 {
@@ -140,6 +139,41 @@ namespace Royaya.com.Controllers
             return response;
         }
 
+
+        //GET /api/Core/DownloadImageForIos?id=4
+        [AllowAnonymous]
+        [Route("DownloadImageForIos")]
+        [HttpGet]
+        public IHttpActionResult DownloadImageForIos(int id)
+        {
+            Attachment attach = db.Attachments.Where(a => a.id.Equals(id)).FirstOrDefault();
+            if (attach == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            String fileName = attach.FileName;
+
+            //Create HTTP Response.
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
+
+            //Set the File Path.
+            string filePath = HttpContext.Current.Server.MapPath("~/App_Data/") + fileName;
+
+            //Check whether File exists.
+            if (!File.Exists(filePath))
+            {
+                //Throw 404 (Not Found) exception if File not found.
+                response.StatusCode = HttpStatusCode.NotFound;
+                response.ReasonPhrase = string.Format("File not found: {0} .", fileName);
+                throw new HttpResponseException(response);
+            }
+
+            //Read the File into a Byte Array.
+            byte[] bytes = File.ReadAllBytes(filePath);
+            
+            return Ok(bytes);
+        }
         public ApplicationUser getCurrentUser ()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));

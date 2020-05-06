@@ -12,7 +12,8 @@
             <tr>
                 <th>User Name</th>
                 <th>User Type</th>
-                <th></th>
+                <th>Status</th>
+                @*<th></th>*@
             </tr>
         </thead>
         <tbody>
@@ -23,7 +24,8 @@
                         @Html.ActionLink(@user.UserName, "PersonalPage", new { id = @user.Id }, null)
                     </td>
                     <td>@user.Type</td>
-                    <td>@Html.ActionLink("Assign User to Role", "AssignUserRole", "Account", new { @UserId = user.Id }, null)</td>
+                    <th>@user.Status</th>
+                   @* <td>@Html.ActionLink("Assign User to Role", "AssignUserRole", "Account", new { @UserId = user.Id }, null)</td>*@
                 </tr>
             }
         </tbody>

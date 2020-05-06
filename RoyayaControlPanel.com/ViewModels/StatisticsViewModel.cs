@@ -18,6 +18,8 @@ namespace Royaya.com.ViewModels
 
         public int allUsers { get; set; }
 
+        public long onlineUsers { get; set; }
+
 
     }
 }

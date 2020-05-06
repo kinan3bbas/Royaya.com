@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleted Users.
+        /// </summary>
+        public static string DeletedUsers {
+            get {
+                return ResourceManager.GetString("DeletedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done Dreams.
         /// </summary>
         public static string Done_dreams {
@@ -246,6 +255,15 @@ namespace Resources {
         public static string Messages {
             get {
                 return ResourceManager.GetString("Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online Users.
+        /// </summary>
+        public static string OnlineUsers {
+            get {
+                return ResourceManager.GetString("OnlineUsers", resourceCulture);
             }
         }
         

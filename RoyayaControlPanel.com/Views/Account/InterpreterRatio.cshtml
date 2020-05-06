@@ -27,17 +27,17 @@
             <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
                 @Html.ActionLink(Resources.Global.Dreams, "InterpreterDreams", new { id = Id })
             </li>
-            <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
+            @*<li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
                 @Html.ActionLink(Resources.Global.Payments, "EmployeeDocs", "Support", new { id = Id }, null)
-            </li>
+            </li>*@
             @if (userType == "Interpreter")
             {
             <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
                 @Html.ActionLink(Resources.Global.Ratings, "InterpreterRatings", new { id = Id }, null)
             </li>
-            <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+            @*<li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
                 @Html.ActionLink(Resources.Global.BalanceRatio, "InterpreterRatio", new { id = Id }, null)
-            </li>
+            </li>*@
             }
         </ul>
     </div>

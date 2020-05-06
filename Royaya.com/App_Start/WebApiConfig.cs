@@ -10,6 +10,7 @@ using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
 using Royaya.com.Models;
 using Royaya.com.Extras;
+using System.Web.Http.Cors;
 
 namespace Royaya.com
 {
@@ -38,6 +39,8 @@ namespace Royaya.com
             //Enable SSL
             //config.Filters.Add(new RequireHttpsAttribute());
 
+            var corsAttr = new EnableCorsAttribute("http://example.com", "*", "*");
+            config.EnableCors(corsAttr);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

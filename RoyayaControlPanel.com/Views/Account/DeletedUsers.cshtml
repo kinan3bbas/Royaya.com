@@ -1,0 +1,36 @@
+﻿@model List<RoyayaControlPanel.com.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+<div>
+    <h2 style="color: #8b224e">Deleted Users</h2>
+    <br />
+
+     <table id="myTable" class="table table-striped table-bordered table-hover">
+        <thead style="background-color:#6610f2;color:white;font-weight:bold;align-content:center">
+            <tr>
+                <th>User Name</th>
+                <th>User Type</th>
+                <th>Status</th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(@user.UserName, "PersonalPage", new { id = @user.Id }, null)
+                    </td>
+                    <td>@user.Type</td>
+                    <th>@user.Status</th>
+                   @* <td>@Html.ActionLink("Assign User to Role", "AssignUserRole", "Account", new { @UserId = user.Id }, null)</td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+
+
+</div>

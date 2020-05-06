@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/css/MainPageStyles.css" rel="stylesheet" />
+</head>
+<body style="text-align: right;">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#3c4bff">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/MainPageStyle/img/asset-5.png"
+                     style="float:left;background-color:white;width:70px;height:70px; margin-bottom:5px;margin-top:5px;" />
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav mr-auto" style="float:right;color:white;font-weight:bolder;font-size:xx-large">
+                    
+                    <li>
+                       
+                        <a href="#myModal2" data-target="#myModal2" data-toggle="modal" 
+                           style="color:white;font-weight:bolder;font-size:x-large;margin-top:10px">
+                            هل أنت مفسر؟
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                           style="color:white;font-weight:bolder;font-size:x-large;margin-top:10px">
+                            أرسل حلمك
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://play.google.com/store/apps/details?id=com.fsrhilmk.fsrhilmkapp">
+                                    Googel Play
+                                    <img src="~/Images/google-play.png" style="height:25px;width:25px;float:left;font-size:larger" />
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#myModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
+                                   href="#myModal">
+                                    <img src="~/Images/app-store.png" style="height:25px;width:25px;float:left;font-size:larger" />
+                                    Apple Store
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href=""
+                           style="color:white;font-weight:bolder;font-size:x-large;margin-top:10px">
+                            الصفحة الرئيسية
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="icon-bar">
+        <a href="https://www.facebook.com/mks5661133" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="https://twitter.com/almansoore" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.instagram.com/fsrhilmak/" class="google" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.snapchat.com/add/mks00000" class="snapchat" target="_blank" style="background-color: #FFFC00"><i class="fa fa-snapchat"></i></a>
+        <a href="https://www.youtube.com/channel/UCFfTD_e3repCeodf7loi8FA/featured?view_as=subscriber" target="_blank" class="youtube"><i class="fa fa-youtube"></i></a>
+    </div>
+    <div class="container body-content" style="margin-top:25px;text-align: right;">
+
+        @RenderBody()
+        @*<footer>
+            <p>&copy; @DateTime.Now.Year - فسر حلمك</p>
+        </footer>*@
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p style="font-size:xx-large">Comming Soon</p>
+                    <img src="~/Images/app-store.png" style="height:50px;width:50px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                
+                <div class="modal-body text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <p style="font-size:xx-large">هل تجيد تعبير الرؤى وترغب في المشاركة؟</p>
+                    <a href="https://docs.google.com/forms/d/1UVRlFsGNVTp-DPvVUsF9LDyWJ4jKhh2x2mz5ewcuC_o/viewform?edit_requested=true"
+                       class="btn btn-primary btn-default" 
+                       style="background-color:#0984a8;font-size:x-large" >
+                       تجاوز الاختبار الآن!
+                    </a>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@section Scripts{
+    <script type="text/javascript">
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () { myFunction() };
+
+        // Get the navbar
+        var navbar = document.getElementById("navbar");
+
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
+
+    </script>
+}

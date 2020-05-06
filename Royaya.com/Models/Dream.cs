@@ -65,5 +65,7 @@ namespace Royaya.com.Models
         public string CreatorFireBaseId { get; set; }
         public string InterpreterFireBaseId { get; set; }
 
+        public bool PaidDream { get; set; }
+
     }
 }

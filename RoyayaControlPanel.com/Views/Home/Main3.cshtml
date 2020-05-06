@@ -1,0 +1,344 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
+    ViewBag.Title = "Home Page";
+    int pageNumber = 0;
+}
+<link rel="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+
+    <div  class="counter"  style="font-size:x-large!important">
+        <div class="container" style="margin-top:10px!important;">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="employees">
+                        <p class="counter-count">@ViewBag.numberOfLikes</p>
+                        <p class="employee-p">عدد الإعجابات</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="customer">
+                        <p class="counter-count">@ViewBag.numberOfViews</p>
+                        <p class="customer-p">عدد المشاهدات</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="design">
+                        <p class="counter-count">@ViewBag.numberOfClients</p>
+                        <p class="design-p">العملاء</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="order">
+                        <p class="counter-count">@ViewBag.numberOfInterpreters</p>
+                        <p class="order-p">المفسرون</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="order">
+                        <p class="counter-count">@ViewBag.numberOfVisits</p>
+                        <p class="order-p">عدد الزيارات</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:center!important;">
+                    <div class="order">
+                        <p class="counter-count">652</p>
+                        <p class="order-p">المتواجدون الآن</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row text-center" >
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <p style="float:right">
+                <button class="btn btn-primary btn-default" 
+                        style="background-color:#0984a8;font-size:large"
+                        onclick="roaashow(false);">
+                     الأحلام قيد التفسير&nbsp;@ViewBag.numberOfActiveDreams
+                </button>
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p style="float:left">
+                <button class="btn btn-primary btn-default" 
+                        style="background-color:#0984a8;font-size:large" onclick="roaashowDone(false);">
+                    الأحلام المفسرة &nbsp;@ViewBag.numberOfDoneDreams
+                </button>
+            </p>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="container row" style="margin-top:-10px" id="Dream_Body">
+        <div id="Body">
+
+        </div>
+    </div>
+    
+</body>
+@section Scripts
+{
+    <script src="~/MainPageStyle/js/date.format.js"></script>
+    <script src="~/MainPageStyle/js/fontawesome.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        var pagenumber =1;
+        $('.counter-count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                    duration: 5000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+        });
+        var currentValue = "Done";
+        $(document).ready(function () {
+            pagenumber = 1;
+            roaashowDone(false);
+            pagenumber++;
+
+        });
+
+        function loadMore() {
+            if (currentValue == "Done") {
+                roaashowDone(true);
+
+            }
+
+            else {
+                roaashow(true);
+            }
+            pagenumber++;
+        };
+        function roaashow(loadmore) {
+            currentValue = "Active";
+            if (loadmore == false) {
+                $('#Dream_Body div').remove();
+                pagenumber = 1;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetDreams", "Dreams")' + "?page=" + pagenumber + "&status=Active",
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var dateString = value.CreationDate;
+                            var date = new Date(parseInt(dateString.substr(6)));
+
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>"+
+                            "<a href='Home/Details/"+value.id+"\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>"+
+                            "<div class='title text-right '>"+
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost))+"</p><i class='fas fa- cloud'></i>"+
+                                "<hr style='background-color:white'>" +
+                            "</div>"+
+                            "<div class='card-body'>"+
+                                "<a href='Home/Details/" + value.id + "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>" + value.Description.substring(0, 80)+"</p>"+
+                            "</a></div>"+
+                            "<hr style='background-color:white'>"+
+                            "<div class='d-flex bd-highlight justify-content-between'>"+
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy")+"</div>"+
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews +"<span> مشاهدة </span>"+
+                                "<span>" + value.numberOfLikes +"</span><span> إعجاب </span></div>"+
+                            "</div>"+
+
+                                "</div></a></div>";
+                            var row2='<div class="col-md-12">'+
+'            <div class="panel" style="margin-top:10px">'+
+'                <div class="panel-heading">'+
+'                    <div style="margin-right:15px"> <span>الرؤية رقم '+value.id+'</span>'+
+                                '                    <span style="float:left">   <i class="fa fa-money" style="font-size: x-large"> </i> ' + (value.pathCost > 0 ? " &nbasp; رؤية مدفوعة" : "&nbsp;رؤية مجانية") +'</span>'+
+'                    </div>'+
+                                '                    <div style="margin-right:10px">' + date.format("dd/mm/yyyy")+'</div style="margin-right:10px">'+
+'                </div>'+
+'                <div class="panel-body">'+
+'                    <div class="card-title"> '+
+'                         نص الرؤية'+
+'                        <img src="/Images/dream.png" style="height:30px;width:30px;margin-top:-10px" />'+
+'                    </div>'+
+                                '                    <div class="card-text">' + value.Description+'</div>'+
+'                   <hr />'+
+'                    <div class="card-title">'+
+'                        <span> التفسير'+
+''+
+'                            <img src="/Images/book.png" style="height:30px;width:30px;margin-top:-10px" />'+
+'                        </span>'+
+                                '                        <span style="float:left">المفسر ' + value.interpretatorName+'</span>'+
+'                    </div>'+
+'                    <div class="card-text">'+
+'                        <div>لم يتم تفسير الرؤيا حتى الآن</div>'+
+'                        <div style="float:left"></div>'+
+'                    </div>'+
+'                    '+
+'                </div>'+
+'                <div class="panel-footer" style="height:40px;">'+
+'                   <span style="float:left">     <i class="fa fa-eye">  </i> '+ value.numberOfViews +'</span> '+
+'                   <span style="float:left"><i class="fa fa-heart"> </i> '+value.numberOfLikes+'</span>'+
+'                </div>'+
+'            </div>'+
+'        </div>';
+
+
+                            $('#Dream_Body').append(row2);
+                        });
+
+                    }
+                });
+
+        }
+
+
+        function roaashowDone(loadmore) {
+            currentValue = "Done";
+            if (loadmore == false) {
+                $('#Dream_Body div').remove();
+                @{
+                    pageNumber = 1;
+                };
+            }
+                $.ajax({
+                    type: "GET",
+                    url:'@Url.Action("GetDreams", "Dreams")'+"?page=" + pagenumber + "&status=Done",
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var dateString = value.CreationDate;
+                            var date = new Date(parseInt(dateString.substr(6)));
+                            var dateString2 = value.ExplanationDate;
+                            var date2 = new Date(parseInt(dateString2.substr(6)));
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>" +
+                                "<a href='Home/Details/" + value.id + "\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>" +
+                                "<div class='title text-right '>" +
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost)) + "</p><i class='fas fa- cloud'></i>" +
+                                "<hr style='background-color:white'>" +
+                                "</div>" +
+                                "<div class='card-body'>" +
+                                "<a href='Home/Details/" + value.id + "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>" + value.Description.substring(0, 80) + "</p>" +
+                                "</a></div>" +
+                                "<hr style='background-color:white'>" +
+                                "<div class='d-flex bd-highlight justify-content-between'>" +
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy") + "</div>" +
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews + "<span> مشاهدة </span>" +
+                                "<span>" + value.numberOfLikes + "</span><span> إعجاب </span></div>" +
+                                "</div>" +
+
+                                "</div></a></div>";
+
+                            var row2 = '<div class="col-md-12">' +
+                                '            <div class="panel" style="margin-top:10px">' +
+                                '                <div class="panel-heading">' +
+                                '                    <div style="margin-right:10px"> <span>الرؤية رقم ' + value.id + '</span>' +
+                                '                    <span style="float:left">   <i class="fa fa-money" style="font-size: x-large"> </i>' + (value.pathCost>0?" &nbasp; رؤية مدفوعة":"&nbsp;رؤية مجانية") + '</span>' +
+                                '                    </div>' +
+                                '                    <div style="margin-right:10px">' + date.format("dd/mm/yyyy") + '</div style="margin-right:10px">' +
+                                '                </div>' +
+                                '                <div class="panel-body">' +
+                                '                    <div class="card-title"> ' +
+                                '                         نص الرؤية' +
+                                '                        <img src="/Images/dream.png" style="height:30px;width:30px;margin-top:-10px" />' +
+                                '                    </div>' +
+                                '                    <div class="card-text">' + value.Description+ '</div>' +
+                                '                   <hr />' +
+                                '                    <div class="card-title">' +
+                                '                        <span> التفسير' +
+                                '' +
+                                '                            <img src="/Images/book.png" style="height:30px;width:30px;margin-top:-10px" />' +
+                                '                        </span>' +
+                                '                        <span style="float:left">المفسر ' + value.interpretatorName + '</span>' +
+                                '                    </div>' +
+                                '                    <div class="card-text">' +
+                                '                        <div>' + value.Explanation + '</div>' +
+                                '                        <div style="float:left">' + date2.format("dd/mm/yyyy")  + '</div>' +
+                                '                    </div>' +
+                                '                    ' +
+                                '                </div>' +
+                                '                <div class="panel-footer" style="height:40px;">' +
+                                '                   <span style="float:left">     <i class="fa fa-eye">  </i> ' + value.numberOfViews + '</span> ' +
+                                '                   <span style="float:left"><i class="fa fa-heart"> </i> ' + value.numberOfLikes + '</span>' +
+                                '                </div>' +
+                                '            </div>' +
+                                '        </div>';
+                            $('#Dream_Body').append(row2);
+                        });
+
+                    }
+                });
+
+        }
+
+
+        function search(loadmore) {
+            $('#Dream_Body div').remove();
+            $.ajax({
+                type: "GET",
+                url: 'GetDreams?searchString=' + loadmore,
+                dataType: "json",
+                data: { },
+                    success: function (data) {
+                        $.each(data, function (index, value) {
+                            var dateString = value.CreationDate;
+                            var date = new Date(parseInt(dateString.substr(6)));
+                            var row = "<div id='Body' class='col-sm-6 col-lg-4'>" +
+                                "<a href='Home/Details/" + value.id + "\'><div class='card rounded-card ' style='width: 489.68px;height: 272.49px; background-color: #3C4BFF; color: white'>" +
+                                "<div class='title text-right '>" +
+                                "<p class='pr-4 pt-2' style='font-family:Droid Arabic Kufi;font-size:18px;color:white;'>" + (value.pathCost == 0 ? "رؤية مجانية " : ("رؤية مدفوعة والتكلفة " + value.pathCost)) + "</p><i class='fas fa- cloud'></i>" +
+                                "<hr style='background-color:white'>" +
+                                "</div>" +
+                                "<div class='card-body'>" +
+                                "<a href='Home/Details/" + value.id + "\'style='color: #3C4BFF'><p class='card-text text-right' style='font-family:Droid Arabic Kufi;font-size:18px;color:white'>" + value.Description.substring(0, 80) + "</p>" +
+                                "</a></div>" +
+                                "<hr style='background-color:white'>" +
+                                "<div class='d-flex bd-highlight justify-content-between'>" +
+                                "<div class='p-2 bd-highlight' style='font-family:Droid Arabic Kufi;font-size:17px;color:white !important;' >" + date.format("dd/mm/yyyy") + "</div>" +
+                                "<div class='p-2 flex-shrink-1 bd-highlight'><span class='pl-1'>" + value.numberOfViews + "<span> مشاهدة </span>" +
+                                "<span>" + value.numberOfLikes + "</span><span> إعجاب </span></div>" +
+                                "</div>" +
+
+                                "</div></a></div>";
+                            $('#Dream_Body').append(row);
+                        });
+
+                    }
+                });
+
+        }
+
+
+        //var btnDelete = document.getElementById('clear');
+        //var inputFocus = document.getElementById('inputFocus');
+        //btnDelete.addEventListener('click', function (e) {
+        //    e.preventDefault();
+        //    inputFocus.value = ''
+        //})
+        //document.addEventListener('click', function (e) {
+        //    if (document.getElementById('first').contains(e.target)) {
+        //        inputFocus.classList.add('isFocus');
+        //    }
+        //    else {
+        //        // Clicked outside the box
+        //        inputFocus.classList.remove('isFocus')
+        //    }
+        //});
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop()  == $(document).height() - $(window).height()) {
+                // ajax call get data from server and append to the div
+                loadMore();
+            }
+        })
+
+
+    </script>
+}

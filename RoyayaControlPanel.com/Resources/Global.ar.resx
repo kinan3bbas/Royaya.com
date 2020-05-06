@@ -213,4 +213,10 @@
   <data name="Message" xml:space="preserve">
     <value>الرسالة</value>
   </data>
+  <data name="DeletedUsers" xml:space="preserve">
+    <value>المستخدمون المحذوفون</value>
+  </data>
+  <data name="OnlineUsers" xml:space="preserve">
+    <value>المستخدمون النشطون الآن</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 using Royaya.com.Models;
 using RoyayaControlPanel.com.Models;
 using RoyayaControlPanel.com.ViewModels;
+using RoyayaControlPanel.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,6 +17,8 @@ namespace RoyayaControlPanel.com.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private WebSiteStatisticsRepository webSiteStatisticsRepository = new WebSiteStatisticsRepository();
         public ActionResult Index()
         {
             return View();
@@ -30,6 +33,39 @@ namespace RoyayaControlPanel.com.Controllers
         [AllowAnonymous]
         public ActionResult Main()
         {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Main2()
+        {
+            ViewBag.numberOfClients = db.Users.Where(a => a.Type.Equals("Client")).Count();
+            ViewBag.numberOfInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter") && a.verifiedInterpreter && !a.Status.Equals("Deleted")).Count();
+            ViewBag.numberOfActiveUsers = db.Users.Where(a => a.Status.Equals("Active")).Count();
+            ViewBag.numberOfDoneDreams = db.Dreams.Where(a => a.Status.Equals("Done")).Count();
+            ViewBag.numberOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")).Count();
+            ViewBag.numberOfVisits = db.WebSiteStatistics.Sum(a => a.numberOfVisits);
+            ViewBag.numberOfViews = db.Dreams.Sum(a => a.numberOfViews);
+            ViewBag.numberOfLikes = db.Dreams.Sum(a => a.numberOfLikes);
+            WebSiteStatistics temp = new WebSiteStatistics();
+            temp.numberOfVisits = 1;
+            webSiteStatisticsRepository.Create(temp);
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Main3()
+        {
+            ViewBag.numberOfClients = db.Users.Where(a => a.Type.Equals("Client")).Count();
+            ViewBag.numberOfInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter") && a.verifiedInterpreter && !a.Status.Equals("Deleted")).Count();
+            ViewBag.numberOfActiveUsers = db.Users.Where(a => a.Status.Equals("Active")).Count();
+            ViewBag.numberOfDoneDreams = db.Dreams.Where(a => a.Status.Equals("Done")).Count();
+            ViewBag.numberOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")).Count();
+            ViewBag.numberOfVisits = db.WebSiteStatistics.Sum(a => a.numberOfVisits);
+            ViewBag.numberOfViews = db.Dreams.Sum(a => a.numberOfViews);
+            ViewBag.numberOfLikes = db.Dreams.Sum(a => a.numberOfLikes);
+            WebSiteStatistics temp = new WebSiteStatistics();
+            temp.numberOfVisits = 1;
+            webSiteStatisticsRepository.Create(temp);
             return View();
         }
         [AllowAnonymous]
@@ -68,6 +104,53 @@ namespace RoyayaControlPanel.com.Controllers
             return View(dream);
         }
 
+        public ActionResult Details2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Dream dream = db.Dreams.Find(id);
+            if (dream == null)
+            {
+                return HttpNotFound();
+            }
+            
+            
+            dream.numberOfViews++;
+            db.Entry(dream).State = EntityState.Modified;
+            db.SaveChanges();
+
+            ApplicationUser creator = db.Users.Where(a => a.Id.Equals(dream.Creator)).FirstOrDefault();
+            ApplicationUser Interpreter = db.Users.Where(a => a.Id.Equals(dream.interpretatorId)).FirstOrDefault();
+            InterprationPath path = db.InterprationPaths.Where(a => a.id.Equals(dream.pathId)).FirstOrDefault();
+            if (path.Cost == 0)
+                ViewBag.Type = "رؤية مجانية";
+            else
+                ViewBag.Type = "رؤية مدفوعة";
+
+            ViewBag.InterpreterName = Interpreter != null ? Interpreter.Name : "";
+            ViewBag.CreatorName = creator != null ? creator.Name : "";
+            DreamViewModel model = new DreamViewModel();
+            model.CreationDate = dream.CreationDate;
+            model.CreatorId = creator != null ? creator.Id : "";
+            model.CreatorName = creator != null ? creator.Name : "";
+            model.Description = dream.Description;
+            model.Explanation = dream.Explanation;
+            model.ExplanationDate = dream.ExplanationDate;
+            model.id = dream.id;
+            model.InterpretationStartDate = dream.InterpretationStartDate;
+            model.interpretatorName = Interpreter != null ? Interpreter.Name : "";
+            model.interpretatorId = Interpreter != null ? Interpreter.Id : "";
+            model.numberOfLikes = dream.numberOfLikes;
+            model.numberOfViews = dream.numberOfViews;
+            model.pathCost = path.Cost;
+            model.Status = dream.Status;
+            model.UserRating = dream.UserRating;
+            model.RatingDate = dream.RatingDate;
+
+            return View(model);
+        }
 
         [AllowAnonymous]
         public JsonResult GetDreams(int? page, string searchString, string status)

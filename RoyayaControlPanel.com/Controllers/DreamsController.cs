@@ -59,20 +59,23 @@ namespace RoyayaControlPanel.com.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult GetDreams(int? page, string searchString, string status)
+        [HttpGet]
+        public JsonResult GetDreams(string searchString,string status, int page)
         {
             var users = db.Users;
             var dreams = db.Dreams.Include(d => d.interpretator).Include(d => d.path).OrderByDescending(r => r.CreationDate);
             int pageSize = 10;
-            int pageNumber = (page ?? 1);
+            int pageNumber = (page == 0 || page == null) ? 1: page;
             if (searchString != null && !searchString.Equals(""))
                 dreams = dreams.Where(a => a.Description.Contains(searchString)).OrderByDescending(r => r.CreationDate);
             if (status != null && !status.Equals(""))
                 dreams = dreams.Where(a => a.Status.Equals(status)).OrderByDescending(r => r.CreationDate);
-            //dreams = dreams.Skip((pageNumber-1)*pageSize).Take(pageSize).ToList();
+            dreams = dreams.Skip((pageNumber-1)*pageSize).Take(pageSize).OrderByDescending(r => r.CreationDate); ;
             List<DreamViewModel> dreamsView = new List<DreamViewModel>();
             foreach (var item in dreams)
             {
+                item.numberOfViews++;
+                db.Entry(item).State = EntityState.Modified;
                 DreamViewModel temp = new DreamViewModel
                 {
                     id = item.id,
@@ -98,7 +101,9 @@ namespace RoyayaControlPanel.com.Controllers
                 };
                 dreamsView.Add(temp);
             }
-            return Json(dreamsView.ToPagedList(pageNumber, pageSize),JsonRequestBehavior.AllowGet);
+            db.SaveChanges();
+            //return Json(dreamsView.ToPagedList(pageNumber, pageSize),JsonRequestBehavior.AllowGet);
+            return Json(dreamsView, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]

@@ -39,7 +39,7 @@ namespace Royaya.com.Controllers
         {
             
             
-            return db.Dreams.OrderByDescending(a=>a.CreationDate);
+            return db.Dreams.OrderByDescending(a => a.path.Cost).ThenByDescending(a=>a.CreationDate);
 
         }
 
@@ -113,14 +113,35 @@ namespace Royaya.com.Controllers
             }
             if (dream.Description == null || dream.Description.Equals(""))
                 return BadRequest("Description can't be empty!");
+            if (dream.pathId == null) {
+                return BadRequest("Please add a path to the dream");
+            }
+            InterprationPath path = db.InterprationPaths.Find(dream.pathId);
+            if (path == null)
+            {
+                return BadRequest("No matching path");
+            }
+            dream.path = path;
             dream.Status ="Active";
             dream.CreationDate = DateTime.Now;
             dream.LastModificationDate = DateTime.Now;
             dream.Creator = core.getCurrentUser().Id;
             dream.Modifier = core.getCurrentUser().Id;
-            dream.path = db.InterprationPaths.Where(a => a.Cost == 0).FirstOrDefault();
+            //dream.path = db.InterprationPaths.Where(a => a.Cost == 0).FirstOrDefault();
             dream.InterpretationStartDate = DateTime.Now;
             dream.CreatorFireBaseId = core.getCurrentUser().FireBaseId;
+            if (!dream.path.Cost.Equals(0.0))
+                dream.PaidDream = true;
+            if (dream.interpretatorId != null)
+            {
+                ApplicationUser interpatator = db.Users.Where(a => a.Id.Equals(dream.interpretatorId)).FirstOrDefault();
+                if (interpatator == null)
+                {
+                    return BadRequest("Not matching interpretator!");
+                }
+                dream.interpretator = interpatator;
+                dream.InterpreterFireBaseId = interpatator.FireBaseId;
+            }
             db.Dreams.Add(dream);
             await db.SaveChangesAsync();
 
@@ -190,6 +211,8 @@ namespace Royaya.com.Controllers
                     }
                     dream.path = path;
                     dream.InterpretationStartDate = DateTime.Now;
+                    if (!path.Cost.Equals(0.0))
+                        dream.PaidDream = true;
                 }
                 if (interpretatorUpdated)
                 {

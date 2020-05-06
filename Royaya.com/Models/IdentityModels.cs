@@ -18,7 +18,7 @@ namespace Royaya.com.Models
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Last Modification Date")]
@@ -69,6 +69,9 @@ namespace Royaya.com.Models
         public string SecurityQuestion { get; set; }
 
         public string SecurityQuestionAnswer { get; set; }
+
+
+        public DateTime? balancezerodate { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -121,6 +124,8 @@ namespace Royaya.com.Models
         public DbSet<UsersDeviceTokens> UsersDeviceTokens { get; set; }
 
         public DbSet<InterpreterRatio> InterpreterRatios { get; set; }
+        public DbSet<PublicInterpreterRatio> PublicInterpreterRatios { get; set; }
+        public DbSet<WebSiteStatistics> WebSiteStatistics { get; set; }
         //public System.Data.Entity.DbSet<Royaya.com.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

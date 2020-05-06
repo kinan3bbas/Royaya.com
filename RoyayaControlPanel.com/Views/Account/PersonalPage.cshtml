@@ -25,24 +25,30 @@
                 <li id="SalaryInfo" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-size: larger;color:black !important;font-weight:600;">
                     @Html.ActionLink(Resources.Global.Dreams, "InterpreterDreams", new { id = Model.Id })
                 </li>
-                <li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
+                @*<li id="EmployeeDocs" class="nav-item nav-link active" style="border:solid;border-color:#071689; font-size: larger;font-weight:600;">
                     @Html.ActionLink(Resources.Global.Payments, "EmployeeDocs", "Support", new { Employeeid = Id }, null)
-                </li>
+                </li>*@
             @if (Model.Type == "Interpreter")
             {
                 <li id="EmployeeRating"  class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
                     @Html.ActionLink(Resources.Global.Ratings, "InterpreterRatings", new { id = Model.Id }, null)
                 </li>
-                <li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
+                @*<li id="EmployeeRating" class="nav-item nav-link active" style="border:solid;border-color:#071689;font-weight:600; font-size: larger">
                     @Html.ActionLink(Resources.Global.BalanceRatio, "InterpreterRatio", new { id = Model.Id }, null)
-                </li>
+                </li>*@
             }
             </ul>
         </div>
         
         <div class="col-md-9" id="PersonalInfoDV">
 
-          
+            @if (Model.Status == "Deleted")
+            {
+
+                <div class="alert alert-danger" role="alert">
+                    This user was deleted, to change his status contact the developer
+                </div>
+            }
 
             <table class="table table-responsive" style="margin-top:3%">
                 <tr>
@@ -123,7 +129,7 @@
                     <td>
                         @Html.DisplayFor(model => model.MartialStatus)
                     </td>
-                   
+
                 </tr>
                 <tr>
                     <th>
@@ -133,38 +139,51 @@
                         @Html.DisplayFor(model => model.Type)
                     </td>
                 </tr>
-@if (Model.Type == "Interpreter")
-{
-                <tr>
-                    <th>
-                        @Resources.Register.VerifiedInterpreter
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.verifiedInterpreter)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                       @Resources.Register.PersonalDescription
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.PersonalDescription)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        @Resources.Register.FireBasieId
-                    </th>
-                    <td>
-                        @Html.DisplayFor(model => model.FireBaseId)
-                    </td>
-                </tr>
+                @if (Model.Type == "Interpreter")
+                {
+                    <tr>
+                        <th>
+                            @Resources.Register.VerifiedInterpreter
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.verifiedInterpreter)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Resources.Register.PersonalDescription
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.PersonalDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Resources.Register.FireBasieId
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.FireBaseId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            @Resources.Register.JoiningDate
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.CreationDate)
+                        </td>
+                    </tr>
 
-}
+                }
             </table>
-            
-            </div>
-        
+            @if (Model.Status != "Deleted")
+            {
+                <button type="button" class="btn btn-info" style="float:left;font-size:x-small" onclick="resetbalance()">Reset balance</button>
+                <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+                <button type="button" class="btn btn-danger" style="float:left;font-size:x-small" onclick="deleteUser()">Delete User</button>
+
+            }
+        </div>
         </div>
     <div class="row ">
             <div class="col-md-3"></div>
@@ -185,25 +204,29 @@
                                 <div class="col-md-6 col-sm-6"><span> @Resources.Register.NumberOfDreamsInOneDay: </span> <span id="Day"> value</span></div>
                             </div>
                             <div class="row" style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.Speed </span> <span id="Speed"> </span></div>
-                                <div class="col-md-6 col-sm-6"><span> @Resources.Register.Money </span> <span id="Balance"> </span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.Speed: </span> <span id="Speed"> </span></div>
+                                <div class="col-md-6 col-sm-6"><span> @Resources.Register.Money: </span> <span id="Balance"> </span></div>
                             </div>
                             <div class="row" style="font-size:large">
-                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.AvgRating </span> <span id="Rating"> </span></div>
+                                <div class="col-md-6 col-sm-6 "><span> @Resources.Register.AvgRating: </span> <span id="Rating"> </span></div>
                             </div>
 
                         </p>
                         <p></p>
                     </div>
                 }
-                <div class="row">
-                    <div class="col-md-5">
-                        <input type="button"
-                               class="btn btn-primary" value="@Resources.Dream.Edit"
-                               onclick="location.href='@Url.Action("EditInterpreter", "Account", new { id = Model.Id })'" />
+                @if (Model.Status != "Deleted")
+                {
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="button"
+                                   class="btn btn-primary" value="@Resources.Dream.Edit"
+                                   onclick="location.href='@Url.Action("EditInterpreter", "Account", new { id = Model.Id })'" />
 
+                        </div>
                     </div>
-                </div>
+                }
+                
 
             </div>
         </div>
@@ -259,7 +282,7 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function () {
-                        
+
                         alert(1);
                     },
                     error: function () {
@@ -269,5 +292,55 @@
                 return false;
             });
         });
+
+        function resetbalance() {
+
+        $.ajax({
+            type: 'GET',
+            @*url: '@Url.Action("getInterpreterInfo", "Account")',*@
+            url: "/Account/resetBalance?phoneNumber="+String(@Model.PhoneNumber),
+            dataType: 'json',
+            data: { },
+            success: function (data) {
+
+                alert("balance was reseted");
+                WorkExperienceLoadData();
+
+
+            },
+            error: function (ex) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+            alert("StackTrace: " + r.StackTrace);
+            alert("ExceptionType: " + r.ExceptionType);
+            }
+            });
+            return false;
+        }
+
+        function deleteUser() {
+
+        $.ajax({
+            type: 'GET',
+            @*url: '@Url.Action("getInterpreterInfo", "Account")',*@
+            url: "/Account/deleteUser?phoneNumber="+String(@Model.PhoneNumber),
+            dataType: 'json',
+            data: { },
+            success: function (data) {
+
+                alert("User was deleted and won't appear anymore in userlist, close the current page");
+                location.reload();
+
+
+            },
+            error: function (ex) {
+            var r = jQuery.parseJSON(response.responseText);
+            alert("Message: " + r.Message);
+            alert("StackTrace: " + r.StackTrace);
+            alert("ExceptionType: " + r.ExceptionType);
+            }
+            });
+            return false;
+        }
     </script>
 }

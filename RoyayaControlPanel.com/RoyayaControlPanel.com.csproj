@@ -62,6 +62,9 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="NodaTime, Version=2.4.8.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.2.4.8\lib\net45\NodaTime.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -71,11 +74,18 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,6 +93,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -230,11 +246,16 @@
     <Compile Include="Controllers\InterprationPathsController.cs" />
     <Compile Include="Controllers\InterpreterRatiosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PublicInterpreterRatiosController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Extras\BasicModel.cs" />
     <Compile Include="Extras\Message.cs" />
     <Compile Include="Extras\Notification.cs" />
     <Compile Include="Extras\PushNotificationLogic.cs" />
+    <Compile Include="Models\DreamsPindingModel.cs" />
+    <Compile Include="Models\PublicInterpreterRatio.cs" />
+    <Compile Include="Models\WebSiteStatistics.cs" />
+    <Compile Include="Repository\WebSiteStatisticsRepository.cs" />
     <Compile Include="Resources\Dream.ar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -610,6 +631,8 @@
     <Content Include="css\DropDownAdminPage.css" />
     <Content Include="css\fontawesome.css" />
     <Content Include="css\fontawesome.min.css" />
+    <Content Include="css\MainPageStyles2.css" />
+    <Content Include="css\MainPageStyles.css" />
     <Content Include="css\print.min.css" />
     <Content Include="css\regular.css" />
     <Content Include="css\regular.min.css" />
@@ -626,7 +649,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\app-store.png" />
+    <Content Include="Images\book.png" />
+    <Content Include="Images\dream.png" />
+    <Content Include="Images\FB.png" />
+    <Content Include="Images\google-play.png" />
+    <Content Include="Images\Logo.jpg" />
     <Content Include="Images\Logo.png" />
+    <Content Include="Images\man-avatar-icon-flat-vector-19152370.jpg" />
+    <Content Include="Images\mm.PNG" />
+    <Content Include="Images\reading.png" />
+    <Content Include="Images\Snap.png" />
     <Content Include="js\all.js" />
     <Content Include="js\all.min.js" />
     <Content Include="js\brands.js" />
@@ -635,6 +668,7 @@
     <Content Include="js\conflict-detection.min.js" />
     <Content Include="js\fontawesome.js" />
     <Content Include="js\fontawesome.min.js" />
+    <Content Include="js\MainLayout.js" />
     <Content Include="js\regular.js" />
     <Content Include="js\regular.min.js" />
     <Content Include="js\script.js" />
@@ -670,7 +704,9 @@
     <Content Include="MainPageStyle\img\Group 1698.svg" />
     <Content Include="MainPageStyle\img\Group 1699.svg" />
     <Content Include="MainPageStyle\img\Group1663.png" />
-    <Content Include="MainPageStyle\img\home.svg" />
+    <Content Include="MainPageStyle\img\home.svg">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="MainPageStyle\img\others.svg" />
     <Content Include="MainPageStyle\js\all.js" />
     <Content Include="MainPageStyle\js\all.min.js" />
@@ -758,7 +794,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -843,6 +881,16 @@
     <Content Include="Views\Shared\_empty.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Account\DeletedUsers.cshtml" />
+    <Content Include="Views\PublicInterpreterRatios\Create.cshtml" />
+    <Content Include="Views\PublicInterpreterRatios\Delete.cshtml" />
+    <Content Include="Views\PublicInterpreterRatios\Details.cshtml" />
+    <Content Include="Views\PublicInterpreterRatios\Edit.cshtml" />
+    <Content Include="Views\PublicInterpreterRatios\Index.cshtml" />
+    <Content Include="Views\Home\Main2.cshtml" />
+    <Content Include="Views\Home\Details2.cshtml" />
+    <Content Include="Views\Shared\_Layout_main.cshtml" />
+    <Content Include="Views\Home\Main3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

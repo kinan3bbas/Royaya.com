@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RoyayaControlPanel.com.Models.PublicInterpreterRatio>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PLayout.cshtml";
+}
+
+<h2>@Resources.Global.RatioForEachPath</h2>
+
+
+<div style="float:right;" class="col-md-12">
+    <button style="float:right;" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "PublicInterpreterRatios")'">
+        @Resources.Global.AddNewRatio
+    </button>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.path.Cost)
+        </th>
+        <th>
+            @Resources.Global.Ratio
+        </th>
+        <th>
+            @Resources.Dream.CreationDate
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModificationDate)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.path.Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ratio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModificationDate)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

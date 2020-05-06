@@ -15,7 +15,7 @@ namespace RoyayaControlPanel.com.Models
     {
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Last Modification Date")]
@@ -67,6 +67,8 @@ namespace RoyayaControlPanel.com.Models
         [Display(Name = "Verified Interpreter")]
         public bool verifiedInterpreter { get; set; }
 
+        public DateTime? balancezerodate { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -103,6 +105,8 @@ namespace RoyayaControlPanel.com.Models
         public DbSet<UsersDeviceTokens> UsersDeviceTokens { get; set; }
 
         public DbSet<InterpreterRatio> InterpreterRatios { get; set; }
+        public DbSet<PublicInterpreterRatio> PublicInterpreterRatios { get; set; }
+        public DbSet<WebSiteStatistics> WebSiteStatistics { get; set; }
 
         //public System.Data.Entity.DbSet<RoyayaControlPanel.com.Models.ApplicationUser> ApplicationUsers { get; set; }
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }

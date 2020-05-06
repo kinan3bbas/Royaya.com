@@ -10,7 +10,7 @@ namespace Royaya.com.ViewModels
         public string id { get; set; }
         public string Email { get; set; }
 
-        public int numberOfDreamsByDay { get; set; }
+        public double numberOfDreamsByDay { get; set; }
 
         public string pictureId { get; set; }
 

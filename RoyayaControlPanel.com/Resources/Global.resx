@@ -213,4 +213,10 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="DeletedUsers" xml:space="preserve">
+    <value>Deleted Users</value>
+  </data>
+  <data name="OnlineUsers" xml:space="preserve">
+    <value>Online Users</value>
+  </data>
 </root>

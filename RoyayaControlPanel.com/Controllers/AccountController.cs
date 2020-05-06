@@ -17,6 +17,7 @@ using Royaya.com.Models;
 using System.Net;
 using System.Net.Http;
 using RoyayaControlPanel.com.ViewModels;
+using NodaTime;
 
 namespace RoyayaControlPanel.com.Controllers
 {
@@ -434,7 +435,15 @@ namespace RoyayaControlPanel.com.Controllers
         public ActionResult UsersList()
         {
             fillUserData();
-            var users = db.Users.ToList();
+            var users = db.Users.Where(a=>!a.Status.Equals("Deleted")).ToList();
+            return View(users);
+        }
+
+        [HttpGet]
+        public ActionResult DeletedUsers()
+        {
+            fillUserData();
+            var users = db.Users.Where(a => a.Status.Equals("Deleted")).ToList();
             return View(users);
         }
 
@@ -442,7 +451,7 @@ namespace RoyayaControlPanel.com.Controllers
         public ActionResult Interpreters()
         {
             fillUserData();
-            var users = db.Users.Where(a => a.Type.Equals("Interpreter")).ToList();
+            var users = db.Users.Where(a => a.Type.Equals("Interpreter")&&!a.Status.Equals("Deleted")).ToList();
             return View(users);
         }
 
@@ -468,7 +477,6 @@ namespace RoyayaControlPanel.com.Controllers
             temp.FireBaseId = user.FireBaseId;
             temp.VerifiedInterpreter = user.verifiedInterpreter;
             temp.Type = user.Type;
-
             temp.numbOfDreamsInOneDay = user.numbOfDreamsInOneDay;
             return View(temp);
         }
@@ -504,7 +512,7 @@ namespace RoyayaControlPanel.com.Controllers
                 //user.numbOfDreamsInOneDay = tempUser.numbOfDreamsInOneDay;
                 user.Age = tempUser.Age;
                 user.Type = tempUser.Type;
-                
+                user.numbOfDreamsInOneDay = tempUser.numbOfDreamsInOneDay;
                 user.PersonalDescription = tempUser.PersonalDescription;
                 user.CreationDate = DateTime.Now;
                 user.LastModificationDate = DateTime.Now;
@@ -631,17 +639,28 @@ namespace RoyayaControlPanel.com.Controllers
                 temp.Name = user.Name;
                 temp.numberOfAllDreams = user.Dreams.Count;
                 temp.Rating = temp.numberOfAllDreams > 0 ? user.Dreams.Where(b => b.Status.Equals("Done")).Average(a => a.UserRating) : 0;
-                temp.numberOfDreamsByDay = user.numbOfDreamsInOneDay;
+                
                 temp.numberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count;
                 temp.numberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count;
-                temp.speed = temp.numberOfActiveDreams > 0 ? temp.numberOfDoneDreams / temp.numberOfActiveDreams : 0;
+                temp.speed = interpreterSpeed(user, temp.numberOfDoneDreams);
+                temp.numberOfDreamsByDay = temp.speed;
                 finalResult.Add(temp);
 
 
             }
             return Json(finalResult, JsonRequestBehavior.AllowGet);
         }
+        public double interpreterSpeed(ApplicationUser user, int totalDreams)
+        {
+            //TimeSpan difference = DateTime.Now - user.CreationDate;
+            TimeSpan span1 = new TimeSpan(DateTime.Now.Ticks);
+            //TimeSpan span2 = new TimeSpan(user.CreationDate.Ticks);
+            LocalDateTime d1 = new LocalDateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            LocalDateTime d2 = new LocalDateTime(user.CreationDate.Year, user.CreationDate.Month, user.CreationDate.Day,user.CreationDate.Hour, user.CreationDate.Minute, user.CreationDate.Second);
+            long days = Period.Between(d2, d1).Days;
 
+            return days == 0 ? 0 : totalDreams / days;
+        }
         // GET api/Account/getAllStatistics
         [Route("getAllStatistics")]
         [HttpGet]
@@ -664,9 +683,10 @@ namespace RoyayaControlPanel.com.Controllers
             result.allActiveDreams = dreams.Where(a => a.Status.Equals("Active")).Count();
             result.allDoneDreams = dreams.Where(a => a.Status.Equals("Done")).Count();
             result.allUsers = users.Count();
-            result.allClients = db.Users.Where(a => a.Type.Equals("Client")).Count();
-            result.allInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter")).Count();
-            result.allAdmins = db.Users.Where(a => a.Type.Equals("Admin")).Count();
+            result.allClients = db.Users.Where(a => a.Type.Equals("Client")&& !a.Status.Equals("Deleted")).Count();
+            result.allInterpreters = db.Users.Where(a => a.Type.Equals("Interpreter")&& !a.Status.Equals("Deleted")).Count();
+            result.allAdmins = db.Users.Where(a => a.Type.Equals("Admin")&& !a.Status.Equals("Deleted")).Count();
+            result.onlineUsers= db.Users.Where(a=>a.Status.Equals("Active")).Count();
             //result.allClients = users.Where(a => a.Type.Equals("Client")).Count()>0?0: users.Where(a => a.Type.Equals("Client")).Count();
             //result.allInterpreters = users.Where(a => a.Type.Equals("Interpreter")).Count()>0? users.Where(a => a.Type.Equals("Interpreter")).Count():0;
             //result.allAdmins = users.Where(a => a.Type.Equals("Admin")).Count()>0?users.Where(a => a.Type.Equals("Admin")).Count():0;
@@ -709,7 +729,7 @@ namespace RoyayaControlPanel.com.Controllers
         public async Task<ActionResult> InterpreterRatings(string id)
         {
             ApplicationUser user = db.Users.Find(id);
-            var dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)).OrderByDescending(r => r.CreationDate);
+            var dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)&&a.RatingDate!=null).OrderByDescending(r => r.CreationDate);
             ViewBag.userId = id;
             ViewBag.Type = user.Type;
             return View(dreams.ToList());
@@ -776,6 +796,7 @@ namespace RoyayaControlPanel.com.Controllers
         }
         public JsonResult getInterpreterInfo(string phoneNumber)
         {
+            phoneNumber = "+" + phoneNumber;
             ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(phoneNumber)).FirstOrDefault();
             if (user == null) {
                 var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -789,23 +810,27 @@ namespace RoyayaControlPanel.com.Controllers
             List<InterpreterViewModel> finalResult = new List<InterpreterViewModel>();
             string userId = user.Id;
             List<Dream> dreams = db.Dreams.Where(a=>a.interpretatorId.Equals(userId)).ToList();
-            List<InterpreterRatio> ratios = db.InterpreterRatios.Where(a => a.interpretatorId.Equals(userId)).ToList();
+            //List<InterpreterRatio> ratios = db.InterpreterRatios.Where(a => a.interpretatorId.Equals(userId)).ToList();
+            List<PublicInterpreterRatio> ratios = db.PublicInterpreterRatios.ToList();
             List<InterprationPath> paths = db.InterprationPaths.ToList();
             InterpreterViewModel temp = new InterpreterViewModel();
+            long donedreamscount = dreams.Where(b => b.Status.Equals("Done")).Count();
             temp.id = user.Id;
             temp.Email = user.Email;
             temp.pictureId = user.PictureId;
             temp.Name = user.Name;
             temp.numberOfAllDreams = dreams.Count()>0? dreams.Count():0;
-            temp.Rating = temp.numberOfAllDreams > 0 ? Math.Round(dreams.Where(b => b.Status.Equals("Done")).Average(a => a.UserRating),2) : 0;
-            temp.numberOfDreamsByDay = user.numbOfDreamsInOneDay;
+            temp.Rating = donedreamscount > 0 ? Math.Round(dreams.Where(b => b.Status.Equals("Done")).Average(a => a.UserRating),2) : 0;
+            
             temp.numberOfActiveDreams = dreams.Where(a => a.Status.Equals("Active")).Count()>0? dreams.Where(a => a.Status.Equals("Active")).ToList().Count():0;
             temp.numberOfDoneDreams = dreams.Where(a => a.Status.Equals("Done")).Count()>0? dreams.Where(a => a.Status.Equals("Done")).ToList().Count():0;
-            temp.speed = temp.numberOfActiveDreams > 0 ? temp.numberOfDoneDreams / temp.numberOfActiveDreams : 0;
+            temp.speed = interpreterSpeed(user, temp.numberOfDoneDreams);
+            temp.numberOfDreamsByDay = temp.speed;
             double balance = 0.0;
             foreach (var item in ratios)
             {
-                List<Dream> tempdream = dreams.Where(a => a.pathId.Equals(item.pathId)&&a.Status.Equals("Done")).ToList();
+                List<Dream> tempdream = dreams.Where(a => a.pathId.Equals(item.pathId)&&a.Status.Equals("Done") &&
+                        a.CreationDate.CompareTo(user.balancezerodate) >= 0).ToList();
                 double cost = paths.Where(a => a.id.Equals(item.pathId)).FirstOrDefault().Cost;
                 if (tempdream != null)
                     balance += tempdream.Count * cost * (item.ratio/100);
@@ -817,6 +842,53 @@ namespace RoyayaControlPanel.com.Controllers
 
             return  Json(temp, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult resetBalance(string phoneNumber)
+        {
+            phoneNumber = "+" + phoneNumber;
+            ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(phoneNumber)).FirstOrDefault();
+            if (user == null)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("User Can't be found!"),
+                    ReasonPhrase = "User Canot be found!" + phoneNumber
+                };
+                return Json(resp, JsonRequestBehavior.AllowGet);
+            }
+
+            user.balancezerodate = DateTime.Now;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChangesAsync();
+
+            return Json("200", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult deleteUser(string phoneNumber)
+        {
+            phoneNumber = "+" + phoneNumber;
+            ApplicationUser user = db.Users.Where(a => a.PhoneNumber.Equals(phoneNumber)).FirstOrDefault();
+            if (user == null)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("User Can't be found!"),
+                    ReasonPhrase = "User Canot be found!" + phoneNumber
+                };
+                return Json(resp, JsonRequestBehavior.AllowGet);
+            }
+
+            user.Status = "Deleted";
+            user.PasswordHash = UserManager.PasswordHasher.HashPassword("You will never know me");
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChangesAsync();
+            
+
+            return Json("200", JsonRequestBehavior.AllowGet);
+        }
+
+
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
