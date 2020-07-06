@@ -69,6 +69,7 @@ namespace Royaya.com.Models
         public double balance { get; set; }
 
         public double rating { get; set; }
+        public double speed { get; set; }
     }
 
     public class UserLoginInfoViewModel

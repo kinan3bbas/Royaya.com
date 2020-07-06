@@ -269,6 +269,7 @@
     <Compile Include="Controllers\UsersDeviceTokensController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Extras\BasicModel.cs" />
+    <Compile Include="Extras\DreamSwitchingLibrary.cs" />
     <Compile Include="Extras\Message.cs" />
     <Compile Include="Extras\Notification.cs" />
     <Compile Include="Extras\PushNotificationLogic.cs" />
@@ -464,10 +465,23 @@
     <Compile Include="Migrations\202005061905421_webSiteStatisics.Designer.cs">
       <DependentUpon>202005061905421_webSiteStatisics.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005260856317_replacement.cs" />
+    <Compile Include="Migrations\202005260856317_replacement.Designer.cs">
+      <DependentUpon>202005260856317_replacement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005261423579_replacement-fix.cs" />
+    <Compile Include="Migrations\202005261423579_replacement-fix.Designer.cs">
+      <DependentUpon>202005261423579_replacement-fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005261428450_replacement-fix2.cs" />
+    <Compile Include="Migrations\202005261428450_replacement-fix2.Designer.cs">
+      <DependentUpon>202005261428450_replacement-fix2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\Replacement.cs" />
     <Compile Include="Models\WebSiteStatistics.cs" />
     <Compile Include="Models\ContactUs.cs" />
     <Compile Include="Models\Dream.cs" />
@@ -525,6 +539,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FinalPublish.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Testing.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -710,6 +725,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005061905421_webSiteStatisics.resx">
       <DependentUpon>202005061905421_webSiteStatisics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005260856317_replacement.resx">
+      <DependentUpon>202005260856317_replacement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005261423579_replacement-fix.resx">
+      <DependentUpon>202005261423579_replacement-fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005261428450_replacement-fix2.resx">
+      <DependentUpon>202005261428450_replacement-fix2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

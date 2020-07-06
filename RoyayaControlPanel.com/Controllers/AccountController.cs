@@ -719,7 +719,7 @@ namespace RoyayaControlPanel.com.Controllers
             ApplicationUser user = db.Users.Find(id);
             List<Dream> dreams = new List<Dream>();
             if (user.Type.Equals("Interpreter"))
-                dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)).Include(d => d.path).OrderByDescending(r => r.CreationDate).ToList();
+                dreams = db.Dreams.Where(a => a.interpretatorId.Equals(id)).Include(d => d.path).OrderByDescending(r => r.CreationDate).OrderByDescending(a => a.path.Cost).ThenByDescending(a => a.CreationDate).ToList();
             if (user.Type.Equals("Client"))
                 dreams = db.Dreams.Where(a => a.Creator.Equals(id)).OrderByDescending(r => r.CreationDate).ToList();
             ViewBag.userId = id;

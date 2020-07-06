@@ -24,6 +24,7 @@ using System.Net;
 using Quartz;
 using Quartz.Impl;
 using Royaya.com.ScheduledJobs;
+using Royaya.com.Extras;
 
 namespace Royaya.com.Controllers
 {
@@ -626,16 +627,16 @@ namespace Royaya.com.Controllers
             return Ok(finalResult.OrderBy(a => a.speed).OrderBy(b => b.Rating).ToList());
         }
 
-        public double interpreterSpeed(ApplicationUser user,int totalDreams)
+        public double interpreterSpeed(ApplicationUser user, int totalDreams)
         {
             //TimeSpan difference = DateTime.Now - user.CreationDate;
             TimeSpan span1 = new TimeSpan(DateTime.Now.Ticks);
             //TimeSpan span2 = new TimeSpan(user.CreationDate.Ticks);
-            LocalDateTime d1 = new LocalDateTime();
-            LocalDateTime d2 = new LocalDateTime(user.CreationDate.Year,user.CreationDate.Month,user.CreationDate.Day,user.CreationDate.Minute,user.CreationDate.Second);
+            LocalDateTime d1 = new LocalDateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            LocalDateTime d2 = new LocalDateTime(user.CreationDate.Year, user.CreationDate.Month, user.CreationDate.Day, user.CreationDate.Hour, user.CreationDate.Minute, user.CreationDate.Second);
             long days = Period.Between(d2, d1).Days;
 
-            return days == 0?0:totalDreams/days;
+            return days == 0 ? 0 : totalDreams / days;
         }
         [AllowAnonymous]
         // GET api/Account/getAllStatistics
@@ -698,7 +699,9 @@ namespace Royaya.com.Controllers
             InterprationPath path = db.InterprationPaths.Find(dream.pathId);
             long totalOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")
             && a.interpretatorId.Equals(interpreter.Id)).ToList().Count();
-            long numberOfDreamsinOneDay = interpreter.numbOfDreamsInOneDay;
+            int totalOfDoneDreams = db.Dreams.Where(a => a.Status.Equals("Done")
+            && a.interpretatorId.Equals(interpreter.Id)).ToList().Count();
+            long numberOfDreamsinOneDay =(long) interpreterSpeed(interpreter,totalOfDoneDreams);
 
             return getWaitingTimeMessage(Double.Parse(numberOfDreamsinOneDay.ToString()),
                 Double.Parse(totalOfActiveDreams.ToString()));
@@ -723,9 +726,9 @@ namespace Royaya.com.Controllers
                 long seconds = period.Seconds;
                 string result = "Your average waiting time is " + (years > 0 ? years + " years " : "") +
                                 (months > 0 ? months + " months " : "") +
-                                (days > 0 ? days + " days " : "") +
-                                (hours > 0 ? hours + " hours " : "") +
-                                 (minutes > 0 ? minutes + " minutes " : "");
+                                (days > 0 ? days + " days " : "");
+                                //(hours > 0 ? hours + " hours " : "") +
+                                // (minutes > 0 ? minutes + " minutes " : "");
                 return result;
             }
             return "";
@@ -767,13 +770,13 @@ namespace Royaya.com.Controllers
                     Id = user.Id,
                     HasRegistered = user.verifiedInterpreter,
                     NumberOfActiveDreams = user.Dreams.Where(a => a.Status.Equals("Active")).ToList().Count(),
-                    NumberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count()
+                    NumberOfDoneDreams = user.Dreams.Where(a => a.Status.Equals("Done")).ToList().Count(),
 
-
-                });
+                    speed = interpreterSpeed(user, user.Dreams.Count())
+            });
             }
 
-            return Ok(result.OrderBy(a=>a.NumberOfActiveDreams));
+            return Ok(result.OrderByDescending(a=>a.speed));
         }
 
         [AllowAnonymous]
@@ -846,9 +849,12 @@ namespace Royaya.com.Controllers
         {
             ApplicationUser interpreter = db.Users.Where(a => a.Id.Equals(id)).FirstOrDefault();
             InterprationPath path = db.InterprationPaths.Find(pathId);
-            long numberOfDreamsinOneDay = (long)interpreter.numbOfDreamsInOneDay;
+            
             long totalOfActiveDreams = db.Dreams.Where(a => a.Status.Equals("Active")
             && a.interpretatorId.Equals(id)).ToList().Count();
+            int totalOfDoneDreams = db.Dreams.Where(a => a.Status.Equals("Done")
+            && a.interpretatorId.Equals(id)).ToList().Count();
+            long numberOfDreamsinOneDay = (long)interpreterSpeed(interpreter, totalOfDoneDreams);
 
 
             return Ok(getWaitingTimeMessage(Double.Parse(numberOfDreamsinOneDay.ToString()),
@@ -860,7 +866,9 @@ namespace Royaya.com.Controllers
         {
             ApplicationUser interpreter = db.Users.Where(a => a.Id.Equals(id)).FirstOrDefault();
             var paths = db.InterprationPaths.ToList();
-            long numberOfDreamsinOneDay = (long)interpreter.numbOfDreamsInOneDay;
+            int totalOfDoneDreams = db.Dreams.Where(a => a.Status.Equals("Done")
+            && a.interpretatorId.Equals(id)).ToList().Count();
+            long numberOfDreamsinOneDay = (long)interpreterSpeed(interpreter, totalOfDoneDreams);
             List<Dream> dreams = db.Dreams.Where(a => a.Status.Equals("Active")
             && a.interpretatorId.Equals(id)).ToList();
             List<InterpretorPlans> plans = new List<InterpretorPlans>();
@@ -875,7 +883,17 @@ namespace Royaya.com.Controllers
                 Double.Parse(numberOfDreams.ToString())).Replace("Your average waiting time is ", "");
                 plans.Add(plan);
             }
-            return Ok(plans);
+            List<InterpretorPlans> NewPlans = new List<InterpretorPlans>();
+            NewPlans.Add(plans.Where(a => a.path.Cost.Equals(0.99)).FirstOrDefault());
+            NewPlans.Add(plans.Where(a => a.path.Cost.Equals(0)).FirstOrDefault());
+            foreach (var item in plans)
+            {
+                if (item.path.Cost.Equals(0.99) || item.path.Cost.Equals(0))
+                    continue;
+                NewPlans.Add(item);
+            }
+
+            return Ok(NewPlans);
         }
         [AllowAnonymous]
         [Route("GetNotifications")]
@@ -1116,25 +1134,35 @@ namespace Royaya.com.Controllers
 
         [AllowAnonymous]
         [Route("FixData")]
+        [HttpGet]
         public async Task<IHttpActionResult> FixData()
         {
-            List<Dream> dreams = db.Dreams.
-                Where(a => a.InterpreterFireBaseId == null).Include("interpretator").ToList();
+            List<Dream> dreams = DreamSwitchingLibrary.getDreamsForUpdate().ToList();
+            List<ApplicationUser> users = db.Users.Where(a => a.verifiedInterpreter && a.Type.Equals("Interpreter") && a.Status.Equals("Active")).ToList();
             List<Dream> updatedDreams = new List<Dream>();
+            List<Replacement> doneReplacements = new List<Replacement>();
             foreach (var item in dreams)
             {
-                if (item.interpretator != null&&item.interpretator.FireBaseId!=null)
-                {
-                    item.InterpreterFireBaseId = item.interpretator.FireBaseId;
-                    db.Entry(item).State = EntityState.Modified;
-                    updatedDreams.Add(item);
+                UserInfoViewModel newInterpreter = DreamSwitchingLibrary.getFastestInterpreter(dreams,users);
+                
+                Replacement replacement = DreamSwitchingLibrary.AddReplacement(item, item.interpretator);
+                item.interpretatorId = newInterpreter.Id;
+                item.interpretator = db.Users.Find(newInterpreter.Id);
+                item.LastModificationDate = DateTime.Now;
+                item.InterpreterFireBaseId = newInterpreter.FireBaseId;
+                //db.Replacements.Add(replacement);
 
-                }
+                doneReplacements.Add(replacement);
+                db.Entry(item).State = EntityState.Modified;
+                updatedDreams.Add(item);
             }
             db.SaveChanges();
-            return Ok(updatedDreams);
+            return Ok(doneReplacements.Select(s=> new { s.OldinterpretatorId,s.NewinterpretatorId}));
         }
+        
     }
+
+
 
 
 }

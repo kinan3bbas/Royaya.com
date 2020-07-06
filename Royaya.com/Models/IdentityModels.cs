@@ -126,6 +126,8 @@ namespace Royaya.com.Models
         public DbSet<InterpreterRatio> InterpreterRatios { get; set; }
         public DbSet<PublicInterpreterRatio> PublicInterpreterRatios { get; set; }
         public DbSet<WebSiteStatistics> WebSiteStatistics { get; set; }
+
+        public DbSet<Replacement> Replacements { get; set; }
         //public System.Data.Entity.DbSet<Royaya.com.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

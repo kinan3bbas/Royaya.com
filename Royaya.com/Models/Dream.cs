@@ -67,5 +67,7 @@ namespace Royaya.com.Models
 
         public bool PaidDream { get; set; }
 
+        //public ICollection<Replacement> Replacements { get; set; }
+
     }
 }
